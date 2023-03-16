@@ -7,4 +7,20 @@
     <RootNamespace>SemesterProjekt_2</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Exceptions\" />
+    <Folder Include="Models\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="Pages\Medlemmer\" />
+    <Folder Include="Pages\Madvarer\" />
+    <Folder Include="Pages\Events\" />
+    <Folder Include="Pages\Indkøb\" />
+    <Folder Include="Pages\Login\" />
+    <Folder Include="Pages\Blog\" />
+    <Folder Include="Pages\Ordre\" />
+    <Folder Include="Pages\Retter\" />
+    <Folder Include="Pages\Vagter\" />
+    <Folder Include="Service\" />
+  </ItemGroup>
+
 </Project>
