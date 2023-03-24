@@ -2,5 +2,8 @@
 {
     public class Member
     {
+
+        public int MedlemID { get; set; }
+
     }
 }
