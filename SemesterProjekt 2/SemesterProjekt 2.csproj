@@ -20,6 +20,7 @@
     <Folder Include="Pages\Ordre\" />
     <Folder Include="Pages\Retter\" />
     <Folder Include="Pages\Vagter\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>
