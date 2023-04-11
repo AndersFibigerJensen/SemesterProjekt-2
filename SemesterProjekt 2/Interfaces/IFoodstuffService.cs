@@ -1,6 +1,8 @@
 ﻿namespace SemesterProjekt_2.Interfaces
 {
-    public interface FoodstuffService
+
+    //Luna
+    public interface IFoodstuffService
     {
     }
 }

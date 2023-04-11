@@ -2,6 +2,7 @@
 {
     public class Member
     {
+        //Anders
 
         public int MedlemID { get; set; }
 

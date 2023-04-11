@@ -1,6 +1,9 @@
-﻿namespace SemesterProjekt_2.Services
+﻿using SemesterProjekt_2.Interfaces;
+
+namespace SemesterProjekt_2.Services
 {
-    public class ShiftService
+    //luna
+    public class ShiftService:IShiftService
     {
     }
 }

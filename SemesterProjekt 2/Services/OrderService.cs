@@ -1,6 +1,9 @@
-﻿namespace SemesterProjekt_2.Services
+﻿using SemesterProjekt_2.Interfaces;
+
+namespace SemesterProjekt_2.Services
 {
-    public class OrderService
+    // Anders
+    public class OrderService:IOrderService
     {
     }
 }
