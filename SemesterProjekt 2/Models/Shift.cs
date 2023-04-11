@@ -11,6 +11,11 @@
         public DateTime dateTo { get; set; }
         public Member assignedMember { get; set; }
 
+        public Shift()
+        {
+
+        }
+
         public Shift(DateTime DateFrom, DateTime DateTo, Member AssignedMember)
         {
             _shiftID++;

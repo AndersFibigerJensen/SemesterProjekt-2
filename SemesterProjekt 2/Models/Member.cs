@@ -2,6 +2,7 @@
 {
     public class Member
     {
+        //Anders
 
         public int MedlemID { get; set; }
 
@@ -13,7 +14,7 @@
 
         public bool isFamily { get; set; }
 
-        public List<T> shifts { get; set; }
+        public List<Shift> shifts { get; set; }
 
         public bool isAdmin  { get; set; }
 

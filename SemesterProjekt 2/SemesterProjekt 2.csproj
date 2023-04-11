@@ -9,8 +9,6 @@
 
   <ItemGroup>
     <Folder Include="Exceptions\" />
-    <Folder Include="Interfaces\" />
-    <Folder Include="Services\" />
     <Folder Include="Pages\Medlemmer\" />
     <Folder Include="Pages\Madvarer\" />
     <Folder Include="Pages\Events\" />
@@ -20,7 +18,6 @@
     <Folder Include="Pages\Ordre\" />
     <Folder Include="Pages\Retter\" />
     <Folder Include="Pages\Vagter\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>
