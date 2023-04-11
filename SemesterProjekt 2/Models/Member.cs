@@ -13,7 +13,7 @@
 
         public bool isFamily { get; set; }
 
-        public List<T> shifts { get; set; }
+        public List<Shift> shifts { get; set; }
 
         public bool isAdmin  { get; set; }
 
