@@ -1,0 +1,29 @@
+CREATE TABLE Member(
+MemberID not null primary key
+Name varchar(30) not null
+Password varchar(30) not null
+Email varchar(30) not null
+Address varchar(30) not null
+isFamily bool not null
+hasDoneHygieneCourse bool not null
+isAdmin bool not null
+);
+
+Create table EventMember(
+MemberID not null
+EventID not null
+ID not null primary key
+Foreign Key(MemberID) references Member(MemberID)
+Foreign Key(EventID)  references Event()
+);
+
+create table ShiftMember(
+MemberID not null
+ShiftID not null
+ID not null primary key
+Foreign Key(MemberID) references Member(MemberID) 
+Foreign Key() 
+);
+
+
+
