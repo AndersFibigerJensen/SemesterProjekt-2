@@ -1,7 +1,14 @@
+using Microsoft.Extensions.Hosting;
+using SemesterProjekt_2.Interfaces;
+using SemesterProjekt_2.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddTransient<IMemberService, MemberService>();
+builder.Services.AddTransient<IEventService, EventService>();
+builder.Services.AddTransient<IShiftService, ShiftService>();
 
 var app = builder.Build();
 
