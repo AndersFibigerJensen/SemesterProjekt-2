@@ -4,21 +4,18 @@ using Microsoft.Data.SqlClient;
 
 namespace SemesterProjekt_2.Services
 {
-    //Luna
-    public class ShiftService :Connection, IShiftService
+    // Luna
+    public class ShiftService : Connection, IShiftService
     {
         // Query Strings
         private string queryGetAll = "select * from Shift";
         private string queryGetFromID = "select * from Shift where shiftID = @ShiftID";
-        private string queryInsert = "insert into Shifts Values(@ShiftID, @DateFrom, @DateTo, @MemberID)";
+        private string queryInsert = "insert into Shifts Values(@ShiftID, @DateFrom, @DateTo, @MemberID, @EventID)";
         private string queryDelete = "delete from Shift where shiftID = @ShiftID";
-        private string queryUpdate = "update Shift set ShiftID = @NewSID, DateFrom = @NewDFrom, DateTo = @NewDTo, MemberID = @NewMID where ShiftID = @OldSID";     
+        private string queryUpdate = "update Shift set ShiftID = @NewSID, DateFrom = @NewDFrom, DateTo = @NewDTo, MemberID = @NewMID, EventID = @NewEID where ShiftID = @OldSID";     
         private string querySearch = "nyi";
 
-        public ShiftService(IConfiguration configuration):base(configuration)
-        {
-
-        }
+        public ShiftService(IConfiguration configuration) : base(configuration) { }
 
         // Functions
         public Task<List<Shift>> GetAllShiftsAsync()
