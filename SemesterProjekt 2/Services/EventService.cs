@@ -12,6 +12,7 @@ namespace SemesterProjekt_2.Services
         private string queryGetFromID = "select * from event where eventId = @EventID";
         private string queryDelete = "delete * from event where eventId = @EventID";
         private string queryUpdate = "update * from event where eventId = @EventID";
+        private string querySearch = " select * from event where Name Like '%'+@Name+'%'";
         public Task AddEventAsync()
         {
             throw new NotImplementedException();
