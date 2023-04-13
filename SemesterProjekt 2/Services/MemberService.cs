@@ -1,5 +1,6 @@
 ﻿using SemesterProjekt_2.Interfaces;
 using SemesterProjekt_2.Models;
+using Microsoft.Data.SqlClient;
 
 namespace SemesterProjekt_2.Services
 {
@@ -20,39 +21,75 @@ namespace SemesterProjekt_2.Services
 
         }
 
-        public MemberService(string connectionstring):base(connectionstring)
+        public async Task AddMemberAsync(Member member)
         {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using(SqlCommand command = new SqlCommand(MemberAdd, connection))
+                {
 
-        }
-
-        public Task AddMemberAsync()
-        {
-            throw new NotImplementedException();
+                }
+            }
         }
 
         public Task DeleteMemberAsync(int id)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand(MemberAdd, connection))
+                {
+
+                }
+            }
+            return null;
         }
 
         public Task<List<Member>> FilterMembersAsync(string filter)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand(MemberAdd, connection))
+                {
+
+                }
+            }
+            return null;
         }
 
         public Task<List<Member>> GetAllMembersAsync()
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand(MemberAdd, connection))
+                {
+
+                }
+            }
+            return null;
         }
 
         public Task<Member> GetMemberByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand(MemberAdd, connection))
+                {
+
+                }
+            }
+            return null;
         }
 
         public Task UpdateMemberAsync(int id)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand(MemberAdd, connection))
+                {
+
+                }
+            }
+            return null;
         }
     }
 }
