@@ -1,10 +1,11 @@
 ﻿using SemesterProjekt_2.Interfaces;
 using SemesterProjekt_2.Models;
+using Microsoft.Data.SqlClient;
 
 namespace SemesterProjekt_2.Services
 {
     //Luna
-    public class ShiftService : IShiftService
+    public class ShiftService :Connection, IShiftService
     {
         // Query Strings
         private string queryGetAll = "select * from Shift";
@@ -13,6 +14,11 @@ namespace SemesterProjekt_2.Services
         private string queryDelete = "delete from Shift where shiftID = @ShiftID";
         private string queryUpdate = "update Shift set ShiftID = @NewSID, DateFrom = @NewDFrom, DateTo = @NewDTo, MemberID = @NewMID where ShiftID = @OldSID";     
         private string querySearch = "nyi";
+
+        public ShiftService(IConfiguration configuration):base(configuration)
+        {
+
+        }
 
         // Functions
         public Task<List<Shift>> GetAllShiftsAsync()
