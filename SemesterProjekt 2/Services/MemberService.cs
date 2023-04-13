@@ -6,32 +6,40 @@ namespace SemesterProjekt_2.Services
     // Anders
     public class MemberService : IMemberService
     {
-        public Task AddMember()
+        //sql code
+        private string Memberstrings = " select * from Members";
+        private string MemberfromID = " select * from Members where memberid=@ID";
+        private string Membersearch = " select * from Members where Name Like '%'+@Name+'%'";
+        private string MemberUpdate = "update Member where MemberID=@ID";
+        private string MemberDelete = "delete from hotel where MemberID=@ID";
+        private string MemberAdd = "insert into Members values(@ID,@Name,@Password,@Email,@Address,@isFamily,@Course,@isAdmin)";
+
+        public Task AddMemberAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task DeleteMember(int id)
+        public Task DeleteMemberAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<Member>> FilterMembers(string filter)
+        public Task<List<Member>> FilterMembersAsync(string filter)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<Member>> GetAllMembers()
+        public Task<List<Member>> GetAllMembersAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<Member> GetMemberById(int id)
+        public Task<Member> GetMemberByIdAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task UpdateMember(int id)
+        public Task UpdateMemberAsync(int id)
         {
             throw new NotImplementedException();
         }

@@ -7,17 +7,17 @@ namespace SemesterProjekt_2.Interfaces
     public interface IMemberService
     {
 
-        public Task<List<Member>> GetAllMembers();
+        public Task<List<Member>> GetAllMembersAsync();
 
-        public Task<Member> GetMemberById(int id);
+        public Task<Member> GetMemberByIdAsync(int id);
 
-        public Task AddMember();
+        public Task AddMemberAsync();
 
-        public Task DeleteMember(int id);
+        public Task DeleteMemberAsync(int id);
 
-        public Task UpdateMember(int id);
+        public Task UpdateMemberAsync(int id);
 
-        public Task<List<Member>> FilterMembers(string filter);
+        public Task<List<Member>> FilterMembersAsync(string filter);
 
 
     }

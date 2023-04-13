@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <Folder Include="Exceptions\" />
-    <Folder Include="Pages\Medlemmer\" />
     <Folder Include="Pages\Madvarer\" />
     <Folder Include="Pages\Events\" />
     <Folder Include="Pages\Indkøb\" />
