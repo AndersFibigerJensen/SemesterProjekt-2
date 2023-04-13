@@ -40,7 +40,7 @@ namespace SemesterProjekt_2.Services
             throw new NotImplementedException();
         }
 
-        public Task<List<Member>> FilterShiftsAsync(DateTime dtFrom, DateTime dtTo)
+        public Task<List<Member>> FilterShiftsAsync(DateTime date)
         {
             throw new NotImplementedException();
         }
