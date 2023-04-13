@@ -27,7 +27,18 @@ namespace SemesterProjekt_2.Services
             {
                 using(SqlCommand command = new SqlCommand(MemberAdd, connection))
                 {
+                    try
+                    {
 
+                    }
+                    catch (SqlException sql)
+                    {
+
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
                 }
             }
         }
@@ -38,7 +49,18 @@ namespace SemesterProjekt_2.Services
             {
                 using (SqlCommand command = new SqlCommand(MemberAdd, connection))
                 {
+                    try
+                    {
 
+                    }
+                    catch (SqlException sql)
+                    {
+
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
                 }
             }
             return null;
@@ -50,18 +72,58 @@ namespace SemesterProjekt_2.Services
             {
                 using (SqlCommand command = new SqlCommand(MemberAdd, connection))
                 {
+                    try
+                    {
+
+                    }
+                    catch (SqlException sql)
+                    {
+
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
 
                 }
             }
             return null;
         }
 
-        public Task<List<Member>> GetAllMembersAsync()
+        public async Task<List<Member>> GetAllMembersAsync()
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 using (SqlCommand command = new SqlCommand(MemberAdd, connection))
                 {
+                    List<Member> members = new List<Member>();
+                    try
+                    {
+                        await command.Connection.OpenAsync();
+                        SqlDataReader reader = command.ExecuteReader();
+                        while (await reader.ReadAsync()) 
+                        {
+                            int MemberID = reader.GetInt32(0);
+                            string name=reader.GetString(1);
+                            string password=reader.GetString(2);
+                            string email=reader.GetString(3);
+                            string Address=reader.GetString(4);
+                            bool isFamily=reader.GetBoolean(5);
+                            bool HasDoneHygieneCourse=reader.GetBoolean(6);
+                            bool isAdmin = reader.GetBoolean(7);
+                            Member member= new Member(MemberID,name,password,email,Address,isFamily,HasDoneHygieneCourse,isAdmin);
+                            members.Add(member);
+                        }
+
+                    }
+                    catch (SqlException sql)
+                    {
+
+                    }
+                    catch (Exception ex) 
+                    { 
+                    
+                    }
 
                 }
             }
@@ -74,7 +136,18 @@ namespace SemesterProjekt_2.Services
             {
                 using (SqlCommand command = new SqlCommand(MemberAdd, connection))
                 {
+                    try
+                    {
 
+                    }
+                    catch (SqlException sql)
+                    {
+
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
                 }
             }
             return null;
@@ -86,7 +159,18 @@ namespace SemesterProjekt_2.Services
             {
                 using (SqlCommand command = new SqlCommand(MemberAdd, connection))
                 {
+                    try
+                    {
 
+                    }
+                    catch (SqlException sql)
+                    {
+
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
                 }
             }
             return null;
