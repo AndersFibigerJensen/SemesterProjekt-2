@@ -9,16 +9,8 @@ namespace SemesterProjekt_2.Services
 
         public Connection(IConfiguration configuration)
         {
-            connectionString = "";
             Configuration = configuration;
-            //connectionString = Configuration["ConnectionStrings:SimplyConnection"];
-            //connectionString = Configuration["ConnectionStrings:DefaultConnection"];
-        }
-
-        public Connection(string connectionstring)
-        {
-            Configuration = null;
-            this.connectionString = connectionstring;
+            connectionString = Configuration["ConnectionStrings:DefaultConnection"];
         }
 
     }
