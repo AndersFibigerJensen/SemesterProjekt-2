@@ -4,7 +4,7 @@ using SemesterProjekt_2.Models;
 namespace SemesterProjekt_2.Services
 {
     // Anders
-    public class MemberService : IMemberService
+    public class MemberService :Connection, IMemberService
     {
         //sql code
         private string Memberstrings = " select * from Members";
@@ -13,6 +13,17 @@ namespace SemesterProjekt_2.Services
         private string MemberUpdate = "update Member where MemberID=@ID";
         private string MemberDelete = "delete from hotel where MemberID=@ID";
         private string MemberAdd = "insert into Members values(@ID,@Name,@Password,@Email,@Address,@isFamily,@Course,@isAdmin)";
+
+
+        public MemberService(IConfiguration configuration):base(configuration)
+        {
+
+        }
+
+        public MemberService(string connectionstring):base(connectionstring)
+        {
+
+        }
 
         public Task AddMemberAsync()
         {
