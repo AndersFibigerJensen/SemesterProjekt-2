@@ -59,22 +59,15 @@ namespace SemesterProjekt_2.Services
             {
                 try
                 {
-                    SqlCommand command= new SqlCommand(MemberDelete, connection);
+                    SqlCommand command = new SqlCommand(MemberDelete, connection);
                     Member member = await GetMemberByIdAsync(id);
                     command.Parameters.AddWithValue("@ID", member.MemberID);
                     command.Connection.OpenAsync();
-                    int noOfRows= await command.ExecuteNonQueryAsync();
-                    if(noOfRows==1)
+                    int noOfRows = await command.ExecuteNonQueryAsync();
+                    if (noOfRows == 1)
                     {
                         return member;
                     }
-
-
-
-                    
-
-
-
                 }
                 catch (SqlException sql)
                 {
@@ -194,23 +187,27 @@ namespace SemesterProjekt_2.Services
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                using (SqlCommand command = new SqlCommand(MemberAdd, connection))
+
+                try
                 {
-                    try
+                    SqlCommand command = new SqlCommand(MemberAdd, connection);
+                    command.Parameters.AddWithValue("@ID", id);
+                    await command.Connection.OpenAsync();
+                    int noOfRows = await command.ExecuteNonQueryAsync();
+                    if(noOfRows==1)
                     {
-
-                        await command.Connection.OpenAsync();
-                        SqlDataReader reader = command.ExecuteReader();
-
+                        return true;
                     }
-                    catch (SqlException sql)
-                    {
 
-                    }
-                    catch (Exception ex)
-                    {
 
-                    }
+                }
+                catch (SqlException sql)
+                {
+
+                }
+                catch (Exception ex)
+                {
+
                 }
             }
             return false;
