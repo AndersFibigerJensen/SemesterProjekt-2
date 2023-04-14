@@ -10,11 +10,11 @@ namespace SemesterProjekt_2.Interfaces
 
         public Task<Shift> GetShiftByIdAsync(int id);
 
-        public Task AddShiftAsync();
+        public Task<bool> AddShiftAsync(Shift shift);
 
-        public Task DeleteShiftAsync(int id);
+        public Task<Shift> DeleteShiftAsync(int id);
 
-        public Task UpdateShiftAsync(int id);
+        public Task<bool> UpdateShiftAsync(Shift shift, int id);
 
         public Task<List<Member>> FilterShiftsAsync(DateTime date);
 
