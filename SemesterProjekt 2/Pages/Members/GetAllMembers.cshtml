@@ -1,4 +1,44 @@
 ﻿@page
 @model SemesterProjekt_2.Pages.Members.GetAllMembersModel
 @{
+    ViewData["title"] = "GetallMembers";
 }
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                MedlemsID
+            </th>
+            <th>
+                Navn
+            </th>
+            <th>
+                Addresse
+            </th>
+            <th>
+                Email
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            @foreach(var item in Model.Members)
+            {
+                <td>
+                    @item.MemberID
+                </td>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.Address
+                </td>
+                <td>
+                    @item.Email
+                </td>
+                
+            }
+        </tr>
+    </tbody>
+</table>
