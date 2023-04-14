@@ -5,7 +5,7 @@ using Microsoft.Data.SqlClient;
 namespace SemesterProjekt_2.Services
 {
     // Anders
-    public class MemberService :Connection, IMemberService
+    public class MemberService : Connection, IMemberService
     {
         //sql code
         private string Memberstrings = " select * from Members";
@@ -16,7 +16,7 @@ namespace SemesterProjekt_2.Services
         private string MemberAdd = "insert into Members values(@ID,@Name,@Password,@Email,@Address,@isFamily,@Course,@isAdmin)";
 
 
-        public MemberService(IConfiguration configuration):base(configuration)
+        public MemberService(IConfiguration configuration) : base(configuration)
         {
 
         }
@@ -25,10 +25,18 @@ namespace SemesterProjekt_2.Services
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                using(SqlCommand command = new SqlCommand(MemberAdd, connection))
+                using (SqlCommand command = new SqlCommand(MemberAdd, connection))
                 {
                     try
                     {
+                        command.Parameters.AddWithValue("@ID",member.MemberID);
+                        command.Parameters.AddWithValue("@Name",member.Name);
+                        command.Parameters.AddWithValue("@Password");
+                        command.Parameters.AddWithValue();
+                        command.Parameters.AddWithValue();
+                        command.Parameters.AddWithValue();
+
+
 
                     }
                     catch (SqlException sql)
@@ -101,17 +109,17 @@ namespace SemesterProjekt_2.Services
                     {
                         await command.Connection.OpenAsync();
                         SqlDataReader reader = command.ExecuteReader();
-                        while (await reader.ReadAsync()) 
+                        while (await reader.ReadAsync())
                         {
                             int MemberID = reader.GetInt32(0);
-                            string name=reader.GetString(1);
-                            string password=reader.GetString(2);
-                            string email=reader.GetString(3);
-                            string Address=reader.GetString(4);
-                            bool isFamily=reader.GetBoolean(5);
-                            bool HasDoneHygieneCourse=reader.GetBoolean(6);
+                            string name = reader.GetString(1);
+                            string password = reader.GetString(2);
+                            string email = reader.GetString(3);
+                            string Address = reader.GetString(4);
+                            bool isFamily = reader.GetBoolean(5);
+                            bool HasDoneHygieneCourse = reader.GetBoolean(6);
                             bool isAdmin = reader.GetBoolean(7);
-                            Member member= new Member(MemberID,name,password,email,Address,isFamily,HasDoneHygieneCourse,isAdmin);
+                            Member member = new Member(MemberID, name, password, email, Address, isFamily, HasDoneHygieneCourse, isAdmin);
                             members.Add(member);
                         }
 
@@ -120,9 +128,9 @@ namespace SemesterProjekt_2.Services
                     {
 
                     }
-                    catch (Exception ex) 
-                    { 
-                    
+                    catch (Exception ex)
+                    {
+
                     }
 
                 }
@@ -130,7 +138,44 @@ namespace SemesterProjekt_2.Services
             return null;
         }
 
-        public Task<Member> GetMemberByIdAsync(int id)
+        public async Task<Member> GetMemberByIdAsync(int id)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+
+                try
+                {
+                    SqlCommand command = new SqlCommand(MemberAdd, connection);
+                    await command.Connection.OpenAsync();
+                    SqlDataReader reader = command.ExecuteReader();
+                    if(await reader.ReadAsync()) 
+                    {
+                        int MemberID = reader.GetInt32(0);
+                        string name = reader.GetString(1);
+                        string password = reader.GetString(2);
+                        string email = reader.GetString(3);
+                        string Address = reader.GetString(4);
+                        bool isFamily = reader.GetBoolean(5);
+                        bool HasDoneHygieneCourse = reader.GetBoolean(6);
+                        bool isAdmin = reader.GetBoolean(7);
+                        Member member = new Member(MemberID, name, password, email, Address, isFamily, HasDoneHygieneCourse, isAdmin);
+                        return member;
+                    }
+
+                }
+                catch (SqlException sql)
+                {
+
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+            return null;
+        }
+
+        public async Task UpdateMemberAsync(int id)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -138,6 +183,9 @@ namespace SemesterProjekt_2.Services
                 {
                     try
                     {
+
+                        await command.Connection.OpenAsync();
+                        SqlDataReader reader = command.ExecuteReader();
 
                     }
                     catch (SqlException sql)
@@ -150,30 +198,6 @@ namespace SemesterProjekt_2.Services
                     }
                 }
             }
-            return null;
-        }
-
-        public Task UpdateMemberAsync(int id)
-        {
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                using (SqlCommand command = new SqlCommand(MemberAdd, connection))
-                {
-                    try
-                    {
-
-                    }
-                    catch (SqlException sql)
-                    {
-
-                    }
-                    catch (Exception ex)
-                    {
-
-                    }
-                }
-            }
-            return null;
         }
     }
 }
