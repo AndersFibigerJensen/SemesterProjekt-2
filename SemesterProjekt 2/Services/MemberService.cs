@@ -29,12 +29,14 @@ namespace SemesterProjekt_2.Services
                 {
                     try
                     {
-                        command.Parameters.AddWithValue("@ID",member.MemberID);
-                        command.Parameters.AddWithValue("@Name",member.Name);
-                        command.Parameters.AddWithValue("@Password");
-                        command.Parameters.AddWithValue();
-                        command.Parameters.AddWithValue();
-                        command.Parameters.AddWithValue();
+                        command.Parameters.AddWithValue("@ID", member.MemberID);
+                        command.Parameters.AddWithValue("@Name", member.Name);
+                        command.Parameters.AddWithValue("@Password", member.Password);
+                        command.Parameters.AddWithValue("@Address", member.Address);
+                        command.Parameters.AddWithValue("@isFamily", member.IsFamily);
+                        command.Parameters.AddWithValue("@Course", member.HasDoneHygieneCourse);
+                        command.Parameters.AddWithValue("@isAdmin", member.IsAdmin);
+                        command.Connection.OpenAsync();
 
 
 
@@ -51,25 +53,38 @@ namespace SemesterProjekt_2.Services
             }
         }
 
-        public Task DeleteMemberAsync(int id)
+        public async Task<Member> DeleteMemberAsync(int id)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                using (SqlCommand command = new SqlCommand(MemberAdd, connection))
+                try
                 {
-                    try
+                    SqlCommand command= new SqlCommand(MemberDelete, connection);
+                    Member member = await GetMemberByIdAsync(id);
+                    command.Parameters.AddWithValue("@ID", member.MemberID);
+                    command.Connection.OpenAsync();
+                    int noOfRows= await command.ExecuteNonQueryAsync();
+                    if(noOfRows==1)
                     {
-
+                        return member;
                     }
-                    catch (SqlException sql)
-                    {
 
-                    }
-                    catch (Exception ex)
-                    {
 
-                    }
+
+                    
+
+
+
                 }
+                catch (SqlException sql)
+                {
+
+                }
+                catch (Exception ex)
+                {
+
+                }
+
             }
             return null;
         }
@@ -148,7 +163,7 @@ namespace SemesterProjekt_2.Services
                     SqlCommand command = new SqlCommand(MemberAdd, connection);
                     await command.Connection.OpenAsync();
                     SqlDataReader reader = command.ExecuteReader();
-                    if(await reader.ReadAsync()) 
+                    if (await reader.ReadAsync())
                     {
                         int MemberID = reader.GetInt32(0);
                         string name = reader.GetString(1);
@@ -175,7 +190,7 @@ namespace SemesterProjekt_2.Services
             return null;
         }
 
-        public async Task UpdateMemberAsync(int id)
+        public async Task<bool> UpdateMemberAsync(int id)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -198,6 +213,7 @@ namespace SemesterProjekt_2.Services
                     }
                 }
             }
+            return false;
         }
     }
 }

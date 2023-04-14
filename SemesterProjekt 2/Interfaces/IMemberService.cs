@@ -13,9 +13,9 @@ namespace SemesterProjekt_2.Interfaces
 
         public Task AddMemberAsync(Member member);
 
-        public Task DeleteMemberAsync(int id);
+        public Task<Member> DeleteMemberAsync(int id);
 
-        public Task UpdateMemberAsync(int id);
+        public Task<bool> UpdateMemberAsync(int id);
 
         public Task<List<Member>> FilterMembersAsync(string filter);
 
