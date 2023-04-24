@@ -7,6 +7,7 @@ namespace SemesterProjekt_2.Pages.Members
 {
     public class UpdateMemberModel : PageModel
     {
+        [BindProperty]
         public Member Member { get; set; }
 
         private IMemberService _memberService { get; set; }
@@ -23,9 +24,10 @@ namespace SemesterProjekt_2.Pages.Members
             Member= await _memberService.GetMemberByIdAsync(id);
         }
 
-        public async Task OnpostAsync(int id)
+        public async Task<IActionResult> OnpostAsync(int id)
         {
-            await _memberService.UpdateMemberAsync(id);
+            await _memberService.UpdateMemberAsync(id,Member);
+            return RedirectToPage("GetAllMembers");
         }
     }
 }

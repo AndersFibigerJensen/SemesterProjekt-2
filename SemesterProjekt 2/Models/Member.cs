@@ -26,6 +26,7 @@ namespace SemesterProjekt_2.Models
 
         public Member()
         {
+
         }
 
         public Member(int memberID,string name,string password,string email,string address, bool isFamily, bool hasDoneHygieneCourse, bool isAdmin)

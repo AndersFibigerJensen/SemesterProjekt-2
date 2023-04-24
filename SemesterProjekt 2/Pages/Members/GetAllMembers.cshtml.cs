@@ -10,6 +10,8 @@ namespace SemesterProjekt_2.Pages.Members
 
         public List<Member> Members { get; set; }
 
+        public Member Member { get; set; }
+
         private IMemberService _memberService { get; set; }
 
         public GetAllMembersModel(IMemberService memberService)

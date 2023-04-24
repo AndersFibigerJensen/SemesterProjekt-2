@@ -33,6 +33,10 @@
                 <label asp-for="@Model.Member.IsFamily"></label>
                 <input readonly asp-for="@Model.Member.IsFamily" />
             </div>
+            <div class="form-group">
+                <a asp-page="GetAllMembers" class=" btn-btn-primary">Cancel</a>
+                <input type="submit" value=" Add Member" class="btn-btn-primary" />
+            </div>
 
         </form>
     </div>

@@ -4,6 +4,14 @@
     ViewData["title"] = "GetallMembers";
 }
 
+<a asp-page="AddMember"> add room </a>
+
+@*<form method="get">
+    Search <input type="text" asp-for="FilterCriteria" />
+    <input type="radio" asp-for="FilterID" value="1"> Price </>
+    <input type="submit" value="Filter" />
+</form>*@
+
 <table class="table">
     <thead>
         <tr>
@@ -36,6 +44,9 @@
                 </td>
                 <td>
                     @item.Email
+                </td>
+                <td>
+                    <a asp-page="DeleteMember" asp-route-id="@item.MemberID">delete</a> | <a asp-page="UpdateMember" asp-route-id="@item.MemberID"> update</a>
                 </td>
                 
             }
