@@ -1,6 +1,8 @@
 ﻿using SemesterProjekt_2.Interfaces;
 using SemesterProjekt_2.Models;
 using Microsoft.Data.SqlClient;
+using System.Diagnostics.Metrics;
+using System.ComponentModel.DataAnnotations;
 
 namespace SemesterProjekt_2.Services
 {
@@ -11,9 +13,9 @@ namespace SemesterProjekt_2.Services
         private string Memberstrings = " select * from Member";
         private string MemberfromID = " select * from Member where memberid=@ID";
         private string Membersearch = " select * from Members where Name Like '%'+@Name+'%'";
-        private string MemberUpdate = "update Pro.Member " + " set MemberID=@ID, Name=@Name, Password=@Password , Email=@Email, Address=@Address, IsFamily=@Family, HasDoneHygieneCourse=@Hygiene, isAdmin=@Admin" + "where MemberID=@ID";
-        private string MemberDelete = "delete from hotel where MemberID=@ID";
-        private string MemberAdd = "insert into Members values(@ID,@Name,@Password,@Email,@Address,@isFamily,@Course,@isAdmin)";
+        private string MemberUpdate = "update Member " + " set MemberID=@ID, Name=@Name, Password=@Password , Email=@Email, Address=@Address, IsFamily=@Family, HasDoneHygieneCourse=@Hygiene, isAdmin=@Admin " + "where MemberID=@ID";
+        private string MemberDelete = "delete from Member where MemberID=@ID";
+        private string MemberAdd = "insert into Member values(@ID,@Name,@Password,@Email,@Address,@isFamily,@Course,@isAdmin)";
 
 
         public MemberService(IConfiguration configuration) : base(configuration)
@@ -31,15 +33,15 @@ namespace SemesterProjekt_2.Services
                     {
                         command.Parameters.AddWithValue("@ID", member.MemberID);
                         command.Parameters.AddWithValue("@Name", member.Name);
+                        command.Parameters.AddWithValue("Email", member.Email);
                         command.Parameters.AddWithValue("@Password", member.Password);
                         command.Parameters.AddWithValue("@Address", member.Address);
                         command.Parameters.AddWithValue("@isFamily", member.IsFamily);
                         command.Parameters.AddWithValue("@Course", member.HasDoneHygieneCourse);
                         command.Parameters.AddWithValue("@isAdmin", member.IsAdmin);
                         command.Connection.OpenAsync();
-
-
-
+                        await command.ExecuteNonQueryAsync();
+  
                     }
                     catch (SqlException sql)
                     {
@@ -171,6 +173,7 @@ namespace SemesterProjekt_2.Services
                 try
                 {
                     SqlCommand command = new SqlCommand(MemberfromID, connection);
+                    command.Parameters.AddWithValue("@ID", id);
                     await command.Connection.OpenAsync();
                     SqlDataReader reader = command.ExecuteReader();
                     if (await reader.ReadAsync())

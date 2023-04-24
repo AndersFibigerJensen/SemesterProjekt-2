@@ -7,7 +7,7 @@ namespace SemesterProjekt_2.Pages.Members
 {
     public class AddMemberModel : PageModel
     {
-
+        [BindProperty]
         public Member Member { get; set; }
 
         private IMemberService _memberService { get; set; }
@@ -21,9 +21,10 @@ namespace SemesterProjekt_2.Pages.Members
         {
         }
 
-        public async Task OnPostAsync() 
+        public async Task<IActionResult> OnPostAsync() 
         {
             _memberService.AddMemberAsync(Member);
+            return RedirectToAction("GetAllMembers");
         }
     }
 }
