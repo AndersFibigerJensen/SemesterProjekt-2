@@ -18,14 +18,39 @@ namespace SemesterProjekt_2.Services
 
         public EventService(IConfiguration configuration) : base(configuration)
         {
+
         }
 
-        public Task AddEventAsync()
+        public async Task AddEventAsync(Event begivenhed)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand(queryInsert, connection))
+                {
+                    command.Parameters.AddWithValue("@EventID", begivenhed.eventID);
+                    command.Parameters.AddWithValue("@Name", begivenhed.name);
+                    command.Parameters.AddWithValue("@DateFrom", begivenhed.eventStart);
+                    command.Parameters.AddWithValue("@DateTo", begivenhed.eventEnd);
+                    command.Parameters.AddWithValue("@Price", begivenhed.price);
+                    command.Parameters.AddWithValue("@IsMemberRequired", begivenhed.isMemberRequired);
+                    try
+                    {
+                        
+                    }
+                    
+                    catch (SqlException sqlEx)
+                    {
+                        Console.WriteLine("Database error " + sqlEx.Message);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Generel fejl " + ex.Message);
+                    }
+                }
+            }
         }
 
-        public Task<List<Event>> FilterEventsAsync()
+        public async Task<List<Event>> FilterEventsAsync()
         {
             throw new NotImplementedException();
         }
@@ -62,7 +87,7 @@ namespace SemesterProjekt_2.Services
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine("Generel ejl " + ex.Message);
+                        Console.WriteLine("Generel fejl " + ex.Message);
                     }
                     finally
                     {
@@ -70,21 +95,78 @@ namespace SemesterProjekt_2.Services
                     }
                 }
             }
-            throw new NotImplementedException();
+            return null;
         }
 
-        public Task<Event> GetEventByIdAsync(int id)
+        public async Task<Event> GetEventByIdAsync(int id)
         {
-            
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    SqlCommand commmand = new SqlCommand(queryGetFromID, connection);
+                    commmand.Parameters.AddWithValue("@ID", id);
+                    await commmand.Connection.OpenAsync();
+
+                    SqlDataReader reader = await commmand.ExecuteReaderAsync();
+                    if (reader.Read())
+                    {
+                        int Id = reader.GetInt32(0);
+                        string eventName = reader.GetString(1);
+                        DateTime dateFrom = reader.GetDateTime(2);
+                        DateTime dateTo = reader.GetDateTime(3);
+                        double price = reader.GetDouble(4);
+                        bool isMemberRequired = reader.GetBoolean(5);
+                        Event begivenhed = new Event(Id, eventName, dateFrom, dateTo, price, isMemberRequired);
+                        return begivenhed; 
+                    }
+                }
+                catch (SqlException sqlEx)
+                {
+                    Console.WriteLine("Database error " + sqlEx.Message);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Generel fejl " + ex.Message);
+                }
+                finally
+                {
+
+                }
+            }
+            return null;
         }
 
-        public Task RemoveEventAsync(int id)
+        public async Task<Event> RemoveEventAsync(int id)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    Event begivenhed = await GetEventByIdAsync(id);
+                    SqlCommand command = new SqlCommand(queryDelete, connection);
+                    command.Parameters.AddWithValue("@ID", id);
+                    connection.Open();
+                    int noOfRows = await command.ExecuteNonQueryAsync();
+                    return begivenhed;
+                }
+                catch (SqlException sqlEx)
+                {
+                    Console.WriteLine("Database error " + sqlEx.Message);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Generel fejl " + ex.Message);
+                }
+                finally
+                {
+                    
+                }
+            }
+            return null;
         }
 
-        public Task UpdateEventAsync(int id)
+        public Task<bool> UpdateEventAsync(int id)
         {
             throw new NotImplementedException();
         }
