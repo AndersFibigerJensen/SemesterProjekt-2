@@ -21,13 +21,32 @@ namespace SemesterProjekt_2.Pages.Members
 
         public async Task OnGetAsync(int id)
         {
-            Member= await _memberService.GetMemberByIdAsync(id);
+            try
+            {
+                Member = await _memberService.GetMemberByIdAsync(id);
+            }
+            catch (Exception ex) 
+            {
+                ViewData["Errormessage"] = ex.Message;
+
+            }
+            
         }
 
         public async Task<IActionResult> OnpostAsync(int id)
         {
-            await _memberService.UpdateMemberAsync(id,Member);
-            return RedirectToPage("GetAllMembers");
+            try
+            {
+                await _memberService.UpdateMemberAsync(id, Member);
+                return RedirectToPage("GetAllMembers");
+            }
+            catch (Exception ex) 
+            {
+                ViewData["Errormessage"] = ex.Message;
+                return Page();
+
+            }
+
         }
     }
 }

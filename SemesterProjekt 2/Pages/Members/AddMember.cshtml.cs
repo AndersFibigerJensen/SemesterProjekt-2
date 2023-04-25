@@ -23,8 +23,18 @@ namespace SemesterProjekt_2.Pages.Members
 
         public async Task<IActionResult> OnPostAsync() 
         {
-            _memberService.AddMemberAsync(Member);
-            return RedirectToAction("GetAllMembers");
+            try
+            {
+                _memberService.AddMemberAsync(Member);
+                return RedirectToAction("GetAllMembers");
+            }
+            catch (Exception ex) 
+            {
+                ViewData["Errormessage"] = ex.Message;
+                return Page();
+
+            }
+
         }
     }
 }
