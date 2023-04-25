@@ -16,7 +16,7 @@ namespace SemesterProjekt_2.Interfaces
 
         public Task<bool> UpdateShiftAsync(Shift shift, int id);
 
-        public Task<List<Member>> FilterShiftsAsync(DateTime date);
+        public Task<List<Shift>> FilterShiftsAsync(DateTime date);
 
     }
 }
