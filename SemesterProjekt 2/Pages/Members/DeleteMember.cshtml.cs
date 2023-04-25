@@ -19,11 +19,29 @@ namespace SemesterProjekt_2.Pages.Members
 
         public async Task OnGetAsync(int id)
         {
-            Member= await _memberService.GetMemberByIdAsync(id);
+            try
+            {
+                Member = await _memberService.GetMemberByIdAsync(id);
+            }
+            catch (Exception ex) 
+            {
+                ViewData["Errormessage"] = ex.Message;
+
+            }
+            
         }
 
         public async Task<IActionResult> OnpostAsync()
         {
+            try
+            {
+
+            }
+            catch (Exception ex) 
+            {
+                ViewData["Errormessage"] = ex.Message;
+
+            }
             await _memberService.DeleteMemberAsync(Member.MemberID);
             return RedirectToPage("GetAllMembers");
         }

@@ -25,14 +25,24 @@ namespace SemesterProjekt_2.Pages.Members
 
         public async Task OnGetAsync()
         {
-            if(!FilterCriteria.IsNullOrEmpty())
+            try
             {
-                Members= await _memberService.FilterMembersAsync(FilterCriteria);
+                if (!FilterCriteria.IsNullOrEmpty())
+                {
+                    Members = await _memberService.FilterMembersAsync(FilterCriteria);
+                }
+                else
+                {
+                    Members = await _memberService.GetAllMembersAsync();
+                }
+
             }
-            else
+            catch (Exception ex) 
             {
-                Members = await _memberService.GetAllMembersAsync();
+                ViewData["Errormessage"] = ex.Message;
+
             }
+           
            
         }
     }

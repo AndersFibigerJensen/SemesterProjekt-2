@@ -45,11 +45,11 @@ namespace SemesterProjekt_2.Services
                     }
                     catch (SqlException sql)
                     {
-
+                        throw sql;
                     }
                     catch (Exception ex)
                     {
-
+                        throw ex;
                     }
                 }
             }
@@ -73,11 +73,11 @@ namespace SemesterProjekt_2.Services
                 }
                 catch (SqlException sql)
                 {
-
+                    throw sql;
                 }
                 catch (Exception ex)
                 {
-
+                    throw ex;
                 }
 
             }
@@ -114,11 +114,11 @@ namespace SemesterProjekt_2.Services
                     }
                     catch (SqlException sql)
                     {
-
+                        throw sql;
                     }
                     catch (Exception ex)
                     {
-
+                        throw ex;
                     }
 
                 }
@@ -155,11 +155,11 @@ namespace SemesterProjekt_2.Services
                     }
                     catch (SqlException sql)
                     {
-
+                        throw sql;
                     }
                     catch (Exception ex)
                     {
-
+                        throw ex;
                     }
 
                 }
@@ -195,11 +195,11 @@ namespace SemesterProjekt_2.Services
                 }
                 catch (SqlException sql)
                 {
-
+                    throw sql;
                 }
                 catch (Exception ex)
                 {
-
+                    throw ex;
                 }
             }
             return null;
@@ -232,11 +232,11 @@ namespace SemesterProjekt_2.Services
                 }
                 catch (SqlException sql)
                 {
-
+                    throw sql;
                 }
                 catch (Exception ex)
                 {
-
+                    throw ex;
                 }
             }
             return false;
