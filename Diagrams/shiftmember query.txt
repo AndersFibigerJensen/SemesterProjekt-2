@@ -1,0 +1,7 @@
+CREATE Table ShiftMember(
+MemberID int not null,
+ShiftID int not null,
+ID int not null primary key,
+Foreign Key(MemberID) references Member(MemberID),
+Foreign Key(ShiftID) references Shift(ShiftID),
+);

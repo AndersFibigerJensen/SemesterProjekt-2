@@ -1,0 +1,11 @@
+USE welcome_to_my_domain_dk_db_domain
+
+CREATE TABLE Shift(
+ShiftID int not null primary key,
+DateFrom DateTime not null,
+DateTo DateTime not null,
+MemberID int null,
+--EventID int null,
+Foreign Key(MemberID) references Member(MemberID)
+--Foreign Key(EventID) references Event(EventID)
+);
