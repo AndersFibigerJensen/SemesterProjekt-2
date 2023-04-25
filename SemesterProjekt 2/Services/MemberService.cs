@@ -12,7 +12,7 @@ namespace SemesterProjekt_2.Services
         //sql code
         private string Memberstrings = " select * from Member";
         private string MemberfromID = " select * from Member where memberid=@ID";
-        private string Membersearch = " select * from Members where Name Like '%'+@Name+'%'";
+        private string Membersearch = " select * from Member where Name Like '%'+@Name+'%'";
         private string MemberUpdate = "update Member " + " set MemberID=@ID, Name=@Name, Password=@Password , Email=@Email, Address=@Address, IsFamily=@Family, HasDoneHygieneCourse=@Hygiene, isAdmin=@Admin " + "where MemberID=@ID";
         private string MemberDelete = "delete from Member where MemberID=@ID";
         private string MemberAdd = "insert into Member values(@ID,@Name,@Password,@Email,@Address,@isFamily,@Course,@isAdmin)";
@@ -88,13 +88,14 @@ namespace SemesterProjekt_2.Services
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                using (SqlCommand command = new SqlCommand(MemberAdd, connection))
+                using (SqlCommand command = new SqlCommand(Membersearch, connection))
                 {
                     try
                     {
                         List<Member> members= new List<Member>();
+                        command.Parameters.AddWithValue("@Name", filter);
                         await command.Connection.OpenAsync();
-                        SqlDataReader reader = command.ExecuteReader();
+                        SqlDataReader reader = await command.ExecuteReaderAsync();
                         while (await reader.ReadAsync())
                         {
                             int MemberID = reader.GetInt32(0);
@@ -108,6 +109,7 @@ namespace SemesterProjekt_2.Services
                             Member member = new Member(MemberID, name, password, email, Address, isFamily, HasDoneHygieneCourse, isAdmin);
                             members.Add(member);
                         }
+                        return members;
 
                     }
                     catch (SqlException sql)

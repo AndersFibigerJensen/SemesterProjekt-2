@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.IdentityModel.Tokens;
 using SemesterProjekt_2.Interfaces;
 using SemesterProjekt_2.Models;
 
@@ -14,6 +15,9 @@ namespace SemesterProjekt_2.Pages.Members
 
         private IMemberService _memberService { get; set; }
 
+        [BindProperty(SupportsGet = true)]
+        public string FilterCriteria { get; set; }
+
         public GetAllMembersModel(IMemberService memberService)
         {
             _memberService=memberService;
@@ -21,7 +25,15 @@ namespace SemesterProjekt_2.Pages.Members
 
         public async Task OnGetAsync()
         {
-            Members= await _memberService.GetAllMembersAsync();
+            if(!FilterCriteria.IsNullOrEmpty())
+            {
+                Members= await _memberService.FilterMembersAsync(FilterCriteria);
+            }
+            else
+            {
+                Members = await _memberService.GetAllMembersAsync();
+            }
+           
         }
     }
 }
