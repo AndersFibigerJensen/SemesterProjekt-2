@@ -8,7 +8,7 @@ namespace SemesterProjekt_2.Services
     public class EventService :Connection, IEventService
     {
         //Query String
-        private string queryGetAll = "select * from event";
+        private string queryGetAll = "select * from Event";
         private string queryInsert = "insert into event values(@EventID, @Name, @DateFrom, @DateTo, @Price, @IsMemberRequired)";
         private string queryGetFromID = "select * from event where eventId = @EventID";
         private string queryDelete = "delete * from event where eventId = @EventID";
