@@ -168,6 +168,7 @@ namespace SemesterProjekt_2.Services
 
         public Task<bool> UpdateEventAsync(int id)
         {
+            
             throw new NotImplementedException();
         }
     }
