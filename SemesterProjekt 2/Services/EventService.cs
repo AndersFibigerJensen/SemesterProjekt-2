@@ -64,7 +64,6 @@ namespace SemesterProjekt_2.Services
                 {
                     try
                     {
-                        command.Parameters.AddWithValue("@EventID", events);
                         await command.Connection.OpenAsync();
 
                         SqlDataReader reader = await command.ExecuteReaderAsync();
@@ -80,6 +79,7 @@ namespace SemesterProjekt_2.Services
                             Event begivenheder = new (id, name, start, end, price, isMemberRequired);
                             events.Add(begivenheder);
                         }
+                        return events;
                     }
                     catch (SqlException sqlEx)
                     {
