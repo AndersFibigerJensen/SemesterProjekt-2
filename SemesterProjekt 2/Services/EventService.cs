@@ -33,6 +33,8 @@ namespace SemesterProjekt_2.Services
                     command.Parameters.AddWithValue("@DateTo", begivenhed.eventEnd);
                     command.Parameters.AddWithValue("@Price", begivenhed.price);
                     command.Parameters.AddWithValue("@IsMemberRequired", begivenhed.isMemberRequired);
+                    command.Connection.OpenAsync();
+                    await command.ExecuteNonQueryAsync();
                     try
                     {
                         
