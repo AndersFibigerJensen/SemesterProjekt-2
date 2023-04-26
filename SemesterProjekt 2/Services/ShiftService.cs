@@ -11,7 +11,7 @@ namespace SemesterProjekt_2.Services
         // Query Strings
         private string queryGetAll = "select * from Shift";
         private string queryGetFromID = "select * from Shift where shiftID = @ShiftID";
-        private string queryInsert = "insert into Shifts Values(@ShiftID, @DateFrom, @DateTo, @MemberID, @EventID)";
+        private string queryInsert = "insert into Shift Values(@ShiftID, @DateFrom, @DateTo, @MemberID, @EventID)";
         private string queryDelete = "delete from Shift where shiftID = @ShiftID";
         private string queryUpdate = "update Shift set ShiftID = @NewSID, DateFrom = @NewDFrom, DateTo = @NewDTo, MemberID = @NewMID, EventID = @NewEID where ShiftID = @OldSID";     
         private string querySearch = "select * from Shift where DateFrom = @DateFrom";
@@ -103,20 +103,16 @@ namespace SemesterProjekt_2.Services
             {
                 using (SqlCommand command = new SqlCommand(queryInsert, connection))
                 {
-                    command.Parameters.AddWithValue("@ShiftID", shift.shiftID);
-                    command.Parameters.AddWithValue("@DateFrom", shift.dateFrom);
-                    command.Parameters.AddWithValue("@DateTo", shift.dateTo);
-                    command.Parameters.AddWithValue("@MemberID", shift.memberID);
-                    command.Parameters.AddWithValue("@EventID", shift.eventID);
+                    command.Parameters.AddWithValue("@ShiftID", shift.ShiftID);
+                    command.Parameters.AddWithValue("@DateFrom", shift.DateFrom);
+                    command.Parameters.AddWithValue("@DateTo", shift.DateTo);
+                    command.Parameters.AddWithValue("@MemberID", shift.MemberID);
+                    command.Parameters.AddWithValue("@EventID", shift.EventID);
                     try
                     {
                         await command.Connection.OpenAsync();
                         int noOfRows = await command.ExecuteNonQueryAsync(); // To Be Used for Insert, Delete, Update
-                        if (noOfRows == 1)
-                        {
-                            return true;
-                        }
-                        return false;
+                        return noOfRows == 1;
                     }
                     catch (SqlException sqlEx)
                     {
@@ -176,11 +172,11 @@ namespace SemesterProjekt_2.Services
                     try
                     {
                         command.Parameters.AddWithValue("@OldSID", id);
-                        command.Parameters.AddWithValue("@NewSID", shift.shiftID);
-                        command.Parameters.AddWithValue("@NewDFrom", shift.dateFrom);
-                        command.Parameters.AddWithValue("@NewDTo", shift.dateTo);
-                        command.Parameters.AddWithValue("@NewMID", shift.memberID);
-                        command.Parameters.AddWithValue("@NewEID", shift.eventID);
+                        command.Parameters.AddWithValue("@NewSID", shift.ShiftID);
+                        command.Parameters.AddWithValue("@NewDFrom", shift.DateFrom);
+                        command.Parameters.AddWithValue("@NewDTo", shift.DateTo);
+                        command.Parameters.AddWithValue("@NewMID", shift.MemberID);
+                        command.Parameters.AddWithValue("@NewEID", shift.EventID);
                         await connection.OpenAsync();
 
                         int noOfRows = await command.ExecuteNonQueryAsync();
