@@ -1,0 +1,21 @@
+﻿@page
+@model SemesterProjekt_2.Pages.Login.LoginModel
+@{
+    ViewData["title"] = "Login";
+}
+
+<div class="container-md">
+    <form method="post">
+        <div class="form-group">
+            <label asp-for="@Model.member.Email" class="control-label"></label>
+            <input asp-for="@Model.member.Email" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.member.Password" class="control-label"></label>
+            <input asp-for="@Model.member.Password" class="form-control" />
+        </div>
+        <div class="form-check-group">
+            <input type="submit" value="Login" class="btn-block btn btn-primary" />
+        </div>
+    </form>
+</div>
