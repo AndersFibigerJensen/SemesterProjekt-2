@@ -125,15 +125,11 @@ namespace SemesterProjekt_2.Services
                 }
                 catch (SqlException sqlEx)
                 {
-                    Console.WriteLine("Database error " + sqlEx.Message);
+                    throw sqlEx;
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Generel fejl " + ex.Message);
-                }
-                finally
-                {
-
+                    throw ex;
                 }
             }
             return null;
