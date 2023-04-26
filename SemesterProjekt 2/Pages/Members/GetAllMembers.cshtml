@@ -29,9 +29,11 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            @foreach(var item in Model.Members)
-            {
+        @foreach (var item in Model.Members)
+        {
+            <tr>
+                @if(item.Email==Model.member.Email & item.Password==Model.member.Password)
+                {
                 <td>
                     @item.MemberID
                 </td>
@@ -47,8 +49,29 @@
                 <td>
                     <a asp-page="DeleteMember" asp-route-id="@item.MemberID">delete</a> | <a asp-page="UpdateMember" asp-route-id="@item.MemberID"> update</a>
                 </td>
-                
-            }
-        </tr>
+                }
+                else if(item.MemberID==(-1))
+                {
+                    
+                }
+                else
+                {
+                  <td>
+                    @item.MemberID
+                  </td>
+                  <td>
+                      @item.Name
+                  </td>
+                  <td>
+                    @item.Address
+                  </td>
+                  <td>
+                    @item.Email
+                  </td>
+                }
+            </tr>
+
+
+        }
     </tbody>
 </table>

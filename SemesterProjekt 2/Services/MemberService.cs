@@ -139,6 +139,7 @@ namespace SemesterProjekt_2.Services
                         SqlDataReader reader =  await command.ExecuteReaderAsync();
                         while (await reader.ReadAsync())
                         {
+                            
                             int MemberID = reader.GetInt32(0);
                             string name = reader.GetString(1);
                             string password = reader.GetString(2);
