@@ -145,12 +145,15 @@ namespace SemesterProjekt_2.Services
             {
                 try
                 {
-                    Event begivenhed = await GetEventByIdAsync(id);
                     SqlCommand command = new SqlCommand(queryDelete, connection);
+                    Event begivenhed = await GetEventByIdAsync(id);
                     command.Parameters.AddWithValue("@ID", id);
-                    connection.Open();
+                    command.Connection.OpenAsync();
                     int noOfRows = await command.ExecuteNonQueryAsync();
-                    return begivenhed;
+                    if (noOfRows == 1)
+                    {
+                        return begivenhed;
+                    }                    
                 }
                 catch (SqlException sqlEx)
                 {

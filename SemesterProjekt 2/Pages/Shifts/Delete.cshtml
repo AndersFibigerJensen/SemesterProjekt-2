@@ -8,17 +8,14 @@
 <p>
     <h2>Are you sure you want to delete the following shift from the database?</h2>
     <h3>
-        ID: @Model.TBD.shiftID
-        From: @Model.TBD.dateFrom
-
-        To: @Model.TBD.dateTo
-
-        Assigned Member: @Model.TBD.memberID
-
-        Corresponding Event: @Model.TBD.eventID
+        ID: @Model.TBD.ShiftID
+        From: @Model.TBD.DateFrom
+        To: @Model.TBD.DateTo
+        Assigned Member: @Model.TBD.MemberID
+        Corresponding Event: @Model.TBD.EventID
     </h3>
     <form method="post">
-        <input asp-for="@Model.TBD.shiftID" type="hidden" />
+        <input asp-for="@Model.TBD.ShiftID" type="hidden" />
         <input type="submit" value="Delete" />
         <a asp-page="GetAllShifts">Cancel</a>
     </form>

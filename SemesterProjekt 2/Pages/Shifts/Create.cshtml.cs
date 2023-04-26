@@ -23,9 +23,16 @@ namespace SemesterProjekt_2.Pages.Shifts
 
         public async Task<IActionResult> OnPostAsync()
         {
-            await sService.AddShiftAsync(Shift);
-
-            return RedirectToPage("GetAllShifts");
+            try
+            {
+                await sService.AddShiftAsync(Shift);
+                return RedirectToPage("GetAllShifts");
+            }
+            catch (Exception ex)
+            {
+                ViewData["ErrorMessage"] = ex.Message;
+                return Page();
+            }
         }
     }
 }

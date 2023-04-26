@@ -24,7 +24,7 @@ namespace SemesterProjekt_2.Pages.Shifts
 
         public async Task<IActionResult> OnPostAsync()
         {
-            await sService.DeleteShiftAsync(TBD.shiftID);
+            await sService.DeleteShiftAsync(TBD.ShiftID);
 
             return RedirectToPage("GetAllHotels");
         }

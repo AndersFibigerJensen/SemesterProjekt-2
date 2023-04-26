@@ -41,30 +41,30 @@
             {
                 <tr>
                     <td>
-                        @item.shiftID
+                        @item.ShiftID
                     </td>
                     <td>
-                        @item.dateFrom
+                        @item.DateFrom
                     </td>
                     <td>
-                        @item.dateTo
+                        @item.DateTo
                     </td>
                     <td>
-                        @item.memberID
+                        @item.MemberID
                     </td>
                     <td>
-                        @item.eventID
+                        @item.EventID
                     </td>
-                    @if (item.memberID != 0)
+                    @if (item.MemberID != 0)
                     {
-                        <td> <a asp-page="" asp-route-memberid="@item.memberID">View Member</a></td>
+                        <td> <a asp-page="" asp-route-memberid="@item.MemberID">View Member</a></td>
                     }
-                    @if (item.eventID != 0)
+                    @if (item.EventID != 0)
                     {
-                        <td> <a asp-page="" asp-route-eventid="@item.eventID">View Event</a></td>
+                        <td> <a asp-page="" asp-route-eventid="@item.EventID">View Event</a></td>
                     }
-                    <td> <a asp-page="Update" asp-route-shiftid="@item.shiftID">Update Shift</a> </td>
-                    <td> <a asp-page="Delete" asp-route-shiftid="@item.shiftID">Delete Shift</a> </td>
+                    <td> <a asp-page="Update" asp-route-shiftid="@item.ShiftID">Update Shift</a> </td>
+                    <td> <a asp-page="Delete" asp-route-shiftid="@item.ShiftID">Delete Shift</a> </td>
                 </tr>
             }
         }
