@@ -26,7 +26,7 @@ namespace SemesterProjekt_2.Pages.Members
             try
             {
                 _memberService.AddMemberAsync(Member);
-                return RedirectToAction("GetAllMembers");
+                return RedirectToPage("GetAllMembers");
             }
             catch (Exception ex) 
             {

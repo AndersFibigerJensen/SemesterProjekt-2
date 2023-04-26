@@ -35,15 +35,17 @@ namespace SemesterProjekt_2.Pages.Members
         {
             try
             {
+                await _memberService.DeleteMemberAsync(Member.MemberID);
+                return RedirectToPage("GetAllMembers");
 
             }
             catch (Exception ex) 
             {
                 ViewData["Errormessage"] = ex.Message;
+                return Page();
 
             }
-            await _memberService.DeleteMemberAsync(Member.MemberID);
-            return RedirectToPage("GetAllMembers");
+
         }
     }
 }

@@ -4,7 +4,7 @@
     ViewData["title"] = "GetallMembers";
 }
 
-<a asp-page="AddMember"> add room </a>
+<a asp-page="AddMember"> add member </a>
 
 <form method="get">
     Search <input type="text" asp-for="FilterCriteria" />
@@ -36,7 +36,7 @@
                 {
                     
                 }
-                else if(item.Email==Model.member.Email & item.Password==Model.member.Password)
+                else if(item.Email==Model.member.Email & item.Password==Model.member.Password | Model.member.IsAdmin==true)
                 {
                 <td>
                     @item.MemberID
