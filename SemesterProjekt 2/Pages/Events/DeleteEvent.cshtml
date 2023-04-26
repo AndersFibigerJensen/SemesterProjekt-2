@@ -1,0 +1,41 @@
+﻿@page
+@model SemesterProjekt_2.Pages.Events.DeleteEventModel
+@{
+    ViewData["Title"] = "Delete Event";
+}
+<h1>Fjern event</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="@Model.Event.eventID"></label>
+                <input readonly asp-for="@Model.Event.eventID" class=" form-control"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Event.name"></label>
+                <input readonly asp-for="@Model.Event.name" class=" form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Event.eventStart"></label>
+                <input readonly asp-for="@Model.Event.eventStart" class=" form-control"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Event.eventEnd"></label>
+                <input readonly asp-for="@Model.Event.eventEnd" class=" form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Event.price"></label>
+                <input readonly asp-for="@Model.Event.price" class=" form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Event.isMemberRequired"></label>
+                <input readonly asp-for="@Model.Event.isMemberRequired" class=" form-control" />
+            </div>
+            <div class="form-group">
+                <a asp-page="GetAllEvents" class=" btn-btn-primary">Cancel</a>
+                <input type="submit" value=" Delete Event" class="btn-btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
