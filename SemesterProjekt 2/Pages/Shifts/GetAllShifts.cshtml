@@ -1,4 +1,76 @@
 ﻿@page
 @model SemesterProjekt_2.Pages.Shifts.GetAllShiftsModel
 @{
+    ViewData["Title"] = "List of Shifts";
 }
+
+<h1>List of Shifts</h1>
+
+<form method="get">
+    Search <input type="form-control" asp-for="FilterCriteria" />
+    <input type="submit" value="Search" />
+</form>
+
+<p>
+    <a asp-page="Create">Create New Shift</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Shift No.
+            </th>
+            <th>
+                From
+            </th>
+            <th>
+                To
+            </th>
+            <th>
+                Assigned Member
+            </th>
+            <th>
+                Corr. Event
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Shifts.Count() != 0)
+        {
+            @foreach (var item in Model.Shifts)
+            {
+                <tr>
+                    <td>
+                        @item.shiftID
+                    </td>
+                    <td>
+                        @item.dateFrom
+                    </td>
+                    <td>
+                        @item.dateTo
+                    </td>
+                    <td>
+                        @item.memberID
+                    </td>
+                    <td>
+                        @item.eventID
+                    </td>
+                    @if (item.memberID != 0)
+                    {
+                        <td> <a asp-page="" asp-route-memberid="@item.memberID">View Member</a></td>
+                    }
+                    @if (item.eventID != 0)
+                    {
+                        <td> <a asp-page="" asp-route-eventid="@item.eventID">View Event</a></td>
+                    }
+                    <td> <a asp-page="Update" asp-route-shiftid="@item.shiftID">Update Shift</a> </td>
+                    <td> <a asp-page="Delete" asp-route-shiftid="@item.shiftID">Delete Shift</a> </td>
+                </tr>
+            }
+        }
+        else
+        {
+
+        }
+    </tbody>
+</table>

@@ -8,10 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Pages\Vagter\**" />
+    <Content Remove="Pages\Vagter\**" />
+    <EmbeddedResource Remove="Pages\Vagter\**" />
+    <None Remove="Pages\Vagter\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Exceptions\" />
     <Folder Include="Pages\Login\" />
     <Folder Include="Pages\Blog\" />
-    <Folder Include="Pages\Vagter\" />
   </ItemGroup>
 
   <ItemGroup>
