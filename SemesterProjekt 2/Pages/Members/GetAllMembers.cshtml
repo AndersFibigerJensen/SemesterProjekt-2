@@ -32,7 +32,11 @@
         @foreach (var item in Model.Members)
         {
             <tr>
-                @if(item.Email==Model.member.Email & item.Password==Model.member.Password)
+                @if (item.MemberID == (-1))
+                {
+                    
+                }
+                else if(item.Email==Model.member.Email & item.Password==Model.member.Password)
                 {
                 <td>
                     @item.MemberID
@@ -49,10 +53,6 @@
                 <td>
                     <a asp-page="DeleteMember" asp-route-id="@item.MemberID">delete</a> | <a asp-page="UpdateMember" asp-route-id="@item.MemberID"> update</a>
                 </td>
-                }
-                else if(item.MemberID==(-1))
-                {
-                    
                 }
                 else
                 {

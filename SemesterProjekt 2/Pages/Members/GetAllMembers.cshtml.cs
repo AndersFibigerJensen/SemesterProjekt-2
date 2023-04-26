@@ -29,7 +29,7 @@ namespace SemesterProjekt_2.Pages.Members
 
         public async Task OnGetAsync()
         {
-            if(member!=null)
+            if (await _loginservice.GetLogged()!=null)
             {
                 member = await _loginservice.GetLogged();
             }
