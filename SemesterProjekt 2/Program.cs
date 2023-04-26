@@ -9,6 +9,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddTransient<IMemberService, MemberService>();
 builder.Services.AddTransient<IEventService, EventService>();
 builder.Services.AddTransient<IShiftService, ShiftService>();
+builder.Services.AddSingleton<LoginService>();
 
 var app = builder.Build();
 
