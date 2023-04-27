@@ -6,6 +6,7 @@ namespace SemesterProjekt_2.Models
     {
         //Anders
 
+        private static int _counter=0;
         public int MemberID{ get; set; }
 
         public string Name { get; set; }
@@ -29,9 +30,11 @@ namespace SemesterProjekt_2.Models
             Shifts = new List<Shift>();
             IsAdmin= false;
             HasDoneHygieneCourse= false;
+            _counter++;
+            MemberID=_counter;
         }
 
-        public Member(int memberID,string name,string password,string email,string address, bool isFamily, bool hasDoneHygieneCourse, bool isAdmin)
+        public Member(int memberID, string name,string password,string email,string address, bool isFamily, bool hasDoneHygieneCourse, bool isAdmin)
         {
             MemberID = memberID;
             Name = name;
