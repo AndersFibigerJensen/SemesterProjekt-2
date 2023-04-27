@@ -8,33 +8,43 @@
     <div class="col-md-4">
         <form method="post">
             <div class="form-group">
-                <label asp-for="@Model.Member.Name"></label>
+                <label asp-for="@Model.Member.Name" class="control-label"></label>
                 <input asp-for="@Model.Member.Name" class="form-control" />
 
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Member.Address"></label>
-                <input asp-for="@Model.Member.Address" />
+                <label asp-for="@Model.Member.Address" class="control-label"></label>
+                <input asp-for="@Model.Member.Address" class="form-control" />
 
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Member.Email"></label>
-                <input asp-for="@Model.Member.Email" />
+                <label asp-for="@Model.Member.Email" class="control-label"></label>
+                <input asp-for="@Model.Member.Email" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Member.Password" class="control-label"></label>
+                <input asp-for="@Model.Member.Password" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Member.IsFamily" class="control-label"></label>
+                <input asp-for="@Model.Member.IsFamily"/>
+            </div>
+            @if (Model.User.IsAdmin==true)
+            {
+                <div class="form-group">
+                    <label asp-for="@Model.Member.HasDoneHygieneCourse" class="control-label"></label>
+                    <input asp-for="@Model.Member.HasDoneHygieneCourse" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Member.IsAdmin" class="control-label"></label>
+                    <input asp-for="@Model.Member.IsAdmin" />
+                </div>
 
-            </div>
-            <div class="form-group">
-                <label asp-for="@Model.Member.IsFamily"></label>
-                <input asp-for="@Model.Member.IsFamily" />
-            </div>
-            <div class="form-group">
-                <label asp-for="@Model.Member.Password"></label>
-                <input asp-for="@Model.Member.Password" />
-            </div>
+            }
             <div class="form-group">
                 <a asp-page="GetAllMembers" class=" btn-btn-primary">Cancel</a>
                 <input type="submit" value=" Opdater Medlem" class="btn-btn-primary" />
             </div>
-
         </form>
     </div>
 </div>

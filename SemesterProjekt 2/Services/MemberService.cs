@@ -22,7 +22,19 @@ namespace SemesterProjekt_2.Services
         {
 
         }
+        //public MemberService(string Connectionstring):base(connectionstring)
+        //{
 
+        //}
+
+
+        /// <summary>
+        /// Tilføjer et medlem til databasen
+        /// </summary>
+        /// <param name="member">tilføjer medlem inde i parameteren til databasen</param>
+        /// <exception cref="ex"> exceptionen bliver kastet videre i systemet</exception>
+        /// <exception cref="sql"> exceptionen bliver kastet videre i systemet</exception>
+        /// <returns></returns>
         public async Task AddMemberAsync(Member member)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -55,6 +67,13 @@ namespace SemesterProjekt_2.Services
             }
         }
 
+        /// <summary>
+        /// Sletter et medlem fra databasen
+        /// </summary>
+        /// <param name="id"> bruger id til at finde det medlem som skal slettes </param>
+        /// <exception cref="ex"> exceptionen bliver kastet videre i systemet</exception>
+        /// <exception cref="sql"> exceptionen bliver kastet videre i systemet</exception>
+        /// <returns>returnere det medlem som bliver slettet</returns>
         public async Task<Member> DeleteMemberAsync(int id)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -84,6 +103,13 @@ namespace SemesterProjekt_2.Services
             return null;
         }
 
+        /// <summary>
+        /// Filtere alle medlemmer ud fra navn
+        /// </summary>
+        /// <param name="filter">bruges til at filtre medlemmer</param>
+        /// <exception cref="ex"> exceptionen bliver kastet videre i systemet</exception>
+        /// <exception cref="sql"> exceptionen bliver kastet videre i systemet</exception>
+        /// <returns>returnere medlemmer som er blevet filtreret </returns>
         public async Task<List<Member>> FilterMembersAsync(string filter)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -125,6 +151,13 @@ namespace SemesterProjekt_2.Services
             }
             return null;
         }
+
+        /// <summary>
+        /// Henter alle medlemmer fra databasen ned på en liste
+        /// </summary>
+        /// <exception cref="ex"> exceptionen bliver kastet videre i systemet</exception>
+        /// <exception cref="sql"> exceptionen bliver kastet videre i systemet</exception>
+        /// <returns>returnere en liste med alle medlemmer</returns>
 
         public async Task<List<Member>> GetAllMembersAsync()
         {
@@ -168,6 +201,13 @@ namespace SemesterProjekt_2.Services
             return null;
         }
 
+        /// <summary>
+        /// Henter et medlem fra databasen
+        /// </summary>
+        /// <param name="id">Tager medlemmets id som paramaeter</param>
+        /// <exception cref="ex"> exceptionen bliver kastet videre i systemet</exception>
+        /// <exception cref="sql"> exceptionen bliver kastet videre i systemet</exception>
+        /// <returns>returnere et medlem</returns>
         public async Task<Member> GetMemberByIdAsync(int id)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -206,6 +246,14 @@ namespace SemesterProjekt_2.Services
             return null;
         }
 
+        /// <summary>
+        /// Opdatere et medlem
+        /// </summary>
+        /// <param name="id"> bruger id til at finde det medlem som skal opdateres i databasen</param>
+        /// <param name="member">erstatter alt information omkring det gamle medlem med de properities som er i member</param>
+        /// <exception cref="ex"> exceptionen bliver kastet videre i systemet</exception>
+        /// <exception cref="sql"> exceptionen bliver kastet videre i systemet</exception>
+        /// <returns></returns>
         public async Task<bool> UpdateMemberAsync(int id,Member member)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))

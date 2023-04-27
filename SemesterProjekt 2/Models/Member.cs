@@ -27,6 +27,8 @@ namespace SemesterProjekt_2.Models
         public Member()
         {
             Shifts = new List<Shift>();
+            IsAdmin= false;
+            HasDoneHygieneCourse= false;
         }
 
         public Member(int memberID,string name,string password,string email,string address, bool isFamily, bool hasDoneHygieneCourse, bool isAdmin)
@@ -38,6 +40,7 @@ namespace SemesterProjekt_2.Models
             IsFamily= isFamily;
             HasDoneHygieneCourse=hasDoneHygieneCourse;
             Password = password;
+            IsAdmin=isAdmin;
             Shifts= new List<Shift>();
             
 

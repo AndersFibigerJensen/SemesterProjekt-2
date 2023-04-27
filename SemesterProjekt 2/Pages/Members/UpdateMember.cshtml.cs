@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SemesterProjekt_2.Interfaces;
 using SemesterProjekt_2.Models;
+using SemesterProjekt_2.Services;
 
 namespace SemesterProjekt_2.Pages.Members
 {
@@ -10,11 +11,16 @@ namespace SemesterProjekt_2.Pages.Members
         [BindProperty]
         public Member Member { get; set; }
 
-        private IMemberService _memberService { get; set; }
+        [BindProperty]
+        public Member User { get; set; }
 
-        public UpdateMemberModel(IMemberService memberService)
+        private IMemberService _memberService { get; set; }
+        private LoginService _loginService { get; set; }
+
+        public UpdateMemberModel(IMemberService memberService,LoginService LoginService)
         {
             _memberService = memberService;
+            _loginService = LoginService;
         }
 
 
@@ -23,6 +29,7 @@ namespace SemesterProjekt_2.Pages.Members
         {
             try
             {
+                User = await _loginService.GetLogged();
                 Member = await _memberService.GetMemberByIdAsync(id);
             }
             catch (Exception ex) 

@@ -4,6 +4,8 @@ namespace SemesterProjekt_2.Services
 {
     public class LoginService
     {
+        //Anders
+
         private Member _user;
 
         public async Task userlogin(Member user)
