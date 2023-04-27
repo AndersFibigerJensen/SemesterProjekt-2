@@ -5,17 +5,19 @@ using SemesterProjekt_2.Models;
 
 namespace SemesterProjekt_2.Pages.Events
 {
-    public class DeleteEventModel : PageModel
+    public class UpdateEventModel : PageModel
     {
         [BindProperty]
         public Event Event { get; set; }
 
         private IEventService _eService { get; set; }
 
-        public DeleteEventModel(IEventService eService)
+        public UpdateEventModel(IEventService eService)
         {
             _eService = eService;
         }
+
+
 
         public async Task OnGetAsync(int eventID)
         {
@@ -31,19 +33,20 @@ namespace SemesterProjekt_2.Pages.Events
 
         }
 
-        public async Task<IActionResult> OnpostAsync()
+        public async Task<IActionResult> OnpostAsync(int eventID)
         {
             try
             {
-
+                await _eService.UpdateEventAsync(Event, eventID);
+                return RedirectToPage("GetAllEvents");
             }
             catch (Exception ex)
             {
                 ViewData["Errormessage"] = ex.Message;
+                return Page();
 
             }
-            await _eService.RemoveEventAsync(Event.eventID);
-            return RedirectToPage("GetAllEvents");
+
         }
     }
 }

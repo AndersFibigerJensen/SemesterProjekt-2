@@ -1,6 +1,7 @@
 ﻿using SemesterProjekt_2.Interfaces;
 using SemesterProjekt_2.Models;
 using Microsoft.Data.SqlClient;
+using System.Diagnostics.Metrics;
 
 namespace SemesterProjekt_2.Services
 {
@@ -9,12 +10,12 @@ namespace SemesterProjekt_2.Services
     {
         //Query String
         private string queryGetAll = "select * from Event";
-        private string queryInsert = "insert into event values(@EventID, @Name, @DateFrom, @DateTo, @Price, @IsMemberRequired)";
-        private string queryGetFromID = "select * from event where eventId = @EventID";
-        private string queryDelete = "delete * from event where eventId = @EventID";
-        private string queryUpdate = "update event Set ID = @EventID, Name = @Name , " +
-            "Event Start = @EventStart, Event End = @EventEnd, Price = @Price, Is member required = @IsMemberRequired, where ID = @EventID";
-        private string querySearch = " select * from event where Name Like '%'+@Name+'%'";
+        private string queryInsert = "insert into Event values(@EventID, @Name, @DateFrom, @DateTo, @Price, @IsMemberRequired)";
+        private string queryGetFromID = "select * from Event where eventid = @EventID";
+        private string queryDelete = "delete from Event where eventid = @EventID";
+        private string queryUpdate = "update Event Set eventid = @EventID, Name = @Name , " +
+            "EventStart = @EventStart, EventEnd = @EventEnd, Price = @Price, IsMemberRequired = @IsMemberRequired where eventid = @EventID";
+        private string querySearch = " select * from event where name Like '%'+@Name+'%'";
 
         public EventService(IConfiguration configuration) : base(configuration)
         {
@@ -52,9 +53,45 @@ namespace SemesterProjekt_2.Services
             }
         }
 
-        public async Task<List<Event>> FilterEventsAsync()
+        public async Task<List<Event>> FilterEventsAsync(string filter)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand(querySearch, connection))
+                {
+                    try
+                    {
+                        List<Event> events = new List<Event>();
+                        command.Parameters.AddWithValue("@Name", filter);
+
+                        await command.Connection.OpenAsync();
+                        SqlDataReader reader = await command.ExecuteReaderAsync();
+                        while (await reader.ReadAsync())
+                        {
+                            int eventId = reader.GetInt32(0);
+                            string name = reader.GetString(1);
+                            DateTime eventStart = reader.GetDateTime(2);
+                            DateTime eventEnd = reader.GetDateTime(3);
+                            double price = reader.GetDouble(4);
+                            bool isMemberRequired = reader.GetBoolean(5);
+                            
+                            Event eEvent = new Event(eventId, name, eventStart, eventEnd, price, isMemberRequired);
+                            events.Add(eEvent);
+                        }
+                        return events;
+                    }
+                    catch (SqlException sqlEx)
+                    {
+                        throw sqlEx;
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+
+                }
+            }
+            return null;
         }
 
         public async Task<List<Event>> GetAllEventsAsync()
@@ -91,10 +128,6 @@ namespace SemesterProjekt_2.Services
                     {
                         Console.WriteLine("Generel fejl " + ex.Message);
                     }
-                    finally
-                    {
-
-                    }
                 }
             }
             return null;
@@ -104,33 +137,35 @@ namespace SemesterProjekt_2.Services
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                try
+                using (SqlCommand commmand = new SqlCommand(queryGetFromID, connection))
                 {
-                    SqlCommand commmand = new SqlCommand(queryGetFromID, connection);
-                    commmand.Parameters.AddWithValue("@ID", id);
-                    await commmand.Connection.OpenAsync();
-
-                    SqlDataReader reader = await commmand.ExecuteReaderAsync();
-                    if (reader.Read())
+                    try
                     {
-                        int Id = reader.GetInt32(0);
-                        string eventName = reader.GetString(1);
-                        DateTime dateFrom = reader.GetDateTime(2);
-                        DateTime dateTo = reader.GetDateTime(3);
-                        double price = reader.GetDouble(4);
-                        bool isMemberRequired = reader.GetBoolean(5);
-                        Event begivenhed = new Event(Id, eventName, dateFrom, dateTo, price, isMemberRequired);
-                        return begivenhed; 
+                        commmand.Parameters.AddWithValue("@EventID", id);
+                        await commmand.Connection.OpenAsync();
+                        SqlDataReader reader = await commmand.ExecuteReaderAsync();
+                        while (await reader.ReadAsync())
+                        {
+                            int Id = reader.GetInt32(0);
+                            string eventName = reader.GetString(1);
+                            DateTime dateFrom = reader.GetDateTime(2);
+                            DateTime dateTo = reader.GetDateTime(3);
+                            double price = reader.GetDouble(4);
+                            bool isMemberRequired = reader.GetBoolean(5);
+                            Event begivenhed = new Event(Id, eventName, dateFrom, dateTo, price, isMemberRequired);
+                            return begivenhed;
+                        }
                     }
-                }
-                catch (SqlException sqlEx)
-                {
-                    throw sqlEx;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
+                    catch (SqlException sqlEx)
+                    {
+                        throw sqlEx;
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+
+                }                
             }
             return null;
         }
@@ -143,7 +178,7 @@ namespace SemesterProjekt_2.Services
                 {
                     SqlCommand command = new SqlCommand(queryDelete, connection);
                     Event begivenhed = await GetEventByIdAsync(id);
-                    command.Parameters.AddWithValue("@ID", id);
+                    command.Parameters.AddWithValue("@EventID", id);
                     command.Connection.OpenAsync();
                     int noOfRows = await command.ExecuteNonQueryAsync();
                     if (noOfRows == 1)
@@ -167,10 +202,36 @@ namespace SemesterProjekt_2.Services
             return null;
         }
 
-        public Task<bool> UpdateEventAsync(int id)
+        public async Task<bool> UpdateEventAsync(Event eEvent, int id)
         {
-            
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    SqlCommand command = new SqlCommand(queryUpdate, connection);
+                    command.Parameters.AddWithValue("@EventID", eEvent.eventID);
+                    command.Parameters.AddWithValue("@Name", eEvent.name);
+                    command.Parameters.AddWithValue("@EventStart", eEvent.eventStart);
+                    command.Parameters.AddWithValue("@EventEnd", eEvent.eventEnd);
+                    command.Parameters.AddWithValue("@Price", eEvent.price);
+                    command.Parameters.AddWithValue("@IsMemberRequired", eEvent.isMemberRequired);
+                    await command.Connection.OpenAsync();
+                    int noOfRows = await command.ExecuteNonQueryAsync();
+                    if (noOfRows == 1)
+                    {
+                        return true;
+                    }
+                }
+                catch (SqlException sql)
+                {
+                    throw sql;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            return false;
         }
     }
 }

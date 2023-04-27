@@ -26,8 +26,8 @@ namespace SemesterProjekt_2.Interfaces
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Task<bool> UpdateEventAsync(int id);
-        public Task<List<Event>> FilterEventsAsync();
+        public Task<bool> UpdateEventAsync(Event eEvent, int id);
+        public Task<List<Event>> FilterEventsAsync(string filter);
         /// <summary>
         /// Finder en event med et givent id
         /// </summary>

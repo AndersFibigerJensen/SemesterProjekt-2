@@ -26,12 +26,12 @@ namespace SemesterProjekt_2.Pages.Events
 
         public async Task OnGetAsync()
         {
-            //if (!FilterCriteria.IsNullOrEmpty())
-            //{
-            //    Events = await _eService.FilterEventsAsync(FilterCriteria);
-            //}
-            //else
-            
+            if (!FilterCriteria.IsNullOrEmpty())
+            {
+                Events = await _eService.FilterEventsAsync(FilterCriteria);
+            }
+            else
+
             {
                 Events = await _eService.GetAllEventsAsync();
             }

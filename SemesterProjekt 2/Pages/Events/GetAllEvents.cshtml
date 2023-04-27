@@ -9,6 +9,11 @@
     <a asp-page="AddEvent">Add new event</a>
 </p>
 
+<form method="get">
+    Search <input type="text" asp-for="FilterCriteria" />
+    <input type="submit" value="Filter" />
+</form>
+
 <table class="table">
     <thead>
         <tr>
