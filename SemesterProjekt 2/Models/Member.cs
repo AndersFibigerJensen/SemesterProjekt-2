@@ -1,22 +1,27 @@
-﻿using System.Net;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Net;
 
 namespace SemesterProjekt_2.Models
 {
     public class Member
     {
         //Anders
-
-        private static int _counter=0;
+        [Required]
         public int MemberID{ get; set; }
 
+        [Required]
         public string Name { get; set; }
 
+        [Required]
         public string Address { get; set; }
 
+        [Required]
         public string Email { get; set; }
 
+        [Required]
         public string Password { get; set; }
 
+        [Required]
         public bool IsFamily { get; set; }
 
         public List<Shift> Shifts { get; set; }
@@ -30,8 +35,6 @@ namespace SemesterProjekt_2.Models
             Shifts = new List<Shift>();
             IsAdmin= false;
             HasDoneHygieneCourse= false;
-            _counter++;
-            MemberID=_counter;
         }
 
         public Member(int memberID, string name,string password,string email,string address, bool isFamily, bool hasDoneHygieneCourse, bool isAdmin)

@@ -5,7 +5,7 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SemesterProjekt 2", "SemesterProjekt 2\SemesterProjekt 2.csproj", "{D9E9A697-4A5F-4920-984D-135F4A50A8D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jordnær", "Jordnær\Jordnær.csproj", "{D29A0965-24A3-4EEA-8B5F-CA7574C5773A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JordnærTest2", "JordnærTest2\JordnærTest2.csproj", "{2B484045-D655-444B-B184-5998DB829DAA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{D9E9A697-4A5F-4920-984D-135F4A50A8D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9E9A697-4A5F-4920-984D-135F4A50A8D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9E9A697-4A5F-4920-984D-135F4A50A8D5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D29A0965-24A3-4EEA-8B5F-CA7574C5773A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D29A0965-24A3-4EEA-8B5F-CA7574C5773A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D29A0965-24A3-4EEA-8B5F-CA7574C5773A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D29A0965-24A3-4EEA-8B5F-CA7574C5773A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B484045-D655-444B-B184-5998DB829DAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B484045-D655-444B-B184-5998DB829DAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B484045-D655-444B-B184-5998DB829DAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B484045-D655-444B-B184-5998DB829DAA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -13,7 +13,7 @@ namespace SemesterProjekt_2.Services
         private string Memberstrings = " select * from Member";
         private string MemberfromID = " select * from Member where memberid=@ID";
         private string Membersearch = " select * from Member where Name Like '%'+@Name+'%'";
-        private string MemberUpdate = "update Member " + " set MemberID=@ID, Name=@Name, Password=@Password , Email=@Email, Address=@Address, IsFamily=@Family, HasDoneHygieneCourse=@Hygiene, isAdmin=@Admin " + "where MemberID=@ID";
+        private string MemberUpdate = "update Member " + " set Name=@Name, Password=@Password , Email=@Email, Address=@Address, IsFamily=@Family, HasDoneHygieneCourse=@Hygiene, isAdmin=@Admin " + "where MemberID=@ID";
         private string MemberDelete = "delete from Member where MemberID=@ID";
         private string MemberAdd = "insert into Member values(@ID,@Name,@Password,@Email,@Address,@isFamily,@Course,@isAdmin)";
 
@@ -22,10 +22,11 @@ namespace SemesterProjekt_2.Services
         {
 
         }
-        //public MemberService(string Connectionstring):base(connectionstring)
-        //{
 
-        //}
+        public MemberService(string connectionstring) : base(connectionstring)
+        {
+
+        }
 
 
         /// <summary>
@@ -43,7 +44,6 @@ namespace SemesterProjekt_2.Services
                 {
                     try
                     {
-                        command.Parameters.AddWithValue("@ID", member.MemberID);
                         command.Parameters.AddWithValue("@Name", member.Name);
                         command.Parameters.AddWithValue("Email", member.Email);
                         command.Parameters.AddWithValue("@Password", member.Password);

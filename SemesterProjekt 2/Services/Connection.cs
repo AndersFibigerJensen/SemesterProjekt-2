@@ -13,5 +13,9 @@ namespace SemesterProjekt_2.Services
             connectionString = Configuration["ConnectionStrings:DefaultConnection"];
         }
 
+        public Connection(string connectionstring)
+        {
+            this.connectionString = connectionstring;
+        }
     }
 }
