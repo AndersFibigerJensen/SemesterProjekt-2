@@ -5,9 +5,12 @@
 }
 <h1>Velkommen til Eventsiden</h1>
 
-<p>
-    <a asp-page="AddEvent">Add new event</a>
-</p>
+@if (Model.user.IsAdmin == true)
+{
+    <p>
+        <a asp-page="AddEvent">Add new event</a>
+    </p>
+}
 
 <form method="get">
     Search <input type="text" asp-for="FilterCriteria" />
@@ -17,9 +20,6 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                ID
-            </th>
             <th>
                 Name
             </th>
@@ -44,9 +44,6 @@
             {
                 <tr>
                     <td>
-                        @item.eventID
-                    </td>
-                    <td>
                         @item.name
                     </td>
                     <td>
@@ -59,7 +56,15 @@
                         @item.price
                     </td>
                     <td>
-                        @item.isMemberRequired
+                        @if (item.isMemberRequired == true)
+                        {
+                            <p>for medlemmer</p>
+                        }
+                        else 
+                        {
+                            <p>for alle</p>
+                        }
+                        @*@(item.isMemberRequired == true)?<p>for medlemmer</p><p>for alle</p>*@
                     </td>
                     @if (Model.user.IsAdmin == true)
                     {

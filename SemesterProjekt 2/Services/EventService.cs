@@ -13,7 +13,7 @@ namespace SemesterProjekt_2.Services
         private string queryInsert = "insert into Event values(@Name, @DateFrom, @DateTo, @Price, @IsMemberRequired)";
         private string queryGetFromID = "select * from Event where eventid = @EventID";
         private string queryDelete = "delete from Event where eventid = @EventID";
-        private string queryUpdate = "update Event Set eventid = @EventID, Name = @Name , " +
+        private string queryUpdate = "update Event Set Name = @Name , " +
             "EventStart = @EventStart, EventEnd = @EventEnd, Price = @Price, IsMemberRequired = @IsMemberRequired where eventid = @EventID";
         private string querySearch = " select * from event where name Like '%'+@Name+'%'";
 
