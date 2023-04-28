@@ -10,7 +10,7 @@ namespace SemesterProjekt_2.Services
     {
         //Query String
         private string queryGetAll = "select * from Event";
-        private string queryInsert = "insert into Event values(@EventID, @Name, @DateFrom, @DateTo, @Price, @IsMemberRequired)";
+        private string queryInsert = "insert into Event values(@Name, @DateFrom, @DateTo, @Price, @IsMemberRequired)";
         private string queryGetFromID = "select * from Event where eventid = @EventID";
         private string queryDelete = "delete from Event where eventid = @EventID";
         private string queryUpdate = "update Event Set eventid = @EventID, Name = @Name , " +
@@ -28,7 +28,7 @@ namespace SemesterProjekt_2.Services
             {
                 using (SqlCommand command = new SqlCommand(queryInsert, connection))
                 {
-                    command.Parameters.AddWithValue("@EventID", begivenhed.eventID);
+                    
                     command.Parameters.AddWithValue("@Name", begivenhed.name);
                     command.Parameters.AddWithValue("@DateFrom", begivenhed.eventStart);
                     command.Parameters.AddWithValue("@DateTo", begivenhed.eventEnd);

@@ -15,9 +15,9 @@
 
         }
 
-        public Event(int EventID, string Name, DateTime EventStart, DateTime EventEnd, double Price, bool IsMemberRequired)
+        public Event(int eventid, string Name, DateTime EventStart, DateTime EventEnd, double Price, bool IsMemberRequired)
         {
-            eventID = EventID;
+            eventID = eventid;
             name = Name;
             eventStart = EventStart;
             eventEnd = EventEnd;
