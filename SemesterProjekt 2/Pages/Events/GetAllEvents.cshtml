@@ -43,31 +43,6 @@
             @foreach (var item in Model.Events)
             {
                 <tr>
-                    @if (Model.user.IsAdmin == true)
-                    {
-                        <td>
-                            @item.eventID
-                        </td>
-                        <td>
-                            @item.name
-                        </td>
-                        <td>
-                            @item.eventStart
-                        </td>
-                        <td>
-                            @item.eventEnd
-                        </td>
-                        <td>
-                            @item.price
-                        </td>
-                        <td>
-                            @item.isMemberRequired
-                        </td>
-                        <td>
-                            <a asp-page="/Events/UpdateEvent" asp-route-eventID="@item.eventID">Edit</a>
-                            <a asp-page="/Events/DeleteEvent" asp-route-eventID="@item.eventID">Delete</a>
-                        </td>                        
-                    }
                     <td>
                         @item.eventID
                     </td>
@@ -86,6 +61,13 @@
                     <td>
                         @item.isMemberRequired
                     </td>
+                    @if (Model.user.IsAdmin == true)
+                    {
+                        <td>
+                            <a asp-page="/Events/UpdateEvent" asp-route-eventID="@item.eventID">Edit</a>
+                            <a asp-page="/Events/DeleteEvent" asp-route-eventID="@item.eventID">Delete</a>
+                        </td>
+                    }
 
                 </tr>
             }
