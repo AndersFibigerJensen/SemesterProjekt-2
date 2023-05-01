@@ -19,6 +19,11 @@ namespace SemesterProjekt_2.Services
         public ShiftService(IConfiguration configuration) : base(configuration) { }
 
         // Functions
+
+        /// <summary>
+        /// Gets a list of all shifts currently in the database
+        /// </summary>
+        /// <returns>A list containing all shifts currently in the database</returns>
         public async Task<List<Shift>> GetAllShiftsAsync()
         {
             List<Shift> allShifts = new List<Shift>();
@@ -59,6 +64,11 @@ namespace SemesterProjekt_2.Services
             return allShifts;
         }
 
+        /// <summary>
+        /// Gets the shift currently assigned to the input ID
+        /// </summary>
+        /// <param name="id">ID of the shift we're searching for</param>
+        /// <returns>The shift assigned to the input ID</returns>
         public async Task<Shift> GetShiftByIdAsync(int id)
         {
             Shift s = new Shift();
@@ -97,6 +107,11 @@ namespace SemesterProjekt_2.Services
             return s;
         }
 
+        /// <summary>
+        /// Adds a shift to the database
+        /// </summary>
+        /// <param name="shift">Shift to be added to the database</param>
+        /// <returns>Whether or not the process was successful (true if yes, false if no)</returns>
         public async Task<bool> AddShiftAsync(Shift shift)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -128,6 +143,11 @@ namespace SemesterProjekt_2.Services
             return false;
         }
 
+        /// <summary>
+        /// Deletes a shift from the database
+        /// </summary>
+        /// <param name="id">ID of the shift to be deleted</param>
+        /// <returns>Deleted shift</returns>
         public async Task<Shift> DeleteShiftAsync(int id)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -163,6 +183,12 @@ namespace SemesterProjekt_2.Services
             return null;
         }
 
+        /// <summary>
+        /// Changes the parameters of a shift
+        /// </summary>
+        /// <param name="shift">Shift containing the new parameters</param>
+        /// <param name="id">ID of the old shift, the one to be updated</param>
+        /// <returns>Whether or not the task process was successful (true if yes, false if no)</returns>
         public async Task<bool> UpdateShiftAsync(Shift shift, int id)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -195,6 +221,11 @@ namespace SemesterProjekt_2.Services
             return false;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
         public async Task<List<Shift>> FilterShiftsAsync(DateTime date)
         {
             List<Shift> filteredShifts = new List<Shift>();
