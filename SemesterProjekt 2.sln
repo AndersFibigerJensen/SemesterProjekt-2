@@ -5,7 +5,7 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SemesterProjekt 2", "SemesterProjekt 2\SemesterProjekt 2.csproj", "{D9E9A697-4A5F-4920-984D-135F4A50A8D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JordnærTest2", "JordnærTest2\JordnærTest2.csproj", "{2B484045-D655-444B-B184-5998DB829DAA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JordnærTest2", "JordnærTest2\JordnærTest2.csproj", "{2B484045-D655-444B-B184-5998DB829DAA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
