@@ -3,3 +3,35 @@
 @{
     ViewData["Title"] = "Update Shift";
 }
+
+<h1>Update Hotel</h1>
+<p>
+    <h2>You are currently editing the data bound to the following shift:</h2>
+    <h3>
+        ID: @Model.TBU.ShiftID
+        Name: @Model.TBU.DateFrom
+        Address: @Model.TBU.DateTo
+    </h3>
+</p>
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="@Model.NewShift.ShiftID"></label>
+                <input asp-for="@Model.NewShift.ShiftID" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.NewShift.DateFrom"></label>
+                <input asp-for="@Model.NewShift.DateFrom" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.NewShift.DateTo"></label>
+                <input asp-for="@Model.NewShift.DateTo" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
