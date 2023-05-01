@@ -1,0 +1,57 @@
+﻿@page
+@model SemesterProjekt_2.Pages.Members.HomePageModel
+@{
+    ViewData["title"] = "HomePage";
+}
+@*Anders*@
+
+<div>
+    <form method="post" class="userpage-form">
+        <input asp-for="member.MemberID" type="hidden" />
+        <div>
+            @*<img src=""*@
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.member.Name" class="control-label"></label>
+            <input asp-for="@Model.member.Name" class="control-label" readonly />
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.member.Address" class="control-label"></label>
+            <input asp-for="@Model.member.Address" class="control-label" readonly />
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.member.Email" class="control-label"></label>
+            <input asp-for="@Model.member.Email" class="control-label" readonly />
+        </div>
+        <div class="form-group">
+            @if (Model.member.IsFamily == true)
+            {
+                <p class="form-control"> familie</p>
+            }
+        </div>
+        @if (Model.member.HasDoneHygieneCourse == true)
+        {
+            <div class="form-group">
+                
+                <p class="form-control"> har bestået hygiene kursus</p>
+                
+
+            </div>
+
+        }
+        @if (Model.member.IsAdmin == true)
+        {
+            <div class="form-group">
+
+                <p class="form-control"> har admin priviligeger</p>
+
+
+            </div>
+
+        }
+        <div>
+            <a asp-page="UpdateMember" asp-route-id="@Model.member.MemberID" class="btn btn-primary" > opdater Medlem </a>
+            <a asp-page="DeleteMember" asp-route-id="@Model.member.MemberID" class="btn btn-primary"> slet din profil</a>
+        </div>
+    </form>
+</div>

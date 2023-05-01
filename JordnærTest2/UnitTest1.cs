@@ -10,7 +10,7 @@ namespace JordnærTest2
         private string connection ="";
         
         [TestMethod]
-        public void AddMemberTest()
+        public async Task AddMemberTestAsync()
         {
             //arrange
             MemberService MemService = new MemberService(connection);
@@ -29,11 +29,38 @@ namespace JordnærTest2
         }
 
         [TestMethod]
-        public void DeleteMemberTest()
+        public async Task DeleteMemberTestAsync()
         {
             //arrange
             MemberService MemService = new MemberService(connection);
             List<Member> Members = MemService.GetAllMembersAsync().Result;
+            Member member = new Member(-2, "a", "a", "a", "a", false, false, false);
+
+            //act
+            MemService.AddMemberAsync(member);
+            int MemberBefore= Members.Count();
+            MemService.DeleteMemberAsync(-2);
+            int MemberAfter= Members.Count();
+
+
+            //assert
+            Assert.AreEqual(MemberBefore,MemberAfter);
+
+        }
+
+        [TestMethod]
+
+        public async Task GetMemberAsync()
+        {
+            //arrange
+            MemberService MemService = new MemberService(connection);
+            List<Member> Members = MemService.GetAllMembersAsync().Result;
+
+            //act
+            Member member =await MemService.GetMemberByIdAsync(1);
+
+            //assert
+            Assert.AreEqual(Members[1],member);
 
         }
     }

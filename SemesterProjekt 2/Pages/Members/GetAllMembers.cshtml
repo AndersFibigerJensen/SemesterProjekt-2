@@ -3,6 +3,7 @@
 @{
     ViewData["title"] = "GetallMembers";
 }
+//Anders
 
 <a asp-page="AddMember"> add member </a>
 
@@ -51,7 +52,7 @@
                     @item.Email
                 </td>
                 <td>
-                    <a asp-page="DeleteMember" asp-route-id="@item.MemberID">delete</a> | <a asp-page="UpdateMember" asp-route-id="@item.MemberID"> update</a>
+                    <a asp-page="DeleteMember" asp-route-id="@item.MemberID">delete</a> | <a asp-page="UpdateMember" asp-route-id="@item.MemberID"> update</a>|<a asp-page="HomePage">home</a>
                 </td>
                 }
                 else
