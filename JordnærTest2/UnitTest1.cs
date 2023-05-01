@@ -34,6 +34,7 @@ namespace JordnærTest2
             //arrange
             MemberService MemService = new MemberService(connection);
             List<Member> Members = MemService.GetAllMembersAsync().Result;
+
         }
     }
 }
