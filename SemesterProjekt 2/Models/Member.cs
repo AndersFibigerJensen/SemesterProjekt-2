@@ -52,5 +52,18 @@ namespace SemesterProjekt_2.Models
 
         }
 
+        public Member(string name, string password, string email, string address, bool isFamily, bool hasDoneHygieneCourse, bool isAdmin)
+        {
+            Name = name;
+            Address = address;
+            Email = email;
+            IsFamily = isFamily;
+            HasDoneHygieneCourse = hasDoneHygieneCourse;
+            Password = password;
+            IsAdmin = isAdmin;
+            Shifts = new List<Shift>();
+
+        }
+
     }
 }

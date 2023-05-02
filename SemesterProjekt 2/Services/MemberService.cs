@@ -15,7 +15,7 @@ namespace SemesterProjekt_2.Services
         private string Membersearch = " select * from Member where Name Like '%'+@Name+'%'";
         private string MemberUpdate = "update Member " + " set Name=@Name, Password=@Password , Email=@Email, Address=@Address, IsFamily=@Family, HasDoneHygieneCourse=@Hygiene, isAdmin=@Admin " + "where MemberID=@ID";
         private string MemberDelete = "delete from Member where MemberID=@ID";
-        private string MemberAdd = "insert into Member values(@ID,@Name,@Password,@Email,@Address,@isFamily,@Course,@isAdmin)";
+        private string MemberAdd = "insert into Member values(@Name,@Password,@Email,@Address,@isFamily,@Course,@isAdmin)";
 
 
         public MemberService(IConfiguration configuration) : base(configuration)

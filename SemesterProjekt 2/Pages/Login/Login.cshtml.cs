@@ -33,7 +33,7 @@ namespace SemesterProjekt_2.Pages.Login
                 if(user.Email==member.Email & user.Password==member.Password)
                 {
                     _loginService.userlogin(user);
-                    return RedirectToPage("/Members/GetAllMembers");
+                    return RedirectToPage("/Members/HomePage");
                 }
 
             }

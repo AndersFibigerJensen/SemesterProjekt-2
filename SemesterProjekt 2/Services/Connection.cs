@@ -9,8 +9,9 @@ namespace SemesterProjekt_2.Services
 
         public Connection(IConfiguration configuration)
         {
+            connectionString = Secret.ConnectionString;
             Configuration = configuration;
-            connectionString = Configuration["ConnectionStrings:DefaultConnection"];
+            //connectionString = Configuration["ConnectionStrings:DefaultConnection"];
         }
 
         public Connection(string connectionstring)
