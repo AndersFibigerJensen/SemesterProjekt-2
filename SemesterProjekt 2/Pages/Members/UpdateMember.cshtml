@@ -10,34 +10,41 @@
             <div class="form-group">
                 <label asp-for="@Model.Member.Name" class="control-label"></label>
                 <input asp-for="@Model.Member.Name" class="form-control" />
+                <span></span>
 
             </div>
             <div class="form-group">
                 <label asp-for="@Model.Member.Address" class="control-label"></label>
                 <input asp-for="@Model.Member.Address" class="form-control" />
+                <span></span>
 
             </div>
             <div class="form-group">
                 <label asp-for="@Model.Member.Email" class="control-label"></label>
                 <input asp-for="@Model.Member.Email" class="form-control" />
+                <span></span>
             </div>
             <div class="form-group">
                 <label asp-for="@Model.Member.Password" class="control-label"></label>
                 <input asp-for="@Model.Member.Password" class="form-control" />
+                <span></span>
             </div>
             <div class="form-group">
                 <label asp-for="@Model.Member.IsFamily" class="control-label"></label>
                 <input asp-for="@Model.Member.IsFamily"/>
+                <span></span>
             </div>
             @if (Model.User.IsAdmin==true)
             {
                 <div class="form-group">
                     <label asp-for="@Model.Member.HasDoneHygieneCourse" class="control-label"></label>
                     <input asp-for="@Model.Member.HasDoneHygieneCourse" />
+                    <span></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="@Model.Member.IsAdmin" class="control-label"></label>
                     <input asp-for="@Model.Member.IsAdmin" />
+                    <span></span>
                 </div>
 
             }

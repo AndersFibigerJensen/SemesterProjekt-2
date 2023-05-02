@@ -27,15 +27,23 @@ namespace SemesterProjekt_2.Pages.Login
 
         public async Task<IActionResult> OnPostAsync()
         {
-            List<Member> members = await _memberService.GetAllMembersAsync();
-            foreach(Member user in members)
+            try
             {
-                if(user.Email==member.Email & user.Password==member.Password)
+                List<Member> members = await _memberService.GetAllMembersAsync();
+                foreach (Member user in members)
                 {
-                    _loginService.userlogin(user);
-                    return RedirectToPage("/Members/GetAllMembers");
+                    if (user.Email == member.Email & user.Password == member.Password)
+                    {
+                        _loginService.userlogin(user);
+                        return RedirectToPage("/Members/GetAllMembers");
+                    }
+
                 }
 
+            }
+            catch(Exception ex) 
+            {
+                ViewData["Errormessage"] = ex.Message;
             }
             return Page();
         }

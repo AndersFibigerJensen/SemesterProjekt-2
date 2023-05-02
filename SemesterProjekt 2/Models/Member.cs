@@ -9,19 +9,19 @@ namespace SemesterProjekt_2.Models
         [Required]
         public int MemberID{ get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="du skal give et navn")]
         public string Name { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="du skal give en addresse")]
         public string Address { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="du skal give en email")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="du skal give et password")]
         public string Password { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "du skal vælge om du er en del af en familie eller enkel person ")]
         public bool IsFamily { get; set; }
 
         public List<Shift> Shifts { get; set; }
