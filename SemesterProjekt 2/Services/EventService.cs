@@ -21,6 +21,10 @@ namespace SemesterProjekt_2.Services
         {
 
         }
+        public EventService(string connectionstring) :base(connectionstring)
+        {
+
+        }
 
         public async Task AddEventAsync(Event begivenhed)
         {
