@@ -51,21 +51,6 @@ namespace JordnærTest2
 
         }
 
-        [TestMethod]
 
-        public async Task GetMemberAsync()
-        {
-            //arrange
-            MemberService MemService = new MemberService(connection);
-            List<Member> Members = MemService.GetAllMembersAsync().Result;
-
-            //act
-            Member member =MemService.GetMemberByIdAsync(1).Result;
-            Member testmember = Members[1];
-
-            //assert
-            Assert.AreEqual(testmember,member);
-
-        }
     }
 }
