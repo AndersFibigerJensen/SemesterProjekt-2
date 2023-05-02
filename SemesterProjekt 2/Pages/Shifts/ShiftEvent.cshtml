@@ -1,0 +1,87 @@
+﻿@page
+@model SemesterProjekt_2.Pages.Shifts.ShiftEventModel
+@{
+    ViewData["Title"] = "Assign Shift to Event";
+}
+
+<h1>You are currently editing ShiftID @Model.ShiftID</h1>
+<h2>Select an event to be assigned to the Shift. </h2>
+<h2>Only one event can be assigned to a shift at a time.</h2>
+
+<a asp-page="GetAllShifts">Back</a>
+
+<form method="get">
+    Search <input type="text" asp-for="FilterCriteria" />
+    <input type="submit" value="Filter" />
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Event Start
+            </th>
+            <th>
+                Event End
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                IsMemberRequired
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Events.Count() != 0)
+        {
+            @foreach (var item in Model.Events)
+            {
+                <tr>
+                    <td>
+                        @item.eventID
+                    </td>
+                    <td>
+                        @item.name
+                    </td>
+                    <td>
+                        @item.eventStart
+                    </td>
+                    <td>
+                        @item.eventEnd
+                    </td>
+                    <td>
+                        @item.price
+                    </td>
+                    <td>
+                    @{
+                        if (item.isMemberRequired == true)
+                        {
+                            <p>Members Only</p>
+                        }
+                        else
+                        {
+                            <p>All Allowed</p>
+                        }
+                    }
+                    </td>
+                    <td>
+                    <form method="post">
+                      <input type="submit" asp-route-eventid="@item.eventID" asp-route-shiftid="@Model.ShiftID" value="Set This Event" class="btn btn-primary" />
+                    </form>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<form method="post">
+    <input type="submit" asp-route-eventid="-1" asp-route-shiftid="@Model.ShiftID" value="Clear Shift" class="btn btn-primary" />
+</form>

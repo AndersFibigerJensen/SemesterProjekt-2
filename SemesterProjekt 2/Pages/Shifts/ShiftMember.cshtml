@@ -1,8 +1,12 @@
 ﻿@page
 @model SemesterProjekt_2.Pages.Shifts.ShiftMemberModel
 @{
+    ViewData["Title"] = "Assign Member to Shift";
 }
 
+<h1>You are currently editing ShiftID @Model.ShiftID</h1>
+<h2>Select a member to be assigned to the Shift. </h2>
+<h2>Only one member can be assigned to a shift at a time.</h2>
 
 <a asp-page="GetAllShifts">Back</a>
 

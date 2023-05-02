@@ -37,14 +37,33 @@ namespace SemesterProjekt_2.Pages.Shifts
             {
                 Members = await mService.GetAllMembersAsync();
             }
+
         }
 
         public async Task<IActionResult> OnPostAsync(int shiftid, int memberID)
         {
-            Shift TBU = await sService.GetShiftByIdAsync(shiftid);
-            Shift newShift = new Shift(TBU.ShiftID, TBU.DateFrom, TBU.DateTo, memberID, TBU.EventID);
+            Member hygCheck = await mService.GetMemberByIdAsync(memberID);
+            try
+            {
+                if (hygCheck.HasDoneHygieneCourse == false)
+                {
+                    throw new Exception("This member has not done the hygiene course yet. Therefore, they cannot be assigned this shift.");
+                }
+                else
+                {
+                    Shift TBU = await sService.GetShiftByIdAsync(shiftid);
+                    Shift newShift = new Shift(TBU.ShiftID, TBU.DateFrom, TBU.DateTo, memberID, TBU.EventID);
 
-            await sService.UpdateShiftAsync(newShift, TBU.ShiftID);
+                    await sService.UpdateShiftAsync(newShift, TBU.ShiftID);
+
+                    return RedirectToPage("GetAllShifts");
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewData["Error"] = ex.Message;
+
+            }
 
             return RedirectToPage("GetAllShifts");
         }

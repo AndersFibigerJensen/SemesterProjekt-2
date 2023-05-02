@@ -30,7 +30,7 @@
                 Assigned Member
             </th>
             <th>
-                Corr. Event
+                Corresponding Event
             </th>
         </tr>
     </thead>
@@ -63,9 +63,20 @@
                             </td>
                         }
                     }
-                    <td>
-                        @item.EventID
-                    </td>
+                    @{
+                        if (item.EventID == -1)
+                        {
+                            <td>
+                                <a asp-page="ShiftEvent" asp-route-shiftid="@item.ShiftID">0</a>
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                <a asp-page="ShiftEvent" asp-route-shiftid="@item.ShiftID">@item.EventID</a>
+                            </td>
+                        }
+                    }
                     <td> <a asp-page="Update" asp-route-shiftid="@item.ShiftID">Update Shift</a> </td>
                     <td> <a asp-page="Delete" asp-route-shiftid="@item.ShiftID">Delete Shift</a> </td>
                 </tr>

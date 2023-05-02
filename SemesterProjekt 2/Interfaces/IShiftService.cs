@@ -48,5 +48,12 @@ namespace SemesterProjekt_2.Interfaces
         /// <returns></returns>
         public Task<List<Shift>> FilterShiftsAsync(DateTime date);
 
+        /// <summary>
+        /// Finds all shifts that have a given member ID
+        /// </summary>
+        /// <param name="memberid">Member ID</param>
+        /// <returns>All shifts with the given member ID</returns>
+        public Task<List<Shift>> GetAllShiftsByMemberIdAsync(int memberid);
+
     }
 }
