@@ -1,0 +1,59 @@
+﻿@page
+@model SemesterProjekt_2.Pages.Shifts.ShiftMemberModel
+@{
+}
+
+
+<a asp-page="GetAllShifts">Back</a>
+
+<form method="get">
+    Search <input type="text" asp-for="FilterCriteria" />
+    <input type="submit" value="Filter" />
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Member ID
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Address
+            </th>
+            <th>
+                E-mail
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Members)
+        {
+            <tr>
+               <td>
+                   @item.MemberID
+               </td>
+               <td>
+                   @item.Name
+               </td>
+               <td>
+                   @item.Address
+               </td>
+               <td>
+                   @item.Email
+               </td>
+               <td>
+               <form method="post">
+                <input type="submit" asp-route-memberid="@item.MemberID" asp-route-shiftid="@Model.ShiftID" value="Assign Member" class="btn btn-primary" />
+               </form>
+               </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<form method="post">
+    <input type="submit" asp-route-memberid="-1" asp-route-shiftid="@Model.ShiftID" value="Clear Shift" class="btn btn-primary" />
+</form>

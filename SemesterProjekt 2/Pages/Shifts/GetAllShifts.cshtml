@@ -49,20 +49,23 @@
                     <td>
                         @item.DateTo
                     </td>
-                    <td>
-                        @item.MemberID
-                    </td>
+                    @{
+                        if (item.MemberID == -1)
+                        {
+                            <td>
+                                <a asp-page="ShiftMember" asp-route-shiftid="@item.ShiftID">0</a>
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                <a asp-page="ShiftMember" asp-route-shiftid="@item.ShiftID">@item.MemberID</a>
+                            </td>
+                        }
+                    }
                     <td>
                         @item.EventID
                     </td>
-                    @if (item.MemberID != 0)
-                    {
-                        <td> <a asp-page="" asp-route-memberid="@item.MemberID">View Member</a></td>
-                    }
-                    @if (item.EventID != 0)
-                    {
-                        <td> <a asp-page="" asp-route-eventid="@item.EventID">View Event</a></td>
-                    }
                     <td> <a asp-page="Update" asp-route-shiftid="@item.ShiftID">Update Shift</a> </td>
                     <td> <a asp-page="Delete" asp-route-shiftid="@item.ShiftID">Delete Shift</a> </td>
                 </tr>
