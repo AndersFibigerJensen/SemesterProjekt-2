@@ -21,7 +21,7 @@ namespace SemesterProjekt_2.Pages.Members
         {
         }
 
-        public async Task<IActionResult> OnPostAsync() 
+        public async Task<IActionResult > OnPostAsync() 
         {
             try
             {
