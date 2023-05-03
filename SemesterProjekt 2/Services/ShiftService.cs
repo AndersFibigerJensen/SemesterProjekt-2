@@ -15,7 +15,7 @@ namespace SemesterProjekt_2.Services
         private string queryDelete = "delete from Shift where shiftID = @ShiftID";
         private string queryUpdate = "update Shift set ShiftID = @NewSID, DateFrom = @NewDFrom, DateTo = @NewDTo, MemberID = @NewMID, EventID = @NewEID where ShiftID = @OldSID";     
         private string querySearch = "select * from Shift where DateFrom = @DateFrom";
-        private string queryGetAllFromMemberID = "select * from Shift where memberID = @MemberID";
+        private string queryGetAllFromMemberID = "select * from Shift where MemberID = @MemberID";
 
         public ShiftService(IConfiguration configuration) : base(configuration) { }
 
