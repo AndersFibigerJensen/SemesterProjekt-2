@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using SemesterProjekt_2.Interfaces;
 using SemesterProjekt_2.Models;
 using SemesterProjekt_2.Services;
+using System.Diagnostics.Metrics;
 
 namespace SemesterProjekt_2.Pages.Members
 {
@@ -29,7 +30,16 @@ namespace SemesterProjekt_2.Pages.Members
         {
             try
             {
-                User = await _loginService.GetLogged();
+                string username = HttpContext.Session.GetString("email");
+                string password = HttpContext.Session.GetString("password");
+                if (username != null)
+                {
+                    User = await _memberService.LoginMemberAsync(username, password);
+                }
+                else
+                {
+                    User = await _memberService.GetMemberByIdAsync(-1);
+                }
                 Member = await _memberService.GetMemberByIdAsync(id);
             }
             catch (Exception ex) 
@@ -44,6 +54,10 @@ namespace SemesterProjekt_2.Pages.Members
         {
             try
             {
+                if(!ModelState.IsValid)
+                {
+                    return Page();
+                }
                 await _memberService.UpdateMemberAsync(id, Member);
                 return RedirectToPage("GetAllMembers");
             }

@@ -25,6 +25,10 @@ namespace SemesterProjekt_2.Pages.Members
         {
             try
             {
+                if(!ModelState.IsValid)
+                {
+                    return Page();
+                }
                 _memberService.AddMemberAsync(Member);
                 return RedirectToPage("GetAllMembers");
             }
