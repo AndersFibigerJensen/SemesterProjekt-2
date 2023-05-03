@@ -11,10 +11,12 @@ namespace SemesterProjekt_2.Pages.Members
         public Member Member { get; set; }
 
         private IMemberService _memberService { get; set; }
+        private IShiftService sService { get; set; }
 
-        public DeleteMemberModel(IMemberService memberService)
+        public DeleteMemberModel(IMemberService memberService, IShiftService shiftService)
         {
             _memberService= memberService;
+            sService = shiftService;
         }
 
         public async Task OnGetAsync(int id)
@@ -31,10 +33,18 @@ namespace SemesterProjekt_2.Pages.Members
             
         }
 
-        public async Task<IActionResult> OnpostAsync()
+        public async Task<IActionResult> OnpostAsync(int memberid)
         {
             try
             {
+                List<Shift> assignedShifts = await sService.GetAllShiftsByMemberIdAsync(memberid);
+
+                foreach(Shift s in assignedShifts)
+                {
+                    Shift newS = new Shift(s.ShiftID, s.DateFrom, s.DateTo, -1, s.EventID);
+                    await sService.UpdateShiftAsync(newS, s.ShiftID);
+                }
+
                 await _memberService.DeleteMemberAsync(Member.MemberID);
                 return RedirectToPage("GetAllMembers");
 
