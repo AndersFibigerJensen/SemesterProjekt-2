@@ -16,6 +16,7 @@ namespace SemesterProjekt_2.Services
         private string MemberUpdate = "update Member " + " set Name=@Name, Password=@Password , Email=@Email, Address=@Address, IsFamily=@Family, HasDoneHygieneCourse=@Hygiene, isAdmin=@Admin " + "where MemberID=@ID";
         private string MemberDelete = "delete from Member where MemberID=@ID";
         private string MemberAdd = "insert into Member values(@Name,@Password,@Email,@Address,@isFamily,@Course,@isAdmin)";
+        private string MemberLogin = " select * from Member where Email=@Email and Password=@Password";
 
 
         public MemberService(IConfiguration configuration) : base(configuration)
@@ -53,7 +54,7 @@ namespace SemesterProjekt_2.Services
                         command.Parameters.AddWithValue("@isAdmin", member.IsAdmin);
                         command.Connection.OpenAsync();
                         await command.ExecuteNonQueryAsync();
-  
+
                     }
                     catch (SqlException sql)
                     {
@@ -118,7 +119,7 @@ namespace SemesterProjekt_2.Services
                 {
                     try
                     {
-                        List<Member> members= new List<Member>();
+                        List<Member> members = new List<Member>();
                         command.Parameters.AddWithValue("@Name", filter);
                         await command.Connection.OpenAsync();
                         SqlDataReader reader = await command.ExecuteReaderAsync();
@@ -169,10 +170,10 @@ namespace SemesterProjekt_2.Services
                     try
                     {
                         await command.Connection.OpenAsync();
-                        SqlDataReader reader =  await command.ExecuteReaderAsync();
+                        SqlDataReader reader = await command.ExecuteReaderAsync();
                         while (await reader.ReadAsync())
                         {
-                            
+
                             int MemberID = reader.GetInt32(0);
                             string name = reader.GetString(1);
                             string password = reader.GetString(2);
@@ -246,6 +247,44 @@ namespace SemesterProjekt_2.Services
             return null;
         }
 
+        public async Task<Member> LoginMemberAsync(string email, string password)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    SqlCommand command = new SqlCommand(MemberLogin, connection);
+                    command.Parameters.AddWithValue("@Email",email);
+                    command.Parameters.AddWithValue("@Password", password);
+                    await command.Connection.OpenAsync();
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (await reader.ReadAsync())
+                    {
+                        int MemberID = reader.GetInt32(0);
+                        string name = reader.GetString(1);
+                        string Password = reader.GetString(2);
+                        string Email = reader.GetString(3);
+                        string Address = reader.GetString(4);
+                        bool isFamily = reader.GetBoolean(5);
+                        bool HasDoneHygieneCourse = reader.GetBoolean(6);
+                        bool isAdmin = reader.GetBoolean(7);
+                        Member member = new Member(MemberID, name, password, email, Address, isFamily, HasDoneHygieneCourse, isAdmin);
+                        return member;
+                    }
+
+                }
+                catch(SqlException sql)
+                {
+                    throw sql;
+                }
+                catch(Exception ex)
+                {
+                    throw ex;
+                }
+                return null;
+            }
+        }
+
         /// <summary>
         /// Opdatere et medlem
         /// </summary>
@@ -254,7 +293,7 @@ namespace SemesterProjekt_2.Services
         /// <exception cref="ex"> exceptionen bliver kastet videre i systemet</exception>
         /// <exception cref="sql"> exceptionen bliver kastet videre i systemet</exception>
         /// <returns></returns>
-        public async Task<bool> UpdateMemberAsync(int id,Member member)
+        public async Task<bool> UpdateMemberAsync(int id, Member member)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -272,7 +311,7 @@ namespace SemesterProjekt_2.Services
                     command.Parameters.AddWithValue("@Admin", member.IsAdmin);
                     await command.Connection.OpenAsync();
                     int noOfRows = await command.ExecuteNonQueryAsync();
-                    if(noOfRows==1)
+                    if (noOfRows == 1)
                     {
                         return true;
                     }
@@ -289,6 +328,10 @@ namespace SemesterProjekt_2.Services
                 }
             }
             return false;
+
+
+
         }
     }
 }
+

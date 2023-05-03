@@ -17,6 +17,7 @@
   <ItemGroup>
     <Folder Include="Exceptions\" />
     <Folder Include="Pages\Blog\" />
+    <Folder Include="wwwroot\Images\" />
   </ItemGroup>
 
   <ItemGroup>

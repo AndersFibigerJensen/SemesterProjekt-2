@@ -1,0 +1,1 @@
+﻿select * from Member where Password='1' and Email='1'
