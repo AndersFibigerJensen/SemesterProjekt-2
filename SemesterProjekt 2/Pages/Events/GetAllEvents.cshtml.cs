@@ -4,6 +4,7 @@ using SemesterProjekt_2.Interfaces;
 using SemesterProjekt_2.Services;
 using SemesterProjekt_2.Models;
 using Microsoft.IdentityModel.Tokens;
+using System.Diagnostics.Metrics;
 
 namespace SemesterProjekt_2.Pages.Events
 {
@@ -19,21 +20,21 @@ namespace SemesterProjekt_2.Pages.Events
         [BindProperty(SupportsGet = true)]
         public string FilterCriteria { get; set; }
         public Member user { get; set; }
-        private LoginService _loginService { get; set; }
         private IMemberService _memberService { get; set; }
 
-        public GetAllEventsModel(IEventService eventService, LoginService loginService, IMemberService memberService)
+        public GetAllEventsModel(IEventService eventService, IMemberService memberService)
         {
             _eService = eventService;
-            _loginService = loginService;
             _memberService = memberService;
         }
 
         public async Task OnGetAsync()
         {
-            if (await _loginService.GetLogged() != null)
+            string email = HttpContext.Session.GetString("email");
+            string password = HttpContext.Session.GetString("password");
+            if (email != null & password != null)
             {
-                user = await _loginService.GetLogged();
+                user = await _memberService.LoginMemberAsync(email, password);
             }
             else
             {
