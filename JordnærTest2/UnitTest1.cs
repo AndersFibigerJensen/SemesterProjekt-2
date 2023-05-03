@@ -36,7 +36,7 @@ namespace JordnærTest2
             //arrange
             MemberService MemService = new MemberService(connection);
             List<Member> Members = MemService.GetAllMembersAsync().Result;
-            Member member = new Member(-2, "a", "a", "a", "a", false, false, false);
+            Member member = new Member(-2, "a", "a", "a", "a", false, false, false,null);
 
             //act
             MemService.AddMemberAsync(member);

@@ -30,6 +30,8 @@ namespace SemesterProjekt_2.Models
 
         public bool HasDoneHygieneCourse { get; set; }
 
+        public string Image { get; set; }
+
         public Member()
         {
             Shifts = new List<Shift>();
@@ -37,7 +39,7 @@ namespace SemesterProjekt_2.Models
             HasDoneHygieneCourse= false;
         }
 
-        public Member(int memberID, string name,string password,string email,string address, bool isFamily, bool hasDoneHygieneCourse, bool isAdmin)
+        public Member(int memberID, string name,string password,string email,string address, bool isFamily, bool hasDoneHygieneCourse, bool isAdmin, string image)
         {
             MemberID = memberID;
             Name = name;
@@ -47,11 +49,13 @@ namespace SemesterProjekt_2.Models
             HasDoneHygieneCourse=hasDoneHygieneCourse;
             Password = password;
             IsAdmin=isAdmin;
+            Image = image;
             Shifts= new List<Shift>();
             
 
         }
 
+        //for unit testing
         public Member(string name, string password, string email, string address, bool isFamily, bool hasDoneHygieneCourse, bool isAdmin)
         {
             Name = name;
