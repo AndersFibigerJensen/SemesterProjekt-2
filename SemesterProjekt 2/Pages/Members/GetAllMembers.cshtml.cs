@@ -29,7 +29,7 @@ namespace SemesterProjekt_2.Pages.Members
 
         public async Task OnGetAsync()
         {
-            string username=HttpContext.Session.GetString("username");
+            string username=HttpContext.Session.GetString("email");
             string password=HttpContext.Session.GetString("password");
             if (username!=null)
             {
