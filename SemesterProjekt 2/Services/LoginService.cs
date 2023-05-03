@@ -1,4 +1,5 @@
-﻿using SemesterProjekt_2.Models;
+﻿using SemesterProjekt_2.Interfaces;
+using SemesterProjekt_2.Models;
 
 namespace SemesterProjekt_2.Services
 {
@@ -7,7 +8,12 @@ namespace SemesterProjekt_2.Services
         //Anders
 
         private Member _user;
+        private IMemberService _memberService;
 
+        public LoginService(IMemberService memberservice)
+        {
+            _memberService= memberservice;
+        }
 
         /// <summary>
         /// Logger brugeren ind på Jordnærs system
@@ -16,6 +22,7 @@ namespace SemesterProjekt_2.Services
         /// <returns></returns>
         public async Task userlogin(Member user)
         {
+            _memberService.LoginMemberAsync(user.Email, user.Password);
             _user= user;
         }
 
@@ -37,7 +44,6 @@ namespace SemesterProjekt_2.Services
         {
             return _user;
         }
-
 
 
 

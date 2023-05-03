@@ -35,6 +35,9 @@
             <th>
                 IsMemberRequired
             </th>
+            <th>
+                Capacity
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -66,11 +69,20 @@
                         }
                         @*@(item.isMemberRequired == true)?<p>for medlemmer</p><p>for alle</p>*@
                     </td>
+                    <td>
+                        @item.capacity
+                    </td>
                     @if (Model.user.IsAdmin == true)
                     {
                         <td>
                             <a asp-page="/Events/UpdateEvent" asp-route-eventID="@item.eventID">Edit</a>
                             <a asp-page="/Events/DeleteEvent" asp-route-eventID="@item.eventID">Delete</a>
+                        </td>
+                    }
+                    @if (item.isMemberRequired == true && Model.user.MemberID != -1)
+                    {
+                        <td>
+                            <a asp-page="/JoinEvent" asp-route-eventID="@item.eventID">Join</a>
                         </td>
                     }
 

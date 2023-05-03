@@ -22,7 +22,7 @@ namespace SemesterProjekt_2.Interfaces
         /// <summary>
         /// Tilføjer et medlem til databasen
         /// </summary>
-        /// <param name="member">tilføjer medlem inde i parameteren til databasen</param>
+        /// <param name="member">tilføjer medlem inde i parameteren til  databasen</param>
         /// <returns></returns>
         public Task AddMemberAsync(Member member);
 
@@ -48,6 +48,7 @@ namespace SemesterProjekt_2.Interfaces
         /// <returns>returnere medlemmer som er blevet filtreret </returns>
         public Task<List<Member>> FilterMembersAsync(string filter);
 
+        public Task<Member> LoginMemberAsync(string email, string password);
 
     }
 }

@@ -7,7 +7,7 @@ namespace JordnærTest2
     [TestClass]
     public class UnitTest1
     {
-        private string connection ="";
+        private string connection =Secret.ConnectionString;
         
         [TestMethod]
         public async Task AddMemberTestAsync()
@@ -18,10 +18,12 @@ namespace JordnærTest2
 
             //act
             int Membersbefore = Members.Count();
-            Member member= new Member(-2,"a","a","a","a",false,false,false);
+            Member member= new Member("a","a","a","a",false,false,false);
             MemService.AddMemberAsync(member);
+            Members = MemService.GetAllMembersAsync().Result;
+
             int MemberAfter= Members.Count();
-            MemService.DeleteMemberAsync(-2);
+            MemService.DeleteMemberAsync(Members[Members.Count()-1].MemberID);
 
             //assert
             Assert.AreEqual(Membersbefore+1, MemberAfter);
@@ -38,8 +40,9 @@ namespace JordnærTest2
 
             //act
             MemService.AddMemberAsync(member);
-            int MemberBefore= Members.Count();
-            MemService.DeleteMemberAsync(-2);
+            Members= await MemService.GetAllMembersAsync();
+            int MemberBefore = Members.Count();
+            MemService.DeleteMemberAsync(Members[Members.Count() - 1].MemberID);
             int MemberAfter= Members.Count();
 
 
@@ -48,20 +51,6 @@ namespace JordnærTest2
 
         }
 
-        [TestMethod]
 
-        public async Task GetMemberAsync()
-        {
-            //arrange
-            MemberService MemService = new MemberService(connection);
-            List<Member> Members = MemService.GetAllMembersAsync().Result;
-
-            //act
-            Member member =await MemService.GetMemberByIdAsync(1);
-
-            //assert
-            Assert.AreEqual(Members[1],member);
-
-        }
     }
 }

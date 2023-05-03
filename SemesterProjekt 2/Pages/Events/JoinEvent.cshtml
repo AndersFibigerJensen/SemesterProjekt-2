@@ -1,20 +1,20 @@
 ﻿@page
-@model SemesterProjekt_2.Pages.Events.DeleteEventModel
+@model SemesterProjekt_2.Pages.Events.JoinEventModel
 @{
-    ViewData["Title"] = "Delete Event";
+    ViewData["Title"] = "JoinEvent";
 }
-<h1>Fjern event</h1>
+<h1>Tilmeld event</h1>
 
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div class="form-group">
                 <label asp-for="@Model.Event.eventID"></label>
-                <input asp-for="@Model.Event.eventID"  readonly />
+                <input asp-for="@Model.Event.eventID" readonly />
             </div>
             <div class="form-group">
                 <label asp-for="@Model.Event.name"></label>
-                <input asp-for="@Model.Event.name"  readonly />
+                <input asp-for="@Model.Event.name" readonly />
             </div>
             <div class="form-group">
                 <label asp-for="@Model.Event.eventStart"></label>
@@ -26,7 +26,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="@Model.Event.price"></label>
-                <input asp-for="@Model.Event.price"  readonly />
+                <input asp-for="@Model.Event.price" readonly />
             </div>
             <div class="form-group">
                 <label asp-for="@Model.Event.isMemberRequired"></label>
@@ -34,11 +34,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="@Model.Event.capacity"></label>
-                <input asp-for="@Model.Event.capacity" class="form-control" readonly/>
+                <input asp-for="@Model.Event.capacity" class="form-control"/>
             </div>
             <div class="form-group">
                 <a asp-page="GetAllEvents" class=" btn-btn-primary">Cancel</a>
-                <input type="submit" value=" Slet Event" class="btn-btn-primary" readonly />
+                <input type="submit" value=" Tilmeld" class="btn-btn-primary" readonly />
             </div>
         </form>
     </div>

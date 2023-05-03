@@ -29,9 +29,11 @@ namespace SemesterProjekt_2.Pages.Members
 
         public async Task OnGetAsync()
         {
-            if (await _loginservice.GetLogged()!=null)
+            string username=HttpContext.Session.GetString("username");
+            string password=HttpContext.Session.GetString("password");
+            if (username!=null)
             {
-                member = await _loginservice.GetLogged();
+                member = await _memberService.LoginMemberAsync(username, password);
             }
             else
             {

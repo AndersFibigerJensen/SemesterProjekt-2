@@ -32,8 +32,10 @@ namespace SemesterProjekt_2.Pages.Login
             {
                 if(user.Email==member.Email & user.Password==member.Password)
                 {
-                    _loginService.userlogin(user);
-                    return RedirectToPage("/Members/GetAllMembers");
+                    HttpContext.Session.SetString("email",user.Email);
+                    HttpContext.Session.SetString("password",user.Password);
+
+                    return RedirectToPage("/Members/HomePage");
                 }
 
             }

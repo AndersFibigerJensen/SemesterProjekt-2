@@ -9,7 +9,9 @@ builder.Services.AddRazorPages();
 builder.Services.AddTransient<IMemberService, MemberService>();
 builder.Services.AddTransient<IEventService, EventService>();
 builder.Services.AddTransient<IShiftService, ShiftService>();
-builder.Services.AddSingleton<LoginService>();
+builder.Services.AddTransient<LoginService>();
+builder.Services.AddSession();
+builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 
@@ -20,6 +22,8 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+app.UseSession();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

@@ -13,7 +13,7 @@
         </div>
         <div class="form-group">
             <label asp-for="@Model.member.Name" class="control-label"></label>
-            <input asp-for="@Model.member.Name" class="control-label" readonly />
+            <input asp-for="@Model.member.Name" class="control-label" readonly/>
         </div>
         <div class="form-group">
             <label asp-for="@Model.member.Address" class="control-label"></label>
@@ -26,14 +26,14 @@
         <div class="form-group">
             @if (Model.member.IsFamily == true)
             {
-                <p class="form-control"> familie</p>
+                <p class="form-control-plaintext"> familie</p>
             }
         </div>
         @if (Model.member.HasDoneHygieneCourse == true)
         {
             <div class="form-group">
                 
-                <p class="form-control"> har bestået hygiene kursus</p>
+                <p class="form-check"> har bestået hygiene kursus</p>
                 
 
             </div>
