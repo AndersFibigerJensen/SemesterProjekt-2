@@ -9,13 +9,14 @@
         public DateTime eventEnd { get; set; }
         public double price { get; set; }
         public bool isMemberRequired { get; set; }
+        public int capacity { get; set; }
 
         public Event()
         {
 
         }
 
-        public Event(int eventid, string Name, DateTime EventStart, DateTime EventEnd, double Price, bool IsMemberRequired)
+        public Event(int eventid, string Name, DateTime EventStart, DateTime EventEnd, double Price, bool IsMemberRequired, int Capacity)
         {
             eventID = eventid;
             name = Name;
@@ -23,6 +24,7 @@
             eventEnd = EventEnd;
             price = Price;
             isMemberRequired = IsMemberRequired;
+            capacity = Capacity;
         }
 
     }

@@ -10,12 +10,13 @@ namespace SemesterProjekt_2.Services
     {
         //Query String
         private string queryGetAll = "select * from Event";
-        private string queryInsert = "insert into Event values(@Name, @DateFrom, @DateTo, @Price, @IsMemberRequired)";
+        private string queryInsert = "insert into Event values(@Name, @DateFrom, @DateTo, @Price, @IsMemberRequired, @Capacity)";
         private string queryGetFromID = "select * from Event where eventid = @EventID";
         private string queryDelete = "delete from Event where eventid = @EventID";
         private string queryUpdate = "update Event Set Name = @Name , " +
-            "EventStart = @EventStart, EventEnd = @EventEnd, Price = @Price, IsMemberRequired = @IsMemberRequired where eventid = @EventID";
+            "EventStart = @EventStart, EventEnd = @EventEnd, Price = @Price, IsMemberRequired = @IsMemberRequired, Capacity = @Capacity where eventid = @EventID";
         private string querySearch = " select * from event where name Like '%'+@Name+'%'";
+        private string queryJoin = "insert into EventMember(eventid, MemberID) values(@EventID, @MemberID)";
 
         public EventService(IConfiguration configuration) : base(configuration)
         {
@@ -38,20 +39,21 @@ namespace SemesterProjekt_2.Services
                     command.Parameters.AddWithValue("@DateTo", begivenhed.eventEnd);
                     command.Parameters.AddWithValue("@Price", begivenhed.price);
                     command.Parameters.AddWithValue("@IsMemberRequired", begivenhed.isMemberRequired);
+                    command.Parameters.AddWithValue("@Capacity", begivenhed.capacity);
                     command.Connection.OpenAsync();
                     await command.ExecuteNonQueryAsync();
                     try
                     {
                         
                     }
-                    
-                    catch (SqlException sqlEx)
+
+                    catch (SqlException sql)
                     {
-                        Console.WriteLine("Database error " + sqlEx.Message);
+                        throw sql;
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine("Generel fejl " + ex.Message);
+                        throw ex;
                     }
                 }
             }
@@ -78,8 +80,9 @@ namespace SemesterProjekt_2.Services
                             DateTime eventEnd = reader.GetDateTime(3);
                             double price = reader.GetDouble(4);
                             bool isMemberRequired = reader.GetBoolean(5);
+                            int capacity = reader.GetInt32(6);
                             
-                            Event eEvent = new Event(eventId, name, eventStart, eventEnd, price, isMemberRequired);
+                            Event eEvent = new Event(eventId, name, eventStart, eventEnd, price, isMemberRequired, capacity);
                             events.Add(eEvent);
                         }
                         return events;
@@ -119,18 +122,19 @@ namespace SemesterProjekt_2.Services
                             DateTime end = reader.GetDateTime(3);
                             double price = reader.GetDouble(4);
                             bool isMemberRequired = reader.GetBoolean(5);
-                            Event begivenheder = new (id, name, start, end, price, isMemberRequired);
+                            int capacity = reader.GetInt32(6);
+                            Event begivenheder = new (id, name, start, end, price, isMemberRequired, capacity);
                             events.Add(begivenheder);
                         }
                         return events;
                     }
-                    catch (SqlException sqlEx)
+                    catch (SqlException sql)
                     {
-                        Console.WriteLine("Database error " + sqlEx.Message);
+                        throw sql;
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine("Generel fejl " + ex.Message);
+                        throw ex;
                     }
                 }
             }
@@ -156,7 +160,8 @@ namespace SemesterProjekt_2.Services
                             DateTime dateTo = reader.GetDateTime(3);
                             double price = reader.GetDouble(4);
                             bool isMemberRequired = reader.GetBoolean(5);
-                            Event begivenhed = new Event(Id, eventName, dateFrom, dateTo, price, isMemberRequired);
+                            int capacity = reader.GetInt32(6);
+                            Event begivenhed = new Event(Id, eventName, dateFrom, dateTo, price, isMemberRequired, capacity);
                             return begivenhed;
                         }
                     }
@@ -172,6 +177,29 @@ namespace SemesterProjekt_2.Services
                 }                
             }
             return null;
+        }
+
+        public async Task JoinEvent(int eventid, int memberid)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    SqlCommand command = new SqlCommand(queryJoin, connection);
+                    command.Parameters.AddWithValue("@EventID", eventid);
+                    command.Parameters.AddWithValue("@MemberID", memberid);
+                    command.Connection.OpenAsync();
+                    int noOfRows = await command.ExecuteNonQueryAsync();
+                }
+                catch (SqlException sql)
+                {
+                    throw sql;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
         }
 
         public async Task<Event> RemoveEventAsync(int id)
@@ -190,17 +218,13 @@ namespace SemesterProjekt_2.Services
                         return begivenhed;
                     }                    
                 }
-                catch (SqlException sqlEx)
+                catch (SqlException sql)
                 {
-                    Console.WriteLine("Database error " + sqlEx.Message);
+                    throw sql;
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Generel fejl " + ex.Message);
-                }
-                finally
-                {
-                    
+                    throw ex;
                 }
             }
             return null;
@@ -219,6 +243,7 @@ namespace SemesterProjekt_2.Services
                     command.Parameters.AddWithValue("@EventEnd", eEvent.eventEnd);
                     command.Parameters.AddWithValue("@Price", eEvent.price);
                     command.Parameters.AddWithValue("@IsMemberRequired", eEvent.isMemberRequired);
+                    command.Parameters.AddWithValue("@Capacity", eEvent.capacity);
                     await command.Connection.OpenAsync();
                     int noOfRows = await command.ExecuteNonQueryAsync();
                     if (noOfRows == 1)
