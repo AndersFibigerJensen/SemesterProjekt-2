@@ -279,7 +279,11 @@ namespace SemesterProjekt_2.Services
                         bool isFamily = reader.GetBoolean(5);
                         bool HasDoneHygieneCourse = reader.GetBoolean(6);
                         bool isAdmin = reader.GetBoolean(7);
-                        string image= reader.GetString(8);
+                        string image = "";
+                        if(reader.IsDBNull(8))
+                        {
+                            image=reader.GetString(8);
+                        }
                         Member member = new Member(MemberID, name, password, email, Address, isFamily, HasDoneHygieneCourse, isAdmin, image);
                         return member;
                     }
