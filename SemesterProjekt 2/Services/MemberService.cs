@@ -280,7 +280,7 @@ namespace SemesterProjekt_2.Services
                         bool HasDoneHygieneCourse = reader.GetBoolean(6);
                         bool isAdmin = reader.GetBoolean(7);
                         string image = "";
-                        if(reader.IsDBNull(8))
+                        if(!reader.IsDBNull(8))
                         {
                             image=reader.GetString(8);
                         }
