@@ -12,7 +12,7 @@ namespace JordnærTest2
     [TestClass]
     public class UnitTest2
     {
-        private string connection = "";
+        private string connection = Secret.ConnectionString;
         [TestMethod]
         public async Task AddEventServiceAsync()
         {
@@ -23,10 +23,28 @@ namespace JordnærTest2
             int noOfEventsBefore = events.Count;
             Event eEvent = new Event(10, "TestEvent", DateTime.Now, DateTime.Today, 699, false, 45);
             eventService.AddEventAsync(eEvent);
-
+            events = eventService.GetAllEventsAsync().Result;
+            
             int noOfEventsAfter = events.Count;
             //assert
-            Assert.AreEqual(noOfEventsBefore -1, noOfEventsAfter);
+            Assert.AreEqual(noOfEventsBefore +1, noOfEventsAfter);
+        }
+
+        [TestMethod]
+        public async Task DeleteEventServiceAsync()
+        {
+            //arrange
+            EventService eventService = new EventService(connection);
+            List<Event> events = eventService.GetAllEventsAsync().Result;
+            //act
+            int noOfEventsBefore = events.Count;
+            Event eEvent = new Event(11, "TestEventDelete", DateTime.UtcNow, DateTime.Now, 6969, true, 30);
+            eventService.AddEventAsync(eEvent);
+
+            eventService.RemoveEventAsync(events[events.Count() - 1].eventID);
+            int noOfEventsAfter = events.Count;
+            //assert
+            Assert.AreEqual(noOfEventsBefore, noOfEventsAfter);
         }
 
     }

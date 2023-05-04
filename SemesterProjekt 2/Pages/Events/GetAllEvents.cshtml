@@ -82,7 +82,7 @@
                     @if (item.isMemberRequired == true && Model.user.MemberID != -1)
                     {
                         <td>
-                            <a asp-page="/JoinEvent" asp-route-eventID="@item.eventID">Join</a>
+                            <a asp-page="/Events/JoinEvent" asp-route-eventID="@item.eventID">Join</a>
                         </td>
                     }
 

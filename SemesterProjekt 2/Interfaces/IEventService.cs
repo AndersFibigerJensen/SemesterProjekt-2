@@ -35,5 +35,7 @@ namespace SemesterProjekt_2.Interfaces
         /// <returns>id</returns>
         public Task<Event> GetEventByIdAsync(int id);
         public Task JoinEvent(int eventid, int memberid);
+
+        public Task<List<int>> ReturnMembers(int eventid);
     }
 }
