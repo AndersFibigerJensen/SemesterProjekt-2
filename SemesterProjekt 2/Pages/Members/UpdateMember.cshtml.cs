@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SemesterProjekt_2.Interfaces;
@@ -13,15 +14,20 @@ namespace SemesterProjekt_2.Pages.Members
         public Member Member { get; set; }
 
         [BindProperty]
+        public IFormFile Image { get; set; }
+
+        [BindProperty]
         public Member User { get; set; }
 
         private IMemberService _memberService { get; set; }
         private LoginService _loginService { get; set; }
+        private IWebHostEnvironment _webHostEnvironment { get; set; }
 
-        public UpdateMemberModel(IMemberService memberService,LoginService LoginService)
+        public UpdateMemberModel(IMemberService memberService,LoginService LoginService, IWebHostEnvironment webHostEnvironment)
         {
             _memberService = memberService;
             _loginService = LoginService;
+            _webHostEnvironment = webHostEnvironment;
         }
 
 
@@ -54,10 +60,20 @@ namespace SemesterProjekt_2.Pages.Members
         {
             try
             {
-                if(!ModelState.IsValid)
+                if (Image != null)
                 {
-                    return Page();
+                    if (Member.Image != null)
+                    {
+                        string filePath = Path.Combine(_webHostEnvironment.WebRootPath, "Images", Member.Image);
+                        System.IO.File.Delete(filePath);
+                    }
+
+                    Member.Image = ProcessUploadedFile();
                 }
+                //if (!ModelState.IsValid)
+                //{
+                //    return Page();
+                //}
                 await _memberService.UpdateMemberAsync(id, Member);
                 return RedirectToPage("GetAllMembers");
             }
@@ -68,6 +84,22 @@ namespace SemesterProjekt_2.Pages.Members
 
             }
 
+        }
+
+        private string ProcessUploadedFile()
+        {
+            string uniqueFileName = null;
+            if (Image != null)
+            {
+                string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "Images");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + Image.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    Image.CopyTo(fileStream);
+                }
+            }
+            return uniqueFileName;
         }
     }
 }

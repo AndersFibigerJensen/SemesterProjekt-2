@@ -35,6 +35,10 @@
                 <input readonly asp-for="@Model.Member.IsFamily" class="form-label" />
             </div>
             <div class="form-group">
+                <label asp-for="@Model.Member.Image"></label>
+                <input readonly asp-for="@Model.Member.Image" class="form-control" />
+            </div>
+            <div class="form-group">
                 <a asp-page="GetAllMembers" class=" btn-btn-primary">cancel</a>
                 <input type="submit" value=" slet medlem" asp-route-memberid="@Model.Member.MemberID" class="btn-btn-primary" />
             </div>

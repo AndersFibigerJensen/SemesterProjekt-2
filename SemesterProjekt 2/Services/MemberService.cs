@@ -13,9 +13,9 @@ namespace SemesterProjekt_2.Services
         private string Memberstrings = " select * from Member";
         private string MemberfromID = " select * from Member where memberid=@ID";
         private string Membersearch = " select * from Member where Name Like '%'+@Name+'%'";
-        private string MemberUpdate = "update Member " + " set Name=@Name, Password=@Password , Email=@Email, Address=@Address, IsFamily=@Family, HasDoneHygieneCourse=@Hygiene, isAdmin=@Admin " + "where MemberID=@ID";
+        private string MemberUpdate = "update Member " + " set Name=@Name, Password=@Password , Email=@Email, Address=@Address, IsFamily=@Family, HasDoneHygieneCourse=@Hygiene, isAdmin=@Admin, Image=@Image " + "where MemberID=@ID";
         private string MemberDelete = "delete from Member where MemberID=@ID";
-        private string MemberAdd = "insert into Member values(@Name,@Password,@Email,@Address,@isFamily,@Course,@isAdmin)";
+        private string MemberAdd = "insert into Member values(@Name,@Password,@Email,@Address,@isFamily,@Course,@isAdmin,@Image)";
         private string MemberLogin = " select * from Member where Email=@Email and Password=@Password";
 
 
@@ -52,6 +52,7 @@ namespace SemesterProjekt_2.Services
                         command.Parameters.AddWithValue("@isFamily", member.IsFamily);
                         command.Parameters.AddWithValue("@Course", member.HasDoneHygieneCourse);
                         command.Parameters.AddWithValue("@isAdmin", member.IsAdmin);
+                        command.Parameters.AddWithValue("@Image", string.IsNullOrEmpty(member.Image)? (object)DBNull.Value:member.Image);
                         command.Connection.OpenAsync();
                         await command.ExecuteNonQueryAsync();
 
@@ -325,6 +326,7 @@ namespace SemesterProjekt_2.Services
                     command.Parameters.AddWithValue("@Family", member.IsFamily);
                     command.Parameters.AddWithValue("@Hygiene", member.HasDoneHygieneCourse);
                     command.Parameters.AddWithValue("@Admin", member.IsAdmin);
+                    command.Parameters.AddWithValue("@Image", string.IsNullOrEmpty(member.Image) ? (object)DBNull.Value : member.Image);
                     await command.Connection.OpenAsync();
                     int noOfRows = await command.ExecuteNonQueryAsync();
                     if (noOfRows == 1)
