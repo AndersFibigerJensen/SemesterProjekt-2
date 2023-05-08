@@ -84,6 +84,9 @@
                         <td>
                             <a asp-page="/Events/JoinEvent" asp-route-eventID="@item.eventID">Join</a>
                         </td>
+                        <td>
+                            <a asp-page="/Events/ShowMembers" asp-route-eventID="@item.eventID">Show participants</a>
+                        </td>
                     }
 
                 </tr>

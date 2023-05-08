@@ -247,7 +247,6 @@ namespace SemesterProjekt_2.Services
                         {
                             int memberID = reader.GetInt32(1);
                             memberids.Add(memberID);
-
                         }
                         return memberids;
                     }
