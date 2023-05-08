@@ -6,10 +6,10 @@
 @*Anders*@
 
 <div>
-    <form method="post" class="userpage-form">
+    <form method="post" class="userpage-form" enctype="multipart/form-data">
         <input asp-for="member.MemberID" type="hidden" />
         <div>
-            @*<img src=""*@
+            <img src="~/Images/@Model.member.Image" />
         </div>
         <div class="form-group">
             <label asp-for="@Model.member.Name" class="control-label"></label>

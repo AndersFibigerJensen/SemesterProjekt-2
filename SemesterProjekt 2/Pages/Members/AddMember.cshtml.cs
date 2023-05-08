@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SemesterProjekt_2.Interfaces;
@@ -10,11 +11,16 @@ namespace SemesterProjekt_2.Pages.Members
         [BindProperty]
         public Member Member { get; set; }
 
-        private IMemberService _memberService { get; set; }
+        [BindProperty]
+        public IFormFile Image { get; set; }
 
-        public AddMemberModel(IMemberService memberService)
+        private IMemberService _memberService { get; set; }
+        private IWebHostEnvironment _webHostEnvironment { get; set; }
+
+        public AddMemberModel(IMemberService memberService, IWebHostEnvironment Webhostenvironment)
         {
             _memberService = memberService;
+            _webHostEnvironment = Webhostenvironment;
         }
 
         public void OnGet()
@@ -25,7 +31,17 @@ namespace SemesterProjekt_2.Pages.Members
         {
             try
             {
-                if(!ModelState.IsValid)
+                if (Image != null)
+                {
+                    if (Member.Image != null)
+                    {
+                        string filePath = Path.Combine(_webHostEnvironment.WebRootPath, "Images", Member.Image);
+                        System.IO.File.Delete(filePath);
+                    }
+
+                    Member.Image = ProcessUploadedFile();
+                }
+                if (!ModelState.IsValid)
                 {
                     return Page();
                 }
@@ -39,6 +55,22 @@ namespace SemesterProjekt_2.Pages.Members
 
             }
 
+        }
+
+        private string ProcessUploadedFile()
+        {
+            string uniqueFileName = null;
+            if (Image != null)
+            {
+                string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "Images");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + Image.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    Image.CopyTo(fileStream);
+                }
+            }
+            return uniqueFileName;
         }
     }
 }

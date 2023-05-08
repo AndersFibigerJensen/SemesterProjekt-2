@@ -1,1 +1,2 @@
-﻿drop database Jordnær
+﻿alter table Shift
+add foreign key(Eventid) references Event(eventid);
