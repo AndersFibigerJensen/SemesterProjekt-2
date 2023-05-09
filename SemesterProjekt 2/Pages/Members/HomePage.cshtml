@@ -6,34 +6,35 @@
 @*Anders*@
 
 <div>
-    <form method="post" class="userpage-form" enctype="multipart/form-data">
+    <form method="post" class="userpage-form">
         <input asp-for="member.MemberID" type="hidden" />
         <div>
-            <img src="~/Images/@Model.member.Image" />
+            <img src="~/Images/@Model.member.Image" class="rounded-circle" width="100" height="100" />
+        </div>
+        <div>
+        <div class="form-group">
+            <label asp-for="@Model.member.Name"></label>
+            <input asp-for="@Model.member.Name"readonly/>
         </div>
         <div class="form-group">
-            <label asp-for="@Model.member.Name" class="control-label"></label>
-            <input asp-for="@Model.member.Name" class="control-label" readonly/>
+            <label asp-for="@Model.member.Address"></label>
+            <input asp-for="@Model.member.Address" readonly />
         </div>
         <div class="form-group">
-            <label asp-for="@Model.member.Address" class="control-label"></label>
-            <input asp-for="@Model.member.Address" class="control-label" readonly />
-        </div>
-        <div class="form-group">
-            <label asp-for="@Model.member.Email" class="control-label"></label>
-            <input asp-for="@Model.member.Email" class="control-label" readonly />
+            <label asp-for="@Model.member.Email"></label>
+            <input asp-for="@Model.member.Email" readonly />
         </div>
         <div class="form-group">
             @if (Model.member.IsFamily == true)
             {
-                <p class="form-control-plaintext"> familie</p>
+                <p class="form-control" readonly> familie</p>
             }
         </div>
         @if (Model.member.HasDoneHygieneCourse == true)
         {
             <div class="form-group">
                 
-                <p class="form-check"> har bestået hygiene kursus</p>
+                <p> har bestået hygiene kursus</p>
                 
 
             </div>
@@ -52,6 +53,7 @@
         <div>
             <a asp-page="UpdateMember" asp-route-id="@Model.member.MemberID" class="btn btn-primary" > opdater Medlem </a>
             <a asp-page="DeleteMember" asp-route-id="@Model.member.MemberID" class="btn btn-primary"> slet din profil</a>
+        </div>
         </div>
     </form>
 </div>
