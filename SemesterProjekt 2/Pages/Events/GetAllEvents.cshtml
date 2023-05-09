@@ -85,9 +85,16 @@
                     }
                     @if (item.isMemberRequired == true && Model.user.MemberID != -1)
                     {
-                        <td>
-                            <a asp-page="/Events/JoinEvent" asp-route-eventID="@item.eventID">Join</a>
-                        </td>
+                        if (item.capacity >= null)
+                        {
+
+                        }
+                        else
+                        {
+                            <td>
+                                <a asp-page="/Events/JoinEvent" asp-route-eventID="@item.eventID">Join</a>
+                            </td>
+                        }
                         <td>
                             <a asp-page="/Events/ShowMembers" asp-route-eventID="@item.eventID">Show participants</a>
                         </td>
