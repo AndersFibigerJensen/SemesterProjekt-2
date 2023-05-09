@@ -1,0 +1,30 @@
+﻿@page
+@model SemesterProjekt_2.Pages.BlogPosts.GetAllBlogModel
+@{
+    ViewData["title"] = "GetAllBlog";
+}
+
+<table class="table">
+    <thead>
+        <th>
+            BlogPost
+        </th>
+        <th>
+            Image
+        </th>
+    </thead>
+    <tbody>
+        @foreach(var item in Model.Posts)
+        {
+            <tr>
+                <td>
+                    @item.BlogPost
+                </td>
+                <td>
+                    @item.Image
+                </td>
+            </tr>  
+        }
+
+    </tbody>
+</table>

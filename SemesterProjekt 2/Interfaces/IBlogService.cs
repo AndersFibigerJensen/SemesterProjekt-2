@@ -5,15 +5,15 @@ namespace SemesterProjekt_2.Interfaces
     public interface IBlogService
     {
 
-        Task<Blog> CreateBlogPost();
+        Task<Blog> CreateBlogPostAsync(Blog blog);
 
-        Task UpdateBlogPost();
+        Task<bool> UpdateBlogPostAsync(Blog blog);
 
-        Task DeleteBlogPost();
+        Task<Blog> DeleteBlogPostAsync(int BlogId);
 
-        Task<List<Blog>> GetBlogPosts();
+        Task<List<Blog>> GetBlogPostsAsync();
 
-        Task<Blog> GetBlog(int id); 
+        Task<Blog> GetBlogAsync(int id); 
 
     }
 }

@@ -9,6 +9,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddTransient<IMemberService, MemberService>();
 builder.Services.AddTransient<IEventService, EventService>();
 builder.Services.AddTransient<IShiftService, ShiftService>();
+builder.Services.AddTransient<IBlogService, BlogService>();
 builder.Services.AddTransient<LoginService>();
 builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();

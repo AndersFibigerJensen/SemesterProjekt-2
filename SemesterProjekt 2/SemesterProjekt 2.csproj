@@ -8,15 +8,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Pages\Blog\**" />
     <Compile Remove="Pages\Vagter\**" />
+    <Content Remove="Pages\Blog\**" />
     <Content Remove="Pages\Vagter\**" />
+    <EmbeddedResource Remove="Pages\Blog\**" />
     <EmbeddedResource Remove="Pages\Vagter\**" />
+    <None Remove="Pages\Blog\**" />
     <None Remove="Pages\Vagter\**" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Exceptions\" />
-    <Folder Include="Pages\Blog\" />
     <Folder Include="wwwroot\Images\" />
   </ItemGroup>
 

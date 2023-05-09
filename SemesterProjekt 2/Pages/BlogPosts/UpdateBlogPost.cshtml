@@ -1,0 +1,32 @@
+﻿@page
+@model SemesterProjekt_2.Pages.BlogPosts.UpdateBlogPostModel
+@{
+    ViewData["title"] = "UpdateBlogPost";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="@Model.Post.BlogID" class="control-label"></label>
+                <input asp-for="@Model.Post.BlogID" class=" form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Post.BlogPost" class="control-label"></label>
+                <input asp-for="@Model.Post.BlogPost" class=" form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Post.Image" class=" control-label"></label>
+                <input asp-for="@Model.Post.Image" class=" form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Post.memberID" class="control-label"></label>
+                <input asp-for="@Model.Post.memberID" class="form-control" />
+            </div>
+            <div class="form-group">
+                <a asp-page="GetAllBlog" class="btn-primary">cancel</a>
+                <input type="submit" value="Add BlogPost" class="btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

@@ -9,19 +9,19 @@
 
         public string Image { get; set;}
 
-        public Member member { get; set; }
+        public int memberID { get; set; }
 
         public Blog()
         {
 
         }
 
-        public Blog(int blogID,string blogPost,string image,Member Member)
+        public Blog(int blogID,string blogPost,string image,int Member)
         {
             BlogID= blogID;
             BlogPost= blogPost;
             Image = image;
-            member= Member;
+            memberID= Member;
         }
     }
 }
