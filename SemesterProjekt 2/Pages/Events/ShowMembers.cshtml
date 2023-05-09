@@ -1,0 +1,49 @@
+﻿@page
+@model SemesterProjekt_2.Pages.Events.ShowMembersModel
+@using SemesterProjekt_2.Interfaces;
+@inject IMemberService Members;
+@{
+}
+<form method="get">
+    Search <input type="text" asp-for="FilterCriteria" />
+    <input type="submit" value="Filter" />
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                MedlemsID
+            </th>
+            <th>
+                Navn
+            </th>
+            <th>
+                Addresse
+            </th>
+            <th>
+                Email
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Members )
+        {
+            <tr>
+                    <td>
+                        <img src="~/Images/@Members.GetMemberByIdAsync(item).Result.Image" class="rounded-circle" width="80" height="70" />
+                    </td>
+                    <td>
+                        @Members.GetMemberByIdAsync(item).Result.Name
+                    </td>
+                    <td>
+                        @Members.GetMemberByIdAsync(item).Result.Address
+                    </td>
+                    <td>
+                        @Members.GetMemberByIdAsync(item).Result.Email
+                    </td>
+            </tr>
+
+
+        }
+    </tbody>
+</table>

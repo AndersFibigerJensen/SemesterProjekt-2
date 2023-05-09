@@ -17,7 +17,7 @@ namespace SemesterProjekt_2.Services
             "EventStart = @EventStart, EventEnd = @EventEnd, Price = @Price, IsMemberRequired = @IsMemberRequired, Capacity = @Capacity where eventid = @EventID";
         private string querySearch = " select * from event where name Like '%'+@Name+'%'";
         private string queryJoin = "insert into EventMember(eventid, MemberID) values(@EventID, @MemberID)";
-        private string queryGetMembers = "select MemberID from EventMember where eventid = @EventID"; 
+        private string queryGetMembers = "select * from EventMember where eventid = @EventID"; 
 
         public EventService(IConfiguration configuration) : base(configuration)
         {
@@ -242,12 +242,11 @@ namespace SemesterProjekt_2.Services
                         List<int> memberids = new List<int>();
                         command.Parameters.AddWithValue("@EventID", eventid);
                         await command.Connection.OpenAsync();
-                        SqlDataReader reader = command.ExecuteReader();
+                        SqlDataReader reader = await command.ExecuteReaderAsync();
                         while (await reader.ReadAsync())
                         {
                             int memberID = reader.GetInt32(1);
                             memberids.Add(memberID);
-
                         }
                         return memberids;
                     }
