@@ -1,5 +1,7 @@
 ﻿@page
 @model SemesterProjekt_2.Pages.Events.GetAllEventsModel
+@using SemesterProjekt_2.Interfaces;
+@inject IEventService eservice;
 @{
     ViewData["Title"] = "GetAllEvents";
 }
@@ -85,7 +87,7 @@
                     }
                     @if (item.isMemberRequired == true && Model.user.MemberID != -1)
                     {
-                        if (item.capacity >= null)
+                        if (item.capacity <= eservice.CountMembers(item.eventID).Result)
                         {
 
                         }

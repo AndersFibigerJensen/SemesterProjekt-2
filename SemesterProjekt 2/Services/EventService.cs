@@ -17,7 +17,8 @@ namespace SemesterProjekt_2.Services
             "EventStart = @EventStart, EventEnd = @EventEnd, Price = @Price, IsMemberRequired = @IsMemberRequired, Capacity = @Capacity where eventid = @EventID";
         private string querySearch = " select * from event where name Like '%'+@Name+'%'";
         private string queryJoin = "insert into EventMember(eventid, MemberID) values(@EventID, @MemberID)";
-        private string queryGetMembers = "select * from EventMember where eventid = @EventID"; 
+        private string queryGetMembers = "select * from EventMember where eventid = @EventID";
+        private string CountingMembers = "select Count(MemberID) from EventMember where eventid=@EventID";
 
         public EventService(IConfiguration configuration) : base(configuration)
         {
@@ -294,6 +295,30 @@ namespace SemesterProjekt_2.Services
                 }
             }
             return false;
+        }
+
+        public async Task<int> CountMembers(int eventid)
+        {
+            using(SqlConnection connection= new SqlConnection(connectionString)) 
+            {
+                using(SqlCommand command= new SqlCommand(CountingMembers,connection))
+                {
+                    try
+                    {
+                        command.Parameters.AddWithValue("@EventID", eventid);
+                        await command.Connection.OpenAsync();
+                       int eventlist= await command.ExecuteNonQueryAsync();
+                        return eventlist;
+                    }
+                    catch(SqlException sql) 
+                    { 
+                    
+                    }
+                    return 0;
+                }
+            
+            
+            }
         }
     }
 }

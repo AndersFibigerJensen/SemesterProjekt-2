@@ -1,2 +1,2 @@
-﻿alter table Shift
-add foreign key(Eventid) references Event(eventid);
+﻿Select Count(MemberID) From EventMember 
+Where eventid=4;

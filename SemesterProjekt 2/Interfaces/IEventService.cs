@@ -37,5 +37,7 @@ namespace SemesterProjekt_2.Interfaces
         public Task JoinEvent(int eventid, int memberid);
 
         public Task<List<int>> ReturnMembers(int eventid);
+
+        public Task<int> CountMembers(int eventid);
     }
 }
