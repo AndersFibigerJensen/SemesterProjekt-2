@@ -1,2 +1,1 @@
-﻿Select Count(MemberID) From EventMember 
-Where eventid=4;
+﻿Select Count(id) from EventMember where eventid=4;

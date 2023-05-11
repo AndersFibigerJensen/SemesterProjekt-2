@@ -20,6 +20,7 @@ namespace SemesterProjekt_2.Services
         private string queryJoin = "insert into EventMember(eventid, MemberID) values(@EventID, @MemberID)";
         private string queryGetMembers = "select * from EventMember where eventid = @EventID";
         private string CountingMembers = "select Count(MemberID) from EventMember where eventid=@EventID";
+        private string quaryDeleteEventMember = "delete from Event where eventid = @EventID and MemberID=@MemberID";
 
         public EventService(IConfiguration configuration) : base(configuration)
         {
@@ -324,6 +325,34 @@ namespace SemesterProjekt_2.Services
                     return 0;
                 }
             
+            
+            }
+        }
+
+        public Task<bool> DeleteEventMember(int eventid, int Memberid)
+        {
+            using(SqlConnection connection= new SqlConnection(connectionString)) 
+            { 
+                using(SqlCommand command=new SqlCommand(quaryDeleteEventMember, connection,))
+                {
+                    try
+                    {
+                        command.Parameters.AddWithValue("@EventID", eventid);
+                        command.Parameters.AddWithValue("@MemberID", Memberid);
+
+                    }
+                    catch(SqlException sql)
+                    {
+                        throw sql;
+                    }
+                    catch(Exception ex) 
+                    { 
+                    
+                    }
+                    return null
+
+
+                }
             
             }
         }
