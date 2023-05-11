@@ -30,7 +30,13 @@ namespace SemesterProjekt_2.Services
         {
 
         }
-
+        /// <summary>
+        /// Tilføjer en event til databasen
+        /// </summary>
+        /// <param name="begivenhed"></param>
+        /// /// <exception cref="ex"> exceptionen bliver kastet videre i systemet</exception>
+        /// <exception cref="sql"> exceptionen bliver kastet videre i systemet</exception>
+        /// <returns></returns>
         public async Task AddEventAsync(Event begivenhed)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -62,6 +68,13 @@ namespace SemesterProjekt_2.Services
                 }
             }
         }
+        /// <summary>
+        /// Søger efter events i databasen, hvis navn passer til søgningen og viser dem til brugeren.
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <exception cref="ex"> exceptionen bliver kastet videre i systemet</exception>
+        /// <exception cref="sql"> exceptionen bliver kastet videre i systemet</exception>
+        /// <returns>events, med navne, der passer til søgningen</returns>
 
         public async Task<List<Event>> FilterEventsAsync(string filter)
         {
@@ -104,6 +117,10 @@ namespace SemesterProjekt_2.Services
             }
             return null;
         }
+        /// <summary>
+        /// Viser alle events i databasen
+        /// </summary>
+        /// <returns></returns>
 
         public async Task<List<Event>> GetAllEventsAsync()
         {
