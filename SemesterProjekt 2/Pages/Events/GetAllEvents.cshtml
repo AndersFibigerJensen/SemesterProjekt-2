@@ -47,62 +47,71 @@
         {
             @foreach (var item in Model.Events)
             {
-                <tr>
-                    @if(item.eventID==32)
-                    {
-                        
-                    }
-                    <td>
-                        @item.name
-                    </td>
-                    <td>
-                        @item.eventStart
-                    </td>
-                    <td>
-                        @item.eventEnd
-                    </td>
-                    <td>
-                        @item.price
-                    </td>
-                    <td>
-                        @if (item.isMemberRequired == true)
-                        {
-                            <p>for medlemmer</p>
-                        }
-                        else 
-                        {
-                            <p>for alle</p>
-                        }
-                        @*@(item.isMemberRequired == true)?<p>for medlemmer</p><p>for alle</p>*@
-                    </td>
-                    <td>
-                        @item.capacity
-                    </td>
-                    @if (Model.user.IsAdmin == true)
-                    {
-                        <td>
-                            <a asp-page="/Events/UpdateEvent" asp-route-eventID="@item.eventID">Edit</a>
-                            <a asp-page="/Events/DeleteEvent" asp-route-eventID="@item.eventID">Delete</a>
-                        </td>
-                    }
-                    @if (item.isMemberRequired == true && Model.user.MemberID != -1)
-                    {
-                        if (item.capacity <= eservice.CountMembers(item.eventID).Result)
+                @if(item.eventStart<DateTime.Now)
+                {
+                   
+                }
+                else
+                {
+                    <tr>
+                        @if (item.eventID == 32)
                         {
 
                         }
-                        else
+                        <td>
+                            @item.name
+                        </td>
+                        <td>
+                            @item.eventStart
+                        </td>
+                        <td>
+                            @item.eventEnd
+                        </td>
+                        <td>
+                            @item.price
+                        </td>
+                        <td>
+                            @if (item.isMemberRequired == true)
+                            {
+                                <p>for medlemmer</p>
+                            }
+                            else
+                            {
+                                <p>for alle</p>
+                            }
+                            @*@(item.isMemberRequired == true)?<p>for medlemmer</p><p>for alle</p>*@
+                        </td>
+                        <td>
+                            @item.capacity
+                        </td>
+                        @if (Model.user.IsAdmin == true)
                         {
                             <td>
-                                <a asp-page="/Events/JoinEvent" asp-route-eventID="@item.eventID">Join</a>
+                                <a asp-page="/Events/UpdateEvent" asp-route-eventID="@item.eventID">Edit</a>
+                                <a asp-page="/Events/DeleteEvent" asp-route-eventID="@item.eventID">Delete</a>
                             </td>
                         }
-                        <td>
-                            <a asp-page="/Events/ShowMembers" asp-route-eventID="@item.eventID">Show participants</a>
-                        </td>
-                    }
+                        @if (item.isMemberRequired == true && Model.user.MemberID != -1)
+                        {
+                            if (item.capacity <= eservice.CountMembers(item.eventID).Result)
+                            {
 
-                </tr>
+                            }
+                            else
+                            {
+                                <td>
+                                    <a asp-page="/Events/JoinEvent" asp-route-eventID="@item.eventID">Join</a>
+                                </td>
+                            }
+                            <td>
+                                <a asp-page="/Events/ShowMembers" asp-route-eventID="@item.eventID">Show participants</a>
+                            </td>
+                        }
+
+                    </tr>
+                    
+                }
+
             }
         }
     </tbody>

@@ -12,6 +12,8 @@ namespace SemesterProjekt_2.Pages.BlogPosts
 
         public List<Blog> Posts { get; set; }
 
+        public IFormFile Image { get; set; }
+
         public GetAllBlogModel(IBlogService blogService, List<Blog> posts)
         {
             _blogService = blogService;

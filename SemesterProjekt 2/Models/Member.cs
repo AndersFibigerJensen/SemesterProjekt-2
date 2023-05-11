@@ -9,16 +9,16 @@ namespace SemesterProjekt_2.Models
         [Required]
         public int MemberID{ get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "indtast venligst et navn")]
         public string Name { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "indtast venligst en addresse")]
         public string Address { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="indtask venligst en email")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="indtast venligst et password")]
         public string Password { get; set; }
 
         [Required]

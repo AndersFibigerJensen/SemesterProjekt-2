@@ -14,6 +14,8 @@ namespace SemesterProjekt_2.Pages.BlogPosts
         [BindProperty]
         public Blog Post { get; set; }
 
+        public IFormFile Image { get; set; }
+
         public Member User { get; set; }
 
         public UpdateBlogPostModel(IMemberService memberService, IBlogService blogService)

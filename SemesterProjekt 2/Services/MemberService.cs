@@ -259,6 +259,12 @@ namespace SemesterProjekt_2.Services
             return null;
         }
 
+        /// <summary>
+        /// bruger email og password for en session
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <returns>returnerer et medlem som har både email og password der matcher</returns>
         public async Task<Member> LoginMemberAsync(string email, string password)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))

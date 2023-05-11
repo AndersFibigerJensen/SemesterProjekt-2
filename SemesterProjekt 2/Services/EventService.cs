@@ -2,6 +2,7 @@
 using SemesterProjekt_2.Models;
 using Microsoft.Data.SqlClient;
 using System.Diagnostics.Metrics;
+using System.Windows.Input;
 
 namespace SemesterProjekt_2.Services
 {
@@ -307,8 +308,14 @@ namespace SemesterProjekt_2.Services
                     {
                         command.Parameters.AddWithValue("@EventID", eventid);
                         await command.Connection.OpenAsync();
-                       int eventlist= await command.ExecuteNonQueryAsync();
-                        return eventlist;
+                        await command.ExecuteNonQueryAsync();
+                        SqlDataReader reader = await command.ExecuteReaderAsync();
+                        while(await reader.ReadAsync())
+                        {
+                            int count = reader.GetInt32(0);
+                            return count;
+                        }
+
                     }
                     catch(SqlException sql) 
                     { 
