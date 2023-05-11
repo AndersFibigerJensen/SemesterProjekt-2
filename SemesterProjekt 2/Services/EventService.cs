@@ -346,16 +346,23 @@ namespace SemesterProjekt_2.Services
             }
         }
 
-        public Task<bool> DeleteEventMember(int eventid, int Memberid)
+        public async Task<bool> DeleteEventMember(int eventid, int Memberid)
         {
             using(SqlConnection connection= new SqlConnection(connectionString)) 
             { 
-                using(SqlCommand command=new SqlCommand(quaryDeleteEventMember, connection,))
+                using(SqlCommand command=new SqlCommand(quaryDeleteEventMember, connection))
                 {
                     try
                     {
                         command.Parameters.AddWithValue("@EventID", eventid);
                         command.Parameters.AddWithValue("@MemberID", Memberid);
+                        command.Connection.OpenAsync();
+                        int noOfRows = await command.ExecuteNonQueryAsync();
+                        if(noOfRows == 1) 
+                        {
+                            return true;
+                        
+                        }
 
                     }
                     catch(SqlException sql)
@@ -366,7 +373,7 @@ namespace SemesterProjekt_2.Services
                     { 
                     
                     }
-                    return null
+                    return false;
 
 
                 }
