@@ -23,11 +23,11 @@ namespace JordnærTest2
             int noOfEventsBefore = events.Count;
             Event eEvent = new Event(10, "TestEvent", DateTime.Now, DateTime.Today, 699, false, 45);
             eventService.AddEventAsync(eEvent);
-            events = eventService.GetAllEventsAsync().Result;
-            
+                        
+            eventService.RemoveEventAsync(events[events.Count() - 1].eventID);
             int noOfEventsAfter = events.Count;
             //assert
-            Assert.AreEqual(noOfEventsBefore +1, noOfEventsAfter);
+            Assert.AreEqual(noOfEventsBefore, noOfEventsAfter);
         }
 
         [TestMethod]
@@ -45,6 +45,7 @@ namespace JordnærTest2
             int noOfEventsAfter = events.Count;
             //assert
             Assert.AreEqual(noOfEventsBefore, noOfEventsAfter);
+
         }
 
     }

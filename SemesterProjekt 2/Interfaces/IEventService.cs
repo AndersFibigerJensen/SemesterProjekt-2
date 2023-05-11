@@ -7,7 +7,7 @@ namespace SemesterProjekt_2.Interfaces
         /// <summary>
         /// Henter alle events i databasen
         /// </summary>
-        /// <returns>events</returns>
+        /// <returns>Alle events</returns>
         public Task<List<Event>> GetAllEventsAsync();
         /// <summary>
         /// Tilføjer en event til databasen
@@ -27,15 +27,30 @@ namespace SemesterProjekt_2.Interfaces
         /// <param name="id"></param>
         /// <returns></returns>
         public Task<bool> UpdateEventAsync(Event eEvent, int id);
+        /// <summary>
+        /// Søger på efter events i databasen ud fra deres navn og viser dem, der matcher søgningen
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns>event eller events, hvis navn man har søgt efter</returns>
         public Task<List<Event>> FilterEventsAsync(string filter);
         /// <summary>
         /// Finder en event med et givent id
         /// </summary>
         /// <param name="id"></param>
-        /// <returns>id</returns>
+        /// <returns>id for den angivne event</returns>
         public Task<Event> GetEventByIdAsync(int id);
+        /// <summary>
+        /// Tilmelder et medlem til en event
+        /// </summary>
+        /// <param name="eventid"></param>
+        /// <param name="memberid"></param>
+        /// <returns></returns>
         public Task JoinEvent(int eventid, int memberid);
-
+        /// <summary>
+        /// Viser alle medlemmer, der har meldt sig til en given event
+        /// </summary>
+        /// <param name="eventid"></param>
+        /// <returns>Alle medlemmer, der har tilmeldt sig den angivne event</returns>
         public Task<List<int>> ReturnMembers(int eventid);
 
         public Task<int> CountMembers(int eventid);

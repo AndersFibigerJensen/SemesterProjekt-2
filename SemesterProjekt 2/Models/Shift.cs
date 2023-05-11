@@ -7,7 +7,6 @@
         public DateTime DateTo { get; set; }
         public int MemberID { get; set; }
         public int EventID { get; set; }
-
         public Member assignedMember { get; set; }
         public Event assignedEvent { get; set; }
 
