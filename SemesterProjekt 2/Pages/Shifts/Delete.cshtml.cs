@@ -26,7 +26,7 @@ namespace SemesterProjekt_2.Pages.Shifts
         {
             await sService.DeleteShiftAsync(TBD.ShiftID);
 
-            return RedirectToPage("GetAllHotels");
+            return RedirectToPage("GetAllShifts");
         }
     }
 }

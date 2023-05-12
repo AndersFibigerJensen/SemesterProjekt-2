@@ -35,7 +35,7 @@
         </tr>
     </thead>
     <tbody>
-        @if (Model.Shifts.Count() != 0)
+        @if (Model.Shifts.Count != 0)
         {
             @foreach (var item in Model.Shifts)
             {
@@ -50,7 +50,7 @@
                         @item.DateTo
                     </td>
                     @{
-                        if (item.MemberID == -1)
+                        if (item.MemberID == null)
                         {
                             <td>
                                 <a asp-page="ShiftMember" asp-route-shiftid="@item.ShiftID">0</a>
@@ -64,7 +64,7 @@
                         }
                     }
                     @{
-                        if (item.EventID == 32)
+                        if (item.EventID == null)
                         {
                             <td>
                                 <a asp-page="ShiftEvent" asp-route-shiftid="@item.ShiftID">0</a>

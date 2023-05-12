@@ -11,11 +11,13 @@ namespace SemesterProjekt_2.Services
         // Query Strings
         private string queryGetAll = "select * from Shift";
         private string queryGetFromID = "select * from Shift where shiftID = @ShiftID";
-        private string queryInsert = "insert into Shift Values(@ShiftID, @DateFrom, @DateTo, @MemberID, @EventID)";
+        private string queryInsert = "insert into Shift (ShiftID, DateFrom, DateTo) Values(@ShiftID, @DateFrom, @DateTo)";
         private string queryDelete = "delete from Shift where shiftID = @ShiftID";
-        private string queryUpdate = "update Shift set ShiftID = @NewSID, DateFrom = @NewDFrom, DateTo = @NewDTo, MemberID = @NewMID, EventID = @NewEID where ShiftID = @OldSID";     
+        private string queryUpdate = "update Shift set ShiftID = @NewSID, DateFrom = @NewDFrom, DateTo = @NewDTo where ShiftID = @OldSID";     
         private string querySearch = "select * from Shift where DateFrom = @DateFrom";
         private string queryGetAllFromMemberID = "select * from Shift where MemberID = @MemberID";
+        private string queryUpdateMemberID = "update Shift set MemberID = @NewMID where ShiftID = @OldSID";
+        private string queryUpdateEventID = "update Shift set EventID = @NewEID where ShiftID = @OldSID";
 
         public ShiftService(IConfiguration configuration) : base(configuration) { }
 
@@ -44,8 +46,20 @@ namespace SemesterProjekt_2.Services
                             int shiftID = reader.GetInt32(0);
                             DateTime dateFrom = reader.GetDateTime(1);
                             DateTime dateTo = reader.GetDateTime(2);
-                            int memberID = reader.GetInt32(3);
-                            int eventID = reader.GetInt32(4);
+
+                            int? memberID = null;
+                            if (!reader.IsDBNull(i: 3))
+                            {
+                                memberID = reader.GetInt32(i: 3);
+                            }
+                            int? eventID = null;
+                            if (!reader.IsDBNull(i: 4))
+                            {
+                                eventID = reader.GetInt32(i: 4);
+                            }
+
+                            //int memberID = reader.GetInt32(3);
+                            //int eventID = reader.GetInt32(4);
                             Shift shift = new Shift(shiftID, dateFrom, dateTo, memberID, eventID);
                             allShifts.Add(shift);
                         }
@@ -53,12 +67,10 @@ namespace SemesterProjekt_2.Services
                     catch (SqlException sqlEx)
                     {
                         Console.WriteLine("Database error " + sqlEx.Message);
-                        return null;
                     }
                     catch (Exception exp)
                     {
                         Console.WriteLine("General error" + exp.Message);
-                        return null;
                     }
                 }
             }
@@ -88,8 +100,16 @@ namespace SemesterProjekt_2.Services
                             int shiftID = reader.GetInt32(0);
                             DateTime dateFrom = reader.GetDateTime(1);
                             DateTime dateTo = reader.GetDateTime(2);
-                            int memberID = reader.GetInt32(3);
-                            int eventID = reader.GetInt32(4);
+                            int? memberID = null;
+                            if (!reader.IsDBNull(i: 3))
+                            {
+                                memberID = reader.GetInt32(i: 3);
+                            }
+                            int? eventID = null;
+                            if (!reader.IsDBNull(i: 4))
+                            {
+                                eventID = reader.GetInt32(i: 4);
+                            }
                             s = new Shift(shiftID, dateFrom, dateTo, memberID, eventID);
                         }
                     }
@@ -122,8 +142,8 @@ namespace SemesterProjekt_2.Services
                     command.Parameters.AddWithValue("@ShiftID", shift.ShiftID);
                     command.Parameters.AddWithValue("@DateFrom", shift.DateFrom);
                     command.Parameters.AddWithValue("@DateTo", shift.DateTo);
-                    command.Parameters.AddWithValue("@MemberID", shift.MemberID);
-                    command.Parameters.AddWithValue("@EventID", shift.EventID);
+                    //command.Parameters.AddWithValue("@MemberID", shift.MemberID);
+                    //command.Parameters.AddWithValue("@EventID", shift.EventID);
                     try
                     {
                         await command.Connection.OpenAsync();
@@ -202,7 +222,61 @@ namespace SemesterProjekt_2.Services
                         command.Parameters.AddWithValue("@NewSID", shift.ShiftID);
                         command.Parameters.AddWithValue("@NewDFrom", shift.DateFrom);
                         command.Parameters.AddWithValue("@NewDTo", shift.DateTo);
+                        await connection.OpenAsync();
+
+                        int noOfRows = await command.ExecuteNonQueryAsync();
+                        return noOfRows == 1;
+                    }
+                    catch (SqlException sqlEx)
+                    {
+                        Console.WriteLine("Database error " + sqlEx.Message);
+                    }
+                    catch (Exception exp)
+                    {
+                        Console.WriteLine("General error" + exp.Message);
+                    }
+                }
+            }
+            return false;
+        }
+
+        public async Task<bool> UpdateMemberIDAsync(Shift shift, int id)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand(queryUpdateMemberID, connection))
+                {
+                    try
+                    {
+                        command.Parameters.AddWithValue("@OldSID", id);
                         command.Parameters.AddWithValue("@NewMID", shift.MemberID);
+                        await connection.OpenAsync();
+
+                        int noOfRows = await command.ExecuteNonQueryAsync();
+                        return noOfRows == 1;
+                    }
+                    catch (SqlException sqlEx)
+                    {
+                        Console.WriteLine("Database error " + sqlEx.Message);
+                    }
+                    catch (Exception exp)
+                    {
+                        Console.WriteLine("General error" + exp.Message);
+                    }
+                }
+            }
+            return false;
+        }
+
+        public async Task<bool> UpdateEventIDAsync(Shift shift, int id)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand(queryUpdateEventID, connection))
+                {
+                    try
+                    {
+                        command.Parameters.AddWithValue("@OldSID", id);
                         command.Parameters.AddWithValue("@NewEID", shift.EventID);
                         await connection.OpenAsync();
 
@@ -245,8 +319,16 @@ namespace SemesterProjekt_2.Services
                             int shiftID = reader.GetInt32(0);
                             DateTime dateFrom = reader.GetDateTime(1);
                             DateTime dateTo = reader.GetDateTime(2);
-                            int memberID = reader.GetInt32(3);
-                            int eventID = reader.GetInt32(4);
+                            int? memberID = null;
+                            if (!reader.IsDBNull(i: 3))
+                            {
+                                memberID = reader.GetInt32(i: 3);
+                            }
+                            int? eventID = null;
+                            if (!reader.IsDBNull(i: 4))
+                            {
+                                eventID = reader.GetInt32(i: 4);
+                            }
                             Shift shift = new Shift(shiftID, dateFrom, dateTo, memberID, eventID);
                             filteredShifts.Add(shift);
                         }
@@ -284,8 +366,16 @@ namespace SemesterProjekt_2.Services
                             int shiftID = reader.GetInt32(0);
                             DateTime dateFrom = reader.GetDateTime(1);
                             DateTime dateTo = reader.GetDateTime(2);
-                            int memberID = reader.GetInt32(3);
-                            int eventID = reader.GetInt32(4);
+                            int? memberID = null;
+                            if (!reader.IsDBNull(i: 3))
+                            {
+                                memberID = reader.GetInt32(i: 3);
+                            }
+                            int? eventID = null;
+                            if (!reader.IsDBNull(i: 4))
+                            {
+                                eventID = reader.GetInt32(i: 4);
+                            }
                             Shift shift = new Shift(shiftID, dateFrom, dateTo, memberID, eventID);
                             filteredShifts.Add(shift);
                         }

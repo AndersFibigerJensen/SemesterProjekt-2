@@ -38,12 +38,12 @@ namespace SemesterProjekt_2.Pages.Shifts
             }
         }
 
-        public async Task<IActionResult> OnPostAsync(int shiftid, int eventID)
+        public async Task<IActionResult> OnPostAsync(int shiftid, int? eventID)
         {
             Shift TBU = await sService.GetShiftByIdAsync(shiftid);
             Shift newShift = new Shift(TBU.ShiftID, TBU.DateFrom, TBU.DateTo, TBU.MemberID, eventID);
 
-            await sService.UpdateShiftAsync(newShift, TBU.ShiftID);
+            await sService.UpdateEventIDAsync(newShift, TBU.ShiftID);
 
             return RedirectToPage("GetAllShifts");
         }

@@ -42,6 +42,22 @@ namespace SemesterProjekt_2.Interfaces
         public Task<bool> UpdateShiftAsync(Shift shift, int id);
 
         /// <summary>
+        /// Updates a shift's member id
+        /// </summary>
+        /// <param name="shift">Shift with new parameters</param>
+        /// <param name="id">ID of old shift</param>
+        /// <returns>If task was successful</returns>
+        public Task<bool> UpdateMemberIDAsync(Shift shift, int id);
+
+        /// <summary>
+        /// Updates a shift's event id
+        /// </summary>
+        /// <param name="shift">Shift with new parameters</param>
+        /// <param name="id">ID of old shift</param>
+        /// <returns>If task was successful</returns>
+        public Task<bool> UpdateEventIDAsync(Shift shift, int id);
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="date"></param>

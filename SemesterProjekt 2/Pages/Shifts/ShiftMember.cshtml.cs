@@ -54,7 +54,7 @@ namespace SemesterProjekt_2.Pages.Shifts
                     Shift TBU = await sService.GetShiftByIdAsync(shiftid);
                     Shift newShift = new Shift(TBU.ShiftID, TBU.DateFrom, TBU.DateTo, memberID, TBU.EventID);
 
-                    await sService.UpdateShiftAsync(newShift, TBU.ShiftID);
+                    await sService.UpdateMemberIDAsync(newShift, TBU.ShiftID);
 
                     return RedirectToPage("GetAllShifts");
                 }
