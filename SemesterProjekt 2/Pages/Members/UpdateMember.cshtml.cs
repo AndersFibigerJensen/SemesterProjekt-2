@@ -70,10 +70,11 @@ namespace SemesterProjekt_2.Pages.Members
 
                     Member.Image = ProcessUploadedFile();
                 }
-                //if (!ModelState.IsValid)
-                //{
-                //    return Page();
-                //}
+                
+                if (!ModelState.IsValid)
+                {
+                    return Page();
+                }
                 await _memberService.UpdateMemberAsync(id, Member);
                 return RedirectToPage("GetAllMembers");
             }

@@ -184,7 +184,7 @@ namespace SemesterProjekt_2.Services
                             bool isFamily = reader.GetBoolean(5);
                             bool HasDoneHygieneCourse = reader.GetBoolean(6);
                             bool isAdmin = reader.GetBoolean(7);
-                            string image = "";
+                            string image = null;
                             if(!reader.IsDBNull(8))
                             {
                                 image = reader.GetString(8);
