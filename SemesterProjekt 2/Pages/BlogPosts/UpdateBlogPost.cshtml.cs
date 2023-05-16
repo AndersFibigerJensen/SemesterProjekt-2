@@ -46,7 +46,7 @@ namespace SemesterProjekt_2.Pages.BlogPosts
             {
 
                 await _blogService.UpdateBlogPostAsync(Post);
-                return RedirectToPage("GetAllBlog");
+                return RedirectToPage("/Members/HomePage");
             }
             catch (Exception ex) 
             {
