@@ -14,12 +14,13 @@ namespace SemesterProjekt_2.Services
         private string queryInsert = "insert into Shift (ShiftID, DateFrom, DateTo) Values(@ShiftID, @DateFrom, @DateTo)";
         private string queryDelete = "delete from Shift where shiftID = @ShiftID";
         private string queryUpdate = "update Shift set ShiftID = @NewSID, DateFrom = @NewDFrom, DateTo = @NewDTo where ShiftID = @OldSID";     
-        private string querySearch = "select * from Shift where DateFrom = @DateFrom";
+        private string querySearch = "select * from Shift where (datepart(yy, DateFrom) = @Year and datepart(mm, DateFrom) = @Month and datepart(dd, DateFrom) = @Day)";
         private string queryGetAllFromMemberID = "select * from Shift where MemberID = @MemberID";
         private string queryUpdateMemberID = "update Shift set MemberID = @NewMID where ShiftID = @OldSID";
         private string queryUpdateEventID = "update Shift set EventID = @NewEID where ShiftID = @OldSID";
 
         public ShiftService(IConfiguration configuration) : base(configuration) { }
+        public ShiftService(string connectionstring) : base(connectionstring) { }
 
         // Functions
 
@@ -38,9 +39,7 @@ namespace SemesterProjekt_2.Services
                     try
                     {
                         await command.Connection.OpenAsync();
-                        Thread.Sleep(1000);
                         SqlDataReader reader = await command.ExecuteReaderAsync();
-                        Thread.Sleep(1000);
                         while (await reader.ReadAsync())
                         {
                             int shiftID = reader.GetInt32(0);
@@ -311,7 +310,9 @@ namespace SemesterProjekt_2.Services
                 {
                     try
                     {
-                        command.Parameters.AddWithValue("@DateFrom", date);
+                        command.Parameters.AddWithValue("@Year", date.Year);
+                        command.Parameters.AddWithValue("@Month", date.Month);
+                        command.Parameters.AddWithValue("@Day", date.Day);
                         await command.Connection.OpenAsync();
                         SqlDataReader reader = await command.ExecuteReaderAsync();
                         while (await reader.ReadAsync())
