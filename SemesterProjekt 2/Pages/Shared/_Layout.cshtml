@@ -48,15 +48,6 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Members/GetAllMembers">Member</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Events/GetAllEvents">Event</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Shifts/GetAllShifts">Shifts</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/BlogPosts/GetAllBlog">Blog</a>
                         </li>
                         @if(email==null & password==null)
@@ -67,10 +58,20 @@
                         }
                         else
                         {
+
                             Member User = memberservice.LoginMemberAsync(email, password).Result;
-                                <li class="nav-item" class="float-right" style="font-size: medium">
-                                    <p> Hej @User.Name velkommen til Jordnær</p>
-                                </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Members/GetAllMembers">Member</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Events/GetAllEvents">Event</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Shifts/GetAllShifts">Shifts</a>
+                            </li>
+                            <li class="nav-item" class="float-right" style="font-size: medium">
+                                 <a class="nav-link text-dark" asp-area="" asp-page="/Members/HomePage"> Hej @User.Name Velkommen til Jordnær</a>
+                            </li>
                         }
 
                         
