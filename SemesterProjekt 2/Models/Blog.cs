@@ -1,10 +1,15 @@
-﻿namespace SemesterProjekt_2.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SemesterProjekt_2.Models
 {
     public class Blog
     {
 
         public int BlogID { get; set; }
 
+
+        [Required]
+        [StringLength(500)]
         public string BlogPost { get; set; }
 
         public string Image { get; set;}

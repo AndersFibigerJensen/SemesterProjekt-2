@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using SemesterProjekt_2.Interfaces;
+@using SemesterProjekt_2.Models;
+@using SemesterProjekt_2.Services;
+@inject IMemberService memberservice
+@inject IHttpContextAccessor http;
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -27,6 +32,13 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                @{
+
+                    string email = http.HttpContext.Session.GetString("email");
+                    string password = http.HttpContext.Session.GetString("password");
+                    
+
+                }
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
@@ -44,9 +56,21 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Shifts/GetAllShifts">Shifts</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Login/Login">Login</a>
-                        </li>
+                        @if(email==null & password==null)
+                        {
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Login/Login">Login</a>
+                            </li>
+
+                        }
+                        else
+                        {
+                            Member User = memberservice.LoginMemberAsync(email, password).Result;
+                                <li class="nav-item" class="float-right" style="font-size: medium">
+                                    <p> Hej @User.Name velkommen til Jordnær</p>
+                                </li>
+                        }
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/BlogPosts/GetAllBlog">Blog</a>
                         </li>
