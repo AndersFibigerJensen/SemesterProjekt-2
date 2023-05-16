@@ -10,18 +10,21 @@ namespace SemesterProjekt_2.Pages.BlogPosts
         
         private IMemberService _memberService;
         private IBlogService _blogService;
+        private IWebHostEnvironment _webHostEnvironment;
 
         [BindProperty]
         public Blog Post { get; set; }
 
         public IFormFile Image { get; set; }
 
+        [BindProperty]
         public Member User { get; set; }
 
-        public UpdateBlogPostModel(IMemberService memberService, IBlogService blogService)
+        public UpdateBlogPostModel(IMemberService memberService, IBlogService blogService,IWebHostEnvironment webhost)
         {
             _memberService = memberService;
             _blogService = blogService;
+            _webHostEnvironment = webhost;
         }
 
         public async Task OnGetAsync(int id)
@@ -41,6 +44,7 @@ namespace SemesterProjekt_2.Pages.BlogPosts
         {
             try
             {
+
                 await _blogService.UpdateBlogPostAsync(Post);
                 return RedirectToPage("GetAllBlog");
             }
@@ -52,5 +56,22 @@ namespace SemesterProjekt_2.Pages.BlogPosts
             }
             
         }
+
+        private string ProcessUploadedFile()
+        {
+            string uniqueFileName = null;
+            if (Image != null)
+            {
+                string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "Images");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + Image.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    Image.CopyTo(fileStream);
+                }
+            }
+            return uniqueFileName;
+        }
+
     }
 }

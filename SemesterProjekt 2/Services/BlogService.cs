@@ -6,17 +6,23 @@ namespace SemesterProjekt_2.Services
 {
     public class BlogService : Connection, IBlogService
     {
-        private string createPost = "Insert into Blog values(@BlogId,@BlogPost,@Image,MemberID)";
+        private string createPost = "Insert into Blog values(@BlogPost,@Image,@MemberID)";
         private string GetAllPost = "Select * from Blog";
         private string GetPost = "Select * from Blog Where BlogId=@ID";
         private string DeletePost = " Delete from Blog Where BlogId=@ID";
-        private string UpdatePost = "update Member Set BlogId=@Blogid, BlogPost=@Post , Image=@Image , MemberId=@MemberID where BlogId=@BlogId";
+        private string UpdatePost = "update Blog Set BlogPost=@Post , Image=@Image , MemberID=@MemberID where BlogId=@BlogId";
 
         public BlogService(IConfiguration configuration):base(configuration)
         {
 
         }
 
+
+        /// <summary>
+        /// Skaber en blogpost
+        /// </summary>
+        /// <param name="Blog"> tager en tom blogpost</param>
+        /// <returns> returnere en blogpost </returns>
         public async Task<Blog> CreateBlogPostAsync(Blog Blog)
         {
             using(SqlConnection connection= new SqlConnection(connectionString)) 
@@ -25,7 +31,6 @@ namespace SemesterProjekt_2.Services
                 {
                     try
                     {
-                        command.Parameters.AddWithValue("@BlogID", Blog.BlogID);
                         command.Parameters.AddWithValue("@BlogPost", Blog.BlogPost);
                         command.Parameters.AddWithValue("@Image",string.IsNullOrEmpty(Blog.Image)? (object)DBNull.Value:Blog.Image);
                         command.Parameters.AddWithValue("@MemberID",Blog.memberID);
@@ -50,6 +55,11 @@ namespace SemesterProjekt_2.Services
             }
         }
 
+        /// <summary>
+        /// Slet en BlogPost
+        /// </summary>
+        /// <param name="BlogID">bruger et blogid til at finde den individuelle blogpost</param>
+        /// <returns> returnere en blogpost</returns>
         public async Task<Blog> DeleteBlogPostAsync(int BlogID)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -80,6 +90,11 @@ namespace SemesterProjekt_2.Services
             }
         }
 
+        /// <summary>
+        /// henter en blog
+        /// </summary>
+        /// <param name="id"> bruger id til at finde den individuelle blogpost</param>
+        /// <returns>returnere en blogpost med den samme blogpost Blogpostid som i parameteren id</returns>
         public async Task<Blog> GetBlogAsync(int id)
         {
             using(SqlConnection connection= new SqlConnection(connectionString)) 
@@ -122,6 +137,10 @@ namespace SemesterProjekt_2.Services
             }
         }
 
+        /// <summary>
+        /// henter alle blogpost i en liste
+        /// </summary>
+        /// <returns>returnere en liste af blogpost</returns>
         public async Task<List<Blog>> GetBlogPostsAsync()
         {
             using (SqlConnection connection= new SqlConnection(connectionString))
@@ -164,6 +183,11 @@ namespace SemesterProjekt_2.Services
                 return null;
         }
 
+        /// <summary>
+        /// opdatere en blogpost ud fra et
+        /// </summary>
+        /// <param name="blog"></param>
+        /// <returns></returns>
         public async Task<bool> UpdateBlogPostAsync(Blog blog)
         {
             using(SqlConnection connection= new SqlConnection(connectionString)) 
@@ -172,7 +196,6 @@ namespace SemesterProjekt_2.Services
                 {
                     try
                     {
-                        command.Parameters.AddWithValue("@ID",blog.BlogID);
                         command.Parameters.AddWithValue("@Post",blog.BlogPost);
                         command.Parameters.AddWithValue("@Image", string.IsNullOrEmpty(blog.Image) ? (object)DBNull.Value : blog.Image);
                         command.Parameters.AddWithValue("@MemberID",blog.memberID);

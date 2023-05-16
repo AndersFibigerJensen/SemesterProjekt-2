@@ -34,11 +34,11 @@
                 <span asp-validation-for="@Model.Member.Password" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Image" class="control-label"></label>
+                <label asp-for="@Model.Photo" class="control-label"></label>
                 <div class="custom-file">
-                    <input asp-for="@Model.Image" class="custom-file-input form-control" />
+                    <input asp-for="@Model.Photo" class="custom-file-input form-control" />
                 </div>
-                <span asp-validation-for="@Model.Member.Password" class="text-danger"></span>
+                <span asp-validation-for="@Model.Member.Image" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <a asp-page="GetAllMembers" class=" btn-btn-primary">Cancel</a>

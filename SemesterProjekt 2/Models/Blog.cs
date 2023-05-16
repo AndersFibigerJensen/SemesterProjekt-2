@@ -16,6 +16,13 @@
 
         }
 
+        public Blog(string blogPost,string image, int Member)
+        {
+            BlogPost = blogPost;
+            Image = image;
+            memberID = Member;
+        }
+
         public Blog(int blogID,string blogPost,string image,int Member)
         {
             BlogID= blogID;

@@ -12,7 +12,7 @@ namespace SemesterProjekt_2.Pages.Members
         public Member Member { get; set; }
 
         [BindProperty]
-        public IFormFile Image { get; set; }
+        public IFormFile Photo { get; set; }
 
         private IMemberService _memberService { get; set; }
         private IWebHostEnvironment _webHostEnvironment { get; set; }
@@ -27,11 +27,11 @@ namespace SemesterProjekt_2.Pages.Members
         {
         }
 
-        public async Task<IActionResult > OnPostAsync() 
+        public IActionResult OnPost() 
         {
             try
             {
-                if (Image != null)
+                if (Photo != null)
                 {
                     if (Member.Image != null)
                     {
@@ -60,14 +60,14 @@ namespace SemesterProjekt_2.Pages.Members
         private string ProcessUploadedFile()
         {
             string uniqueFileName = null;
-            if (Image != null)
+            if (Photo != null)
             {
                 string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "Images");
-                uniqueFileName = Guid.NewGuid().ToString() + "_" + Image.FileName;
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + Photo.FileName;
                 string filePath = Path.Combine(uploadsFolder, uniqueFileName);
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
-                    Image.CopyTo(fileStream);
+                    Photo.CopyTo(fileStream);
                 }
             }
             return uniqueFileName;

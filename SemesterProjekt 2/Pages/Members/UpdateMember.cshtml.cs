@@ -20,13 +20,11 @@ namespace SemesterProjekt_2.Pages.Members
         public Member User { get; set; }
 
         private IMemberService _memberService { get; set; }
-        private LoginService _loginService { get; set; }
         private IWebHostEnvironment _webHostEnvironment { get; set; }
 
-        public UpdateMemberModel(IMemberService memberService,LoginService LoginService, IWebHostEnvironment webHostEnvironment)
+        public UpdateMemberModel(IMemberService memberService, IWebHostEnvironment webHostEnvironment)
         {
             _memberService = memberService;
-            _loginService = LoginService;
             _webHostEnvironment = webHostEnvironment;
         }
 
@@ -71,9 +69,14 @@ namespace SemesterProjekt_2.Pages.Members
                     Member.Image = ProcessUploadedFile();
                 }
                 
-                if (!ModelState.IsValid)
+                //if (!ModelState.IsValid)
+                //{
+                //    return Page();
+                //}
+                if(User.MemberID==Member.MemberID)
                 {
-                    return Page();
+                    HttpContext.Session.SetString("email", Member.Email);
+                    HttpContext.Session.SetString("password", Member.Password);
                 }
                 await _memberService.UpdateMemberAsync(id, Member);
                 return RedirectToPage("GetAllMembers");
