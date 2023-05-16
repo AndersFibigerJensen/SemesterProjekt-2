@@ -20,7 +20,7 @@ namespace SemesterProjekt_2.Services
         private string queryJoin = "insert into EventMember(eventid, MemberID) values(@EventID, @MemberID)";
         private string queryGetMembers = "select * from EventMember where eventid = @EventID";
         private string CountingMembers = "select Count(MemberID) from EventMember where eventid=@EventID";
-        private string quaryDeleteEventMember = "delete from Event where eventid = @EventID and MemberID=@MemberID";
+        private string quaryDeleteEventMember = "delete from EventMember where eventid = @EventID and MemberID=@MemberID";
 
         public EventService(IConfiguration configuration) : base(configuration)
         {
@@ -37,6 +37,8 @@ namespace SemesterProjekt_2.Services
         /// /// <exception cref="ex"> exceptionen bliver kastet videre i systemet</exception>
         /// <exception cref="sql"> exceptionen bliver kastet videre i systemet</exception>
         /// <returns></returns>
+        
+        //Adam
         public async Task AddEventAsync(Event begivenhed)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -75,7 +77,8 @@ namespace SemesterProjekt_2.Services
         /// <exception cref="ex"> exceptionen bliver kastet videre i systemet</exception>
         /// <exception cref="sql"> exceptionen bliver kastet videre i systemet</exception>
         /// <returns>events, med navne, der passer til søgningen</returns>
-
+        
+        //Adam
         public async Task<List<Event>> FilterEventsAsync(string filter)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -121,7 +124,8 @@ namespace SemesterProjekt_2.Services
         /// Viser alle events i databasen
         /// </summary>
         /// <returns></returns>
-
+        
+        //Adam
         public async Task<List<Event>> GetAllEventsAsync()
         {
             List<Event> events = new List<Event>();
@@ -161,7 +165,7 @@ namespace SemesterProjekt_2.Services
             }
             return null;
         }
-
+        //Adam
         public async Task<Event> GetEventByIdAsync(int id)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -199,7 +203,7 @@ namespace SemesterProjekt_2.Services
             }
             return null;
         }
-
+        //Adam & Anders
         public async Task JoinEvent(int eventid, int memberid)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -222,7 +226,7 @@ namespace SemesterProjekt_2.Services
                 }
             }
         }
-
+        //Adam
         public async Task<Event> RemoveEventAsync(int id)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -250,7 +254,7 @@ namespace SemesterProjekt_2.Services
             }
             return null;
         }
-
+        //Adam & Anders
         public async Task<List<int>> ReturnMembers(int eventid)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -282,7 +286,7 @@ namespace SemesterProjekt_2.Services
                 }
             }
         }
-
+        //Adam
         public async Task<bool> UpdateEventAsync(Event eEvent, int id)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -315,7 +319,7 @@ namespace SemesterProjekt_2.Services
             }
             return false;
         }
-
+        //Adam & Anders
         public async Task<int> CountMembers(int eventid)
         {
             using(SqlConnection connection= new SqlConnection(connectionString)) 
@@ -345,7 +349,7 @@ namespace SemesterProjekt_2.Services
             
             }
         }
-
+        //Anders
         public async Task<bool> DeleteEventMember(int eventid, int Memberid)
         {
             using(SqlConnection connection= new SqlConnection(connectionString)) 
