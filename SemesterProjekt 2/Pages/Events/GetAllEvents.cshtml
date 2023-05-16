@@ -93,22 +93,18 @@
                         }
                         @if (item.isMemberRequired == true && Model.user.MemberID != -1)
                         {
-                            @if (eservice.ReturnMembers(item.eventID).Result.Contains(Model.user.MemberID))
+                            @if (eservice.ReturnMembers(item.eventID).Result.Contains(Model.user.MemberID) | item.capacity <= eservice.CountMembers(item.eventID).Result)
                             {
                                     <td>
                                         <a asp-page="/Events/LeaveEvent" asp-route-eventid="@item.eventID">Leave</a>
                                     </td>
                             }
-                            else
+                            else if (!eservice.ReturnMembers(item.eventID).Result.Contains(Model.user.MemberID))
                             {
                                    <td>
                                       <a asp-page="/Events/JoinEvent" asp-route-eventID="@item.eventID">Join</a>
                                    </td>
                                     
-                            }
-                            if (item.capacity <= eservice.CountMembers(item.eventID).Result)
-                            {
-
                             }
                             <td>
                                 <a asp-page="/Events/ShowMembers" asp-route-eventID="@item.eventID">Show participants</a>
