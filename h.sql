@@ -1,0 +1,1 @@
+﻿Insert into Blog values('ghghghg',null,1);

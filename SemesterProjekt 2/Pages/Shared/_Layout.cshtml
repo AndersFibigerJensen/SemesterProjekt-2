@@ -56,13 +56,14 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Shifts/GetAllShifts">Shifts</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/BlogPosts/GetAllBlog">Blog</a>
+                        </li>
                         @if(email==null & password==null)
                         {
-
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-page="/Login/Login">Login</a>
                             </li>
-
                         }
                         else
                         {
@@ -71,9 +72,7 @@
                                     <p> Hej @User.Name velkommen til Jordnær</p>
                                 </li>
                         }
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/BlogPosts/GetAllBlog">Blog</a>
-                        </li>
+
                         
                     </ul>
                 </div>
