@@ -19,7 +19,7 @@ namespace SemesterProjekt_2.Pages.Shifts
 
         public List<Shift> Shifts { get; set; }
 
-        private IMemberService mService;
+        public IMemberService mService;
         private IShiftService sService;
         public LoginService login;
 

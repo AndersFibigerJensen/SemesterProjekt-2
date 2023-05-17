@@ -1,5 +1,8 @@
 ﻿@page
+@using SemesterProjekt_2.Interfaces
 @model SemesterProjekt_2.Pages.Shifts.GetAllShiftsModel
+@inject IMemberService mService
+@inject IEventService eService
 @{
     ViewData["Title"] = "List of Shifts";
 }
@@ -7,58 +10,58 @@
 @{
     if (Model.CLIMember.MemberID != -1)
     {
-        <h1>List of Shifts</h1>
+    <h1>List of Shifts</h1>
 
-        <form method="get">
-            Search by DateFrom (mm-dd-yyyy)<input type="form-control" asp-for="FilterCriteria" asp-format="{0:MM-dd-yyyy}" />
-            <input type="submit" value="Search" />
-        </form>
+    <form method="get">
+                    Search by DateFrom (mm-dd-yyyy)<input type="form-control" asp-for="FilterCriteria" asp-format="{0:MM-dd-yyyy}" />
+                    <input type="submit" value="Search" />
+    </form>
 
         {
             if (Model.CLIMember.IsAdmin)
             {
-                <p>
-                    <a asp-page="Create">Create New Shift</a>
-                </p>
+    <p>
+                            <a asp-page="Create">Create New Shift</a>
+    </p>
             }
         }
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        Shift No.
-                    </th>
-                    <th>
-                        From (mm-dd-yyyy)
-                    </th>
-                    <th>
-                        To (mm-dd-yyyy)
-                    </th>
-                    <th>
-                        Assigned Member
-                    </th>
-                    <th>
-                        Corresponding Event
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @if (Model.Shifts.Count != 0)
-                {
-                    @foreach (var item in Model.Shifts)
-                    {
+    <table class="table">
+                    <thead>
                         <tr>
-                            <td>
-                                @item.ShiftID
-                            </td>
-                            <td>
-                                @item.DateFrom.ToString("MM-dd-yyyy HH:mm:ss")
-                            </td>
-                            <td>
-                                @item.DateTo.ToString("MM-dd-yyyy HH:mm:ss")
-                            </td>
-                            @{
+                            <th>
+                                Shift No.
+                            </th>
+                            <th>
+                                From (mm-dd-yyyy)
+                            </th>
+                            <th>
+                                To (mm-dd-yyyy)
+                            </th>
+                            <th>
+                                Assigned Member
+                            </th>
+                            <th>
+                                Corresponding Event
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Shifts.Count != 0)
+                {
+                            @foreach (var item in Model.Shifts)
+                    {
+                                <tr>
+                                    <td>
+                                        @item.ShiftID
+                                    </td>
+                                    <td>
+                                        @item.DateFrom.ToString("MM-dd-yyyy HH:mm")
+                                    </td>
+                                    <td>
+                                        @item.DateTo.ToString("MM-dd-yyyy HH:mm")
+                                    </td>
+                                    @{
                                 if (item.MemberID == null)
                                 {
                                     if (Model.CLIMember.IsAdmin)
@@ -77,16 +80,17 @@
                                     if (Model.CLIMember.IsAdmin)
                                     {
                                         <td>
-                                            <a asp-page="ShiftMember" asp-route-shiftid="@item.ShiftID">@item.MemberID</a>
+                                           <a asp-page="ShiftMember" asp-route-shiftid="@item.ShiftID">@mService.GetMemberByIdAsync(item.MemberID ?? 0).Result.Name</a>
                                         </td>
                                     }
+                                    //
                                     else
                                     {
                                         <td>@item.MemberID</td>
                                     }
                                 }
-                            }
-                            @{
+                                    }
+                                    @{
                                 if (item.EventID == null)
                                 {
                                     if (Model.CLIMember.IsAdmin)
@@ -105,35 +109,35 @@
                                     if (Model.CLIMember.IsAdmin)
                                     {
                                         <td>
-                                            <a asp-page="ShiftEvent" asp-route-shiftid="@item.ShiftID">@item.EventID</a>
+                                            <a asp-page="ShiftEvent" asp-route-shiftid="@item.ShiftID">@eService.GetEventByIdAsync(item.EventID ?? 0).Result.name</a>
                                         </td>
                                     }
                                     else
                                     {
-                                        <td>@item.EventID</td>
+                                            <td>@item.EventID</td>
                                     }
                                 }
-                            }
-                            @{
+                                    }
+                                    @{
                                 if (Model.CLIMember.IsAdmin)
                                 {
-                                    <td> <a asp-page="Update" asp-route-shiftid="@item.ShiftID">Update Shift</a> </td>
-                                    <td> <a asp-page="Delete" asp-route-shiftid="@item.ShiftID">Delete Shift</a> </td>
+                                                    <td> <a asp-page="Update" asp-route-shiftid="@item.ShiftID">Update Shift</a> </td>
+                                                    <td> <a asp-page="Delete" asp-route-shiftid="@item.ShiftID">Delete Shift</a> </td>
                                 }
-                            }
+                                    }
 
-                        </tr>
+                                </tr>
                     }
                 }
                 else
                 {
 
                 }
-            </tbody>
-        </table>
+                    </tbody>
+    </table>
     }
     else
     {
-        <h1>You don't have access to this page.</h1>
+    <h1>You don't have access to this page.</h1>
     }
 }
