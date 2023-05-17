@@ -48,6 +48,8 @@ namespace SemesterProjekt_2.Interfaces
         /// <returns>returnere medlemmer som er blevet filtreret </returns>
         public Task<List<Member>> FilterMembersAsync(string filter);
 
+        public Task<List<Member>> FilterEventMembers(string filter,List<Member> members);
+
         public Task<Member> LoginMemberAsync(string email, string password);
 
     }

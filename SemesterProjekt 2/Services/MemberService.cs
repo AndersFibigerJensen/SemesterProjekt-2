@@ -105,6 +105,48 @@ namespace SemesterProjekt_2.Services
             return null;
         }
 
+        public async Task<List<Member>> FilterEventMembers(string filter,List<Member> members)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand(Membersearch, connection))
+                {
+                    try
+                    {
+                        List<Member> Members = members;
+                        command.Parameters.AddWithValue("@Name", filter);
+                        await command.Connection.OpenAsync();
+                        SqlDataReader reader = await command.ExecuteReaderAsync();
+                        while (await reader.ReadAsync())
+                        {
+                            int MemberID = reader.GetInt32(0);
+                            string name = reader.GetString(1);
+                            string password = reader.GetString(2);
+                            string email = reader.GetString(3);
+                            string Address = reader.GetString(4);
+                            bool isFamily = reader.GetBoolean(5);
+                            bool HasDoneHygieneCourse = reader.GetBoolean(6);
+                            bool isAdmin = reader.GetBoolean(7);
+                            string image = reader.GetString(8);
+                            Member member = new Member(MemberID, name, password, email, Address, isFamily, HasDoneHygieneCourse, isAdmin, image);
+                            members.Add(member);
+                        }
+                        return members;
+
+                    }
+                    catch (SqlException sql)
+                    {
+                        throw sql;
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                    return null;
+                }
+            }
+        }
+
         /// <summary>
         /// Filtere alle medlemmer ud fra navn
         /// </summary>
