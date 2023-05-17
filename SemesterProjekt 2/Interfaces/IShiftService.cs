@@ -76,7 +76,7 @@ namespace SemesterProjekt_2.Interfaces
         /// </summary>
         /// <param name="memberid">event ID</param>
         /// <returns>All shifts with the given event ID</returns>
-        public Task<List<Shift>> GetAllShiftsByShiftIdAsync(int shiftid);
+        public Task<List<Shift>> GetAllShiftsByEventIdAsync(int eventid);
 
     }
 }

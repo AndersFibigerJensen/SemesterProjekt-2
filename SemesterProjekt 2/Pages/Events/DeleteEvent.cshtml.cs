@@ -13,9 +13,10 @@ namespace SemesterProjekt_2.Pages.Events
         private IEventService _eService { get; set; }
         private IShiftService sService;
 
-        public DeleteEventModel(IEventService eService)
+        public DeleteEventModel(IEventService eService, IShiftService shiftService)
         {
             _eService = eService;
+            sService = shiftService;
         }
 
         public async Task OnGetAsync(int eventID)
@@ -36,11 +37,11 @@ namespace SemesterProjekt_2.Pages.Events
         {
             try
             {
-                List<Shift> assignedShifts = await sService.GetAllShiftsByMemberIdAsync(eventid);
+                List<Shift> assignedShifts = await sService.GetAllShiftsByEventIdAsync(eventid);
 
                 foreach (Shift s in assignedShifts)
                 {
-                    Shift newS = new Shift(s.ShiftID, s.DateFrom, s.DateTo, null, s.EventID, s.ShiftType);
+                    Shift newS = new Shift(s.ShiftID, s.DateFrom, s.DateTo, s.MemberID, null, s.ShiftType);
                     await sService.UpdateEventIDAsync(newS, s.ShiftID);
                 }
 

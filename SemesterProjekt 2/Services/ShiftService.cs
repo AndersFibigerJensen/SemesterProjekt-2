@@ -17,7 +17,7 @@ namespace SemesterProjekt_2.Services
         private string queryUpdate = "update Shift set ShiftID = @NewSID, DateFrom = @NewDFrom, DateTo = @NewDTo, Type = @NewType where ShiftID = @OldSID";     
         private string querySearch = "select * from Shift where (datepart(yy, DateFrom) = @Year and datepart(mm, DateFrom) = @Month and datepart(dd, DateFrom) = @Day)";
         private string queryGetAllFromMemberID = "select * from Shift where MemberID = @MemberID";
-        private string queryGetAllFromShiftID = "select * from Shift where ShiftID = @ShiftID";
+        private string queryGetAllFromEventID = "select * from Shift where EventID = @EventID";
         private string queryUpdateMemberID = "update Shift set MemberID = @NewMID where ShiftID = @OldSID";
         private string queryUpdateEventID = "update Shift set EventID = @NewEID where ShiftID = @OldSID";
 
@@ -420,17 +420,17 @@ namespace SemesterProjekt_2.Services
             return filteredShifts;
         }
 
-        public async Task<List<Shift>> GetAllShiftsByShiftIdAsync(int shiftid)
+        public async Task<List<Shift>> GetAllShiftsByEventIdAsync(int eventid)
         {
             List<Shift> filteredShifts = new List<Shift>();
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                using (SqlCommand command = new SqlCommand(queryGetAllFromShiftID, connection))
+                using (SqlCommand command = new SqlCommand(queryGetAllFromEventID, connection))
                 {
                     try
                     {
-                        command.Parameters.AddWithValue("@ShiftID", shiftid);
+                        command.Parameters.AddWithValue("@EventID", eventid);
                         await command.Connection.OpenAsync();
                         SqlDataReader reader = await command.ExecuteReaderAsync();
                         while (await reader.ReadAsync())
