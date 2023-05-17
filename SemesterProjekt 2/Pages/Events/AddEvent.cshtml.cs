@@ -18,12 +18,23 @@ namespace SemesterProjekt_2.Pages.Events
 
         public void OnGet()
         {
-
+            
         }
         public async Task<IActionResult> OnPostAsync()
         {
             try
             {
+                DateTime eventStart = Event.eventStart;
+                DateTime eventEnd = Event.eventEnd;
+                DateTime dateNow = DateTime.Now;
+                if (eventStart <= dateNow)
+                {
+                    throw new ArgumentOutOfRangeException("Begivenhedens starttidspunkt skal være efter dagens dato");
+                }
+                if (eventStart >= eventEnd)
+                {
+                    throw new ArgumentOutOfRangeException("Begivenheden skal slutte efter den starter");
+                }
                 await _eservice.AddEventAsync(Event);
                 return RedirectToPage("GetAllEvents", Event);
             }
@@ -32,7 +43,6 @@ namespace SemesterProjekt_2.Pages.Events
                 ViewData["Errormessage"] = ex.Message;
                 return Page();
             }
-            
         }
     }
 }
