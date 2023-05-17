@@ -21,8 +21,11 @@
                 <input asp-for="@Model.User.MemberID" class="form-control" readonly />
             </div>
             <div class="form-group">
-                <a asp-page="GetAllBlog" class="btn-primary">cancel</a>
-                <input type="submit" value="Add BlogPost" class="btn-primary" />
+                <a asp-page="GetAllBlog" class="btn btn-primary">cancel</a>
+                <input type="submit" value="Add BlogPost" class="btn cancelbutton" />
+            </div>
+            <div id="customweeks" data-weeks>
+
             </div>
         </form>
     </div>

@@ -31,8 +31,6 @@ namespace SemesterProjekt_2.Models
         [Required]
         public bool IsFamily { get; set; }
 
-        public List<Shift> Shifts { get; set; }
-
         public bool IsAdmin  { get; set; }
 
         public bool HasDoneHygieneCourse { get; set; }
@@ -42,7 +40,6 @@ namespace SemesterProjekt_2.Models
 
         public Member()
         {
-            Shifts = new List<Shift>();
             IsAdmin= false;
             HasDoneHygieneCourse= false;
         }
@@ -58,7 +55,6 @@ namespace SemesterProjekt_2.Models
             Password = password;
             IsAdmin=isAdmin;
             Image = image;
-            Shifts= new List<Shift>();
             
 
         }
@@ -73,7 +69,6 @@ namespace SemesterProjekt_2.Models
             HasDoneHygieneCourse = hasDoneHygieneCourse;
             Password = password;
             IsAdmin = isAdmin;
-            Shifts = new List<Shift>();
 
         }
 

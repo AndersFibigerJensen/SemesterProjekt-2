@@ -70,7 +70,7 @@ namespace SemesterProjekt_2.Pages.BlogPosts
                 _blogService.CreateBlogPostAsync(Post);
                 return RedirectToPage("GetAllBlog");
             }
-            catch(Exception ex) 
+            catch(Exception ex)
             {
                 ViewData["Errormessage"] = ex.Message;
                 return Page();
