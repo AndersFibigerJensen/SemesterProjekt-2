@@ -23,7 +23,7 @@ namespace SemesterProjekt_2.Pages.Events
             _memberService = memberService;
         }
 
-        public async Task OnGetAsync(int eventID)
+        public async Task OnGetAsync(int eventID ,int memberID)
         {
 
             try

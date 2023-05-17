@@ -42,6 +42,12 @@
                         @Members.GetMemberByIdAsync(item).Result.Email
                     </td>
             </tr>
+            @if (Model.Member.IsAdmin == true)
+            {
+            <td>
+                <a asp-page="/Events/LeaveEvent" asp-route-memberID="@item.@Members.GetMemberByIdAsync(item).Result.MemberID" asp-route-eventID="@Model.Event.eventID">Remove</a>
+            </td>
+            }
 
 
         }
