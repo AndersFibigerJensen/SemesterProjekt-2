@@ -22,11 +22,14 @@ namespace SemesterProjekt_2.Pages.Login
         {
             try
             {
+                HttpContext.Session.SetString("email", null);
+                HttpContext.Session.SetString("password", null);
 
             }
             catch (Exception ex) 
             {
-                
+                ViewData["Message"] = ex.Message;
+                return Page();
             }
             return RedirectToPage("Members/GetAllMembers");
         }

@@ -16,7 +16,7 @@ namespace SemesterProjekt_2.Services
         private string queryDelete = "delete from Event where eventid = @EventID";
         private string queryUpdate = "update Event Set Name = @Name , " +
             "EventStart = @EventStart, EventEnd = @EventEnd, Price = @Price, IsMemberRequired = @IsMemberRequired, Capacity = @Capacity where eventid = @EventID";
-        private string querySearch = " select * from event where name Like '%'+@Name+'%'";
+        private string querySearch = " select * from Member where name Like '%'+@Name+'%'";
         private string queryJoin = "insert into EventMember(eventid, MemberID) values(@EventID, @MemberID)";
         private string queryGetMembers = "select * from EventMember where eventid = @EventID";
         private string CountingMembers = "select Count(MemberID) from EventMember where eventid=@EventID";
