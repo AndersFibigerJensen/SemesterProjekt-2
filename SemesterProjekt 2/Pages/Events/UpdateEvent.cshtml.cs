@@ -37,6 +37,17 @@ namespace SemesterProjekt_2.Pages.Events
         {
             try
             {
+                DateTime eventStart = Event.eventStart;
+                DateTime eventEnd = Event.eventEnd;
+                DateTime dateNow = DateTime.Now;
+                if (eventStart <= dateNow)
+                {
+                    throw new ArgumentOutOfRangeException("Begivenhedens starttidspunkt skal være efter dagens dato");
+                }
+                if (eventStart >= eventEnd)
+                {
+                    throw new ArgumentOutOfRangeException("Begivenheden skal slutte efter den starter");
+                }
                 await _eService.UpdateEventAsync(Event, eventID);
                 return RedirectToPage("GetAllEvents");
             }
