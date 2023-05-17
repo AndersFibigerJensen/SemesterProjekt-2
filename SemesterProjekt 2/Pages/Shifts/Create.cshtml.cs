@@ -25,6 +25,9 @@ namespace SemesterProjekt_2.Pages.Shifts
         {
             try
             {
+                //if ((int)Shift.ShiftType > 5 || (int)Shift.ShiftType < 1)
+                //    throw new Exception("Please select a shift type.");
+
                 await sService.AddShiftAsync(Shift);
                 return RedirectToPage("GetAllShifts");
             }

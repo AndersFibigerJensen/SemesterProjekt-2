@@ -1,0 +1,13 @@
+create table ShiftEnum
+(
+   id int primary key,
+   type varchar(20) not null unique
+);
+
+insert into ShiftEnum (id, type)
+values
+  (1, 'Cafeteria'),
+  (2, 'CafeteriaAssistant'),
+  (3, 'Baking'),
+  (4, 'BakingAssistant'),
+  (5, 'Misc');

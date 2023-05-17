@@ -40,8 +40,13 @@ namespace SemesterProjekt_2.Pages.Shifts
 
         public async Task<IActionResult> OnPostAsync(int shiftid, int? eventID)
         {
+            int? newEventID = eventID;
+            
+            if (eventID < 0)
+                newEventID = null;
+
             Shift TBU = await sService.GetShiftByIdAsync(shiftid);
-            Shift newShift = new Shift(TBU.ShiftID, TBU.DateFrom, TBU.DateTo, TBU.MemberID, eventID);
+            Shift newShift = new Shift(TBU.ShiftID, TBU.DateFrom, TBU.DateTo, TBU.MemberID, newEventID, TBU.ShiftType);
 
             await sService.UpdateEventIDAsync(newShift, TBU.ShiftID);
 

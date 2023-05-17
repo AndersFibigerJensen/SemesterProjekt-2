@@ -22,6 +22,12 @@
                 <input asp-for="@Model.Shift.DateTo" class="form-control" />
             </div>
             <div class="form-group">
+                <label asp-for="@Model.Shift.ShiftType" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <select asp-for="@Model.Shift.ShiftType" asp-items="Html.GetEnumSelectList<Models.Shift.Type>()"></select>
+                </div>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>

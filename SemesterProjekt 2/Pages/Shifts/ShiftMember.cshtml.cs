@@ -45,14 +45,20 @@ namespace SemesterProjekt_2.Pages.Shifts
             Member hygCheck = await mService.GetMemberByIdAsync(memberID);
             try
             {
-                if (hygCheck.HasDoneHygieneCourse == false)
+                if (hygCheck.HasDoneHygieneCourse == false && memberID != -1)
                 {
                     throw new Exception("This member has not done the hygiene course yet. Therefore, they cannot be assigned this shift.");
                 }
                 else
                 {
                     Shift TBU = await sService.GetShiftByIdAsync(shiftid);
-                    Shift newShift = new Shift(TBU.ShiftID, TBU.DateFrom, TBU.DateTo, memberID, TBU.EventID);
+
+                    int? newMemberID = memberID;
+                    if (memberID < 0)
+                        newMemberID = null;
+
+
+                    Shift newShift = new Shift(TBU.ShiftID, TBU.DateFrom, TBU.DateTo, newMemberID, TBU.EventID, TBU.ShiftType);
 
                     await sService.UpdateMemberIDAsync(newShift, TBU.ShiftID);
 

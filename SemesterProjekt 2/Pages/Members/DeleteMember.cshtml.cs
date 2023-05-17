@@ -41,7 +41,7 @@ namespace SemesterProjekt_2.Pages.Members
 
                 foreach(Shift s in assignedShifts)
                 {
-                    Shift newS = new Shift(s.ShiftID, s.DateFrom, s.DateTo, -1, s.EventID);
+                    Shift newS = new Shift(s.ShiftID, s.DateFrom, s.DateTo, -1, s.EventID, s.ShiftType);
                     await sService.UpdateShiftAsync(newS, s.ShiftID);
                 }
 

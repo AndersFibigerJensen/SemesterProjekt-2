@@ -4,13 +4,14 @@
     ViewData["Title"] = "Update Shift";
 }
 
-<h1>Update Hotel</h1>
+<h1>Update Shift</h1>
 <p>
     <h2>You are currently editing the data bound to the following shift:</h2>
     <h3>
-        ID: @Model.TBU.ShiftID
-        Name: @Model.TBU.DateFrom
-        Address: @Model.TBU.DateTo
+        ID: @Model.TBU.ShiftID <br />
+        Name: @Model.TBU.DateFrom <br />
+        Address: @Model.TBU.DateTo <br />
+        Shift Type: @Model.TBU.ShiftType <br />
     </h3>
 </p>
 
@@ -30,7 +31,13 @@
                 <input asp-for="@Model.NewShift.DateTo" class="form-control" />
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <label asp-for="@Model.NewShift.ShiftType" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <select asp-for="@Model.NewShift.ShiftType" asp-items="Html.GetEnumSelectList<Models.Shift.Type>()"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Update" class="btn btn-primary" />
             </div>
         </form>
     </div>

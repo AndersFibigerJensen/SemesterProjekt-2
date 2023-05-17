@@ -1,5 +1,6 @@
 ﻿@page
 @using SemesterProjekt_2.Interfaces
+@using SemesterProjekt_2.Models
 @model SemesterProjekt_2.Pages.Shifts.GetAllShiftsModel
 @inject IMemberService mService
 @inject IEventService eService
@@ -33,6 +34,9 @@
                                 Shift No.
                             </th>
                             <th>
+                                Shift Type
+                            </th>
+                            <th>
                                 From (mm-dd-yyyy)
                             </th>
                             <th>
@@ -55,6 +59,9 @@
                                     <td>
                                         @item.ShiftID
                                     </td>
+                                    <td>
+                                        @item.ShiftType
+                                    </td>                                    
                                     <td>
                                         @item.DateFrom.ToString("MM-dd-yyyy HH:mm")
                                     </td>

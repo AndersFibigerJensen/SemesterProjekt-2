@@ -11,6 +11,7 @@ namespace SemesterProjekt_2.Pages.Events
         public Event Event { get; set; }
 
         private IEventService _eService { get; set; }
+        private IShiftService sService;
 
         public DeleteEventModel(IEventService eService)
         {
@@ -31,19 +32,27 @@ namespace SemesterProjekt_2.Pages.Events
 
         }
 
-        public async Task<IActionResult> OnpostAsync()
+        public async Task<IActionResult> OnpostAsync(int eventid)
         {
             try
             {
+                List<Shift> assignedShifts = await sService.GetAllShiftsByMemberIdAsync(eventid);
+
+                foreach (Shift s in assignedShifts)
+                {
+                    Shift newS = new Shift(s.ShiftID, s.DateFrom, s.DateTo, null, s.EventID, s.ShiftType);
+                    await sService.UpdateEventIDAsync(newS, s.ShiftID);
+                }
+
+                await _eService.RemoveEventAsync(Event.eventID);
+                return RedirectToPage("GetAllEvents");
 
             }
             catch (Exception ex)
             {
                 ViewData["Errormessage"] = ex.Message;
-
+                return Page();
             }
-            await _eService.RemoveEventAsync(Event.eventID);
-            return RedirectToPage("GetAllEvents");
         }
     }
 }
