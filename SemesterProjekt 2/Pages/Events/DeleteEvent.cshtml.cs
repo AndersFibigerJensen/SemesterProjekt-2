@@ -37,6 +37,7 @@ namespace SemesterProjekt_2.Pages.Events
         {
             try
             {
+                //Luna
                 List<Shift> assignedShifts = await sService.GetAllShiftsByEventIdAsync(eventid);
 
                 foreach (Shift s in assignedShifts)
@@ -44,7 +45,7 @@ namespace SemesterProjekt_2.Pages.Events
                     Shift newS = new Shift(s.ShiftID, s.DateFrom, s.DateTo, s.MemberID, null, s.ShiftType);
                     await sService.UpdateEventIDAsync(newS, s.ShiftID);
                 }
-
+                //!Luna
                 await _eService.RemoveEventAsync(Event.eventID);
                 return RedirectToPage("GetAllEvents");
 
