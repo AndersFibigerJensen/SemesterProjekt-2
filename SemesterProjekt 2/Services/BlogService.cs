@@ -196,6 +196,7 @@ namespace SemesterProjekt_2.Services
                 {
                     try
                     {
+                        command.Parameters.AddWithValue("@BlogId", blog.BlogID);
                         command.Parameters.AddWithValue("@Post",blog.BlogPost);
                         command.Parameters.AddWithValue("@Image", string.IsNullOrEmpty(blog.Image) ? (object)DBNull.Value : blog.Image);
                         command.Parameters.AddWithValue("@MemberID",blog.memberID);

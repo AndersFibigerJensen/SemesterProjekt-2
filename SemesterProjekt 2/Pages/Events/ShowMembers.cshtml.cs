@@ -48,9 +48,9 @@ namespace SemesterProjekt_2.Pages.Events
             }
             //if (!FilterCriteria.IsNullOrEmpty())
             //{
-            //    foreach(int id in Members)
+            //    foreach (int id in Members)
             //    {
-            //         await _memberService.GetMemberByIdAsync(id);
+            //        await _memberService.GetMemberByIdAsync(id);
             //        Truemembers.
             //    }
 

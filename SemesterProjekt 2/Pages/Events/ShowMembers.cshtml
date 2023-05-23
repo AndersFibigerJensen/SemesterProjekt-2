@@ -4,10 +4,13 @@
 @inject IMemberService Members;
 @{
 }
-<form method="get">
+@*<form method="get">
     Search <input type="text" asp-for="FilterCriteria" />
     <input type="submit" value="Filter" />
-</form>
+</form>*@
+<p>
+    <a asp-page="GetAllEvents">Back to events</a>
+</p>
 <table class="table">
     <thead>
         <tr>
