@@ -41,11 +41,11 @@ namespace SemesterProjekt_2.Pages.Members
 
                     Member.Image = ProcessUploadedFile();
                 }
-                if (!ModelState.IsValid)
-                {
-                    return Page();
-                }
-                _memberService.AddMemberAsync(Member);
+                //if (!ModelState.IsValid)
+                //{
+                //    return Page();
+                //}
+                //_memberService.AddMemberAsync(Member);
                 return RedirectToPage("GetAllMembers");
             }
             catch (Exception ex) 

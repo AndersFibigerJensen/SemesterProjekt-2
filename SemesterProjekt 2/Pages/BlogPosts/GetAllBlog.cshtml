@@ -4,9 +4,10 @@
     ViewData["title"] = "GetAllBlog";
 }
 
+
 @if(Model.User.MemberID!=-1)
 {
-    <a asp-page="AddBlogPost" class="form-control"> Add Post</a>
+    <a asp-page="AddBlogPost"> Add Post</a>
 }
 
 
@@ -24,8 +25,8 @@
         {
             <tr>
                 <td>
-                     <textarea rows="6" cols="50" readonly>
-                        <p>@item.BlogPost</p>
+                     <textarea rows="6" cols="50" align-content=left readonly>
+                        @item.BlogPost
 
                      </textarea>
                 </td>
