@@ -74,7 +74,7 @@ namespace SemesterProjekt_2.Pages.Shifts
             catch(Exception ex)
             {
                 ViewData["ErrorMessage"] = ex.Message;
-                
+                Events= await eService.GetAllEventsAsync();
                 return Page();
             }
         }
