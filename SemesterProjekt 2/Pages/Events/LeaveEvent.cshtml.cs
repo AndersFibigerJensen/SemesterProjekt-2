@@ -11,6 +11,9 @@ namespace SemesterProjekt_2.Pages.Events
         public Event Event { get; set; }
 
         [BindProperty]
+        public Member user { get; set; }
+
+        [BindProperty]
         public Member member { get; set; }
 
         private IEventService _eService { get; set; }
@@ -32,9 +35,13 @@ namespace SemesterProjekt_2.Pages.Events
                 string password = HttpContext.Session.GetString("password");
                 if (email != null & password != null)
                 {
-                    member = await _memberService.LoginMemberAsync(email, password);
+                    user = await _memberService.LoginMemberAsync(email, password);
                 }
                 Event = await _eService.GetEventByIdAsync(eventID);
+                if(memberID!=0)
+                {
+                    user= await _memberService.GetMemberByIdAsync(memberID);
+                }
             }
             catch (Exception ex)
             {
