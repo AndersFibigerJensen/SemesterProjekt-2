@@ -26,9 +26,29 @@ namespace SemesterProjekt_2.Pages.Shifts
 
         public async Task<IActionResult> OnPostAsync()
         {
-            await sService.UpdateShiftAsync(NewShift, TBU.ShiftID);
+            try
+            {
+                DateTime shiftStart = NewShift.DateFrom;
+                DateTime shiftEnd = NewShift.DateTo;
+                DateTime timeNow = DateTime.Now;
+                if (shiftStart <= timeNow)
+                {
+                    throw new ArgumentOutOfRangeException("Error. Check your variables, shift cannot start in the past.");
+                }
+                if (shiftStart >= shiftEnd)
+                {
+                    throw new ArgumentOutOfRangeException("Error. Check your variables, shift must begin before it can end.");
+                }
 
-            return RedirectToPage("GetAllShifts");
+                await sService.UpdateShiftAsync(NewShift, TBU.ShiftID);
+
+                return RedirectToPage("GetAllShifts");
+            }
+            catch (Exception ex)
+            {
+                ViewData["ErrorMessage"] = ex.Message;
+                return Page();
+            }
         }
     }
 }

@@ -27,6 +27,18 @@ namespace SemesterProjekt_2.Pages.Shifts
             {
                 //if ((int)Shift.ShiftType > 5 || (int)Shift.ShiftType < 1)
                 //    throw new Exception("Please select a shift type.");
+                DateTime shiftStart = Shift.DateFrom;
+                DateTime shiftEnd = Shift.DateTo;
+                DateTime timeNow = DateTime.Now;
+                if (shiftStart <= timeNow)
+                {
+                    throw new ArgumentOutOfRangeException("Check your variables, shift cannot start in the past.");
+                }
+                if (shiftStart >= shiftEnd)
+                {
+                    throw new ArgumentOutOfRangeException("Check your variables, shift must begin before it can end.");
+                }
+
 
                 await sService.AddShiftAsync(Shift);
                 return RedirectToPage("GetAllShifts");

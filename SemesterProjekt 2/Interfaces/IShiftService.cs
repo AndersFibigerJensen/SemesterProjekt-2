@@ -58,10 +58,10 @@ namespace SemesterProjekt_2.Interfaces
         public Task<bool> UpdateEventIDAsync(Shift shift, int id);
 
         /// <summary>
-        /// 
+        /// Finds all shifts that start at a specific date
         /// </summary>
         /// <param name="date"></param>
-        /// <returns></returns>
+        /// <returns>All shifts that start at a specific date</returns>
         public Task<List<Shift>> FilterShiftsAsync(DateTime date);
 
         /// <summary>
