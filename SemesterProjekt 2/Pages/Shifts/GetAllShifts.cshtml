@@ -21,9 +21,9 @@
         {
             if (Model.CLIMember.IsAdmin)
             {
-    <p>
-                            <a asp-page="Create">Create New Shift</a>
-    </p>
+                 <p>
+                    <a asp-page="Create">Create New Shift</a>
+                 </p>
             }
         }
 
@@ -71,7 +71,7 @@
                                     @{
                                 if (item.MemberID == null)
                                 {
-                                    if (Model.CLIMember.IsAdmin)
+                                    if (Model.CLIMember.IsAdmin || Model.CLIMember != null)
                                     {
                                         <td>
                                             <a asp-page="ShiftMember" asp-route-shiftid="@item.ShiftID">None</a>
@@ -90,10 +90,22 @@
                                            <a asp-page="ShiftMember" asp-route-shiftid="@item.ShiftID">@mService.GetMemberByIdAsync(item.MemberID ?? 0).Result.Name</a>
                                         </td>
                                     }
-                                    //
+                                    else if (Model.CLIMember != null)
+                                    {
+                                        if (Model.CLIMember.MemberID == item.MemberID)
+                                        {
+                                            <td>
+                                               <a asp-page="ShiftMember" asp-route-shiftid="@item.ShiftID">@mService.GetMemberByIdAsync(item.MemberID ?? 0).Result.Name</a>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td>@mService.GetMemberByIdAsync(item.MemberID ?? 0).Result.Name</td>
+                                        }
+                                    }
                                     else
                                     {
-                                        <td>@item.MemberID</td>
+                                        <td>@mService.GetMemberByIdAsync(item.MemberID ?? 0).Result.Name</td>
                                     }
                                 }
                                     }
@@ -121,7 +133,7 @@
                                     }
                                     else
                                     {
-                                            <td>@item.EventID</td>
+                                        <td>@eService.GetEventByIdAsync(item.EventID ?? 0).Result.name</td>
                                     }
                                 }
                                     }

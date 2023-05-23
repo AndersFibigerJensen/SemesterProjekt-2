@@ -12,22 +12,40 @@ namespace SemesterProjekt_2.Pages.Shifts
         public List<Member> Members { get; set; }
         [BindProperty]
         public int ShiftID { get; set; }
+        [BindProperty]
+        public int? currentMID { get; set; }
+        [BindProperty]
+        public Member CLIMember { get; set; }
 
         private IMemberService mService { get; set; }
         private IShiftService sService { get; set; }
+        public LoginService login;
 
         [BindProperty(SupportsGet = true)]
         public string FilterCriteria { get; set; }
 
-        public ShiftMemberModel(IShiftService shiftService, IMemberService memberService)
+        public ShiftMemberModel(IShiftService shiftService, IMemberService memberService, LoginService l)
         {
             sService = shiftService;
             mService = memberService;
+            login = l;
         }
 
         public async Task OnGetAsync(int shiftid)
         {
+            string username = HttpContext.Session.GetString("email");
+            string password = HttpContext.Session.GetString("password");
+            if (username != null)
+            {
+                CLIMember = await mService.LoginMemberAsync(username, password);
+            }
+            else
+            {
+                CLIMember = await mService.GetMemberByIdAsync(-1);
+            }
+
             ShiftID = shiftid;
+            currentMID = (await sService.GetShiftByIdAsync(shiftid)).MemberID;
 
             if (!FilterCriteria.IsNullOrEmpty())
             {
