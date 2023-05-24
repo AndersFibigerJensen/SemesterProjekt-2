@@ -5,7 +5,7 @@
 }
 @*Anders*@
 
-@*@*<div>
+<div>
     <form method="post" class="userpage-form">
         <input asp-for="member.MemberID" type="hidden" />
         <div>
@@ -14,27 +14,28 @@
         <div>
         <div class="form-group">
             <label asp-for="@Model.member.Name" class="control-label"></label>
-            <input asp-for="@Model.member.Name" class="control-label" readonly/>
+            <input asp-for="@Model.member.Name" class="form-control" readonly/>
         </div>
         <div class="form-group">
             <label asp-for="@Model.member.Address" class="control-label"></label>
-            <input asp-for="@Model.member.Address" class="control-label" readonly />
+            <input asp-for="@Model.member.Address" class="form-control" readonly />
         </div>
         <div class="form-group">
-            <label asp-for="@Model.member.Email" class=" control-label"></label>
-            <input asp-for="@Model.member.Email" class="control-label" readonly />
+            <label asp-for="@Model.member.Email" class="control-label"></label>
+            <input asp-for="@Model.member.Email" class="form-control" readonly />
         </div>
-@*        <div class="form-group">
+        <div class="form-group">
             @if (Model.member.IsFamily == true)
             {
+                @*<label asp-for="@"*@
                 <p class="form-control" readonly> familie</p>
-            }*@
-@*        </div>*@
-@*        @if (Model.member.HasDoneHygieneCourse == true)
+            }
+       </div>
+       @if (Model.member.HasDoneHygieneCourse == true)
         {
             <div class="form-group">
                 
-                <p> har bestået hygiene kursus</p>
+                <p class="form-control" readonly> har bestået hygiene kursus</p>
                 
 
             </div>
@@ -44,44 +45,16 @@
         {
             <div class="form-group">
 
-                <p class="form-control"> har admin priviligeger</p>
+                <p class="form-control" readonly> har admin priviligeger</p>
 
 
             </div>
 
-        }*@
-@*        <div>
+        }
+      <div>
             <a asp-page="UpdateMember" asp-route-id="@Model.member.MemberID" class="btn btn-primary" > opdater Medlem </a>
             <a asp-page="DeleteMember" asp-route-id="@Model.member.MemberID" class="btn btn-primary"> slet din profil</a>
         </div>
-        </div>
-    </form>
-</div>*@*
-
-<div>
-    <form method="post" class="userpage-form">
-        <input asp-for=@Model.member.MemberID type="hidden" />
-        <div>
-            <img src="~/Images/@Model.member.Image" class="rounded-circle" />
-        </div>
-        <div>
-            <div class="form-group">
-                <label asp-for="@Model.member.Name" class="control-label"></label>
-                <input asp-for="@Model.member.Name" class="control-label" readonly />
-            </div>
-            <div class="form-group">
-                <label asp-for="@Model.member.Address" class="control-label"></label>
-                <input asp-for="@Model.member.Address" class="control-label" readonly />
-            </div>
-            <div class="form-group">
-                <label asp-for="@Model.member.Email" class="control-label"></label>
-                <input asp-for="@Model.member.Email" class="control-label" readonly />
-            </div>
-            <div>
-                <a asp-page="EditMember" asp-route-id="@Model.member.MemberID" class="btn btn-primary">Edit</a>
-                <a asp-page="DeleteMember" asp-route-id="@Model.member.MemberID" class="btn btn-primary">Delete</a>
-                <a asp-page="/Clubmember/Index" class="btn cancelbutton">Show all clubmembers</a>
-            </div>
         </div>
     </form>
 </div>

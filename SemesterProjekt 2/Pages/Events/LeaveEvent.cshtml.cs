@@ -26,7 +26,7 @@ namespace SemesterProjekt_2.Pages.Events
             _memberService = memberService;
         }
 
-        public async Task OnGetAsync(int eventID ,int memberID)
+        public async Task OnGetAsync(int eventID ,int itemid)
         {
 
             try
@@ -38,9 +38,9 @@ namespace SemesterProjekt_2.Pages.Events
                     user = await _memberService.LoginMemberAsync(email, password);
                 }
                 Event = await _eService.GetEventByIdAsync(eventID);
-                if(memberID!=0)
+                if(itemid !=0)
                 {
-                    user= await _memberService.GetMemberByIdAsync(memberID);
+                    user= await _memberService.GetMemberByIdAsync(itemid);
                 }
             }
             catch (Exception ex)
@@ -63,7 +63,7 @@ namespace SemesterProjekt_2.Pages.Events
                 ViewData["Errormessage"] = ex.Message;
 
             }
-            await _eService.DeleteEventMember(Event.eventID, member.MemberID);
+            await _eService.DeleteEventMember(Event.eventID, user.MemberID);
             return RedirectToPage("GetAllEvents");
         }
     }

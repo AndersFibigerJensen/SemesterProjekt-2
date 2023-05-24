@@ -48,7 +48,7 @@
             @if (Model.Member.IsAdmin == true)
             {
             <td>
-                <a asp-page="/Events/LeaveEvent" asp-route-memberID="@item.@Members.GetMemberByIdAsync(item).Result.MemberID" asp-route-eventID="@Model.Event.eventID">Remove</a>
+                <a asp-page="/Events/LeaveEvent" asp-route-itemid="@item" asp-route-eventID="@Model.Event.eventID">Remove</a>
             </td>
             }
 
