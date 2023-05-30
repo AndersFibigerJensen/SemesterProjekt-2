@@ -10,15 +10,13 @@ namespace SemesterProjekt_2.Pages.Members
     {
 
         private IMemberService memberService;
-        private LoginService loginService;
 
         [BindProperty]
         public Member member { get; set; }
 
-        public HomePageModel(IMemberService memberService, LoginService loginService)
+        public HomePageModel(IMemberService memberService)
         {
             this.memberService = memberService;
-            this.loginService = loginService;
         }
 
         public async Task OnGetAsync()

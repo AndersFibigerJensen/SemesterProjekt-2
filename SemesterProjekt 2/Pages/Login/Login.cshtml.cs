@@ -9,15 +9,13 @@ namespace SemesterProjekt_2.Pages.Login
     public class LoginModel : PageModel
     {
         private IMemberService _memberService;
-        private LoginService _loginService;
 
         [BindProperty]
         public Member member { get; set; }
 
-        public LoginModel(IMemberService memberService, LoginService loginService)
+        public LoginModel(IMemberService memberService)
         {
              _memberService= memberService;
-            _loginService = loginService;
         }
 
         public async Task OnGetAsync()
