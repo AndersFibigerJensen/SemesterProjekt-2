@@ -7,7 +7,7 @@ namespace JordnærTest2
     [TestClass]
     public class UnitTest1
     {
-        private string connection =Secret.ConnectionString;
+        private string connection =Secret1.ConnectionString;
         
         [TestMethod]
         public async Task AddMemberTestAsync()
