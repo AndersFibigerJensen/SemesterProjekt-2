@@ -15,15 +15,13 @@ namespace SemesterProjekt_2.Pages.Members
         [BindProperty]
         public Member member { get; set; }
 
-        private LoginService _loginservice;
         private IMemberService _memberService { get; set; }
 
         [BindProperty(SupportsGet = true)]
         public string FilterCriteria { get; set; }
 
-        public GetAllMembersModel(IMemberService memberService, LoginService Login)
+        public GetAllMembersModel(IMemberService memberService)
         {
-            _loginservice = Login;
             _memberService=memberService;
         }
 

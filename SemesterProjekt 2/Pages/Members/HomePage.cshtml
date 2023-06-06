@@ -9,7 +9,7 @@
     <form method="post" class="userpage-form">
         <input asp-for="member.MemberID" type="hidden" />
         <div>
-            <img src="~/Images/@Model.member.Image" class="rounded-circle" class="rounded-circle"/>
+            <img src="~/Images/@Model.member.Image" class="rounded-circle" />
         </div>
         <div>
         <div class="form-group">
@@ -27,7 +27,6 @@
         <div class="form-group">
             @if (Model.member.IsFamily == true)
             {
-                @*<label asp-for="@"*@
                 <p class="form-control" readonly> familie</p>
             }
        </div>

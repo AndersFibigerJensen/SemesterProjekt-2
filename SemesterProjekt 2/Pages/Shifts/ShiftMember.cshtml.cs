@@ -19,16 +19,14 @@ namespace SemesterProjekt_2.Pages.Shifts
 
         private IMemberService mService { get; set; }
         private IShiftService sService { get; set; }
-        public LoginService login;
 
         [BindProperty(SupportsGet = true)]
         public string FilterCriteria { get; set; }
 
-        public ShiftMemberModel(IShiftService shiftService, IMemberService memberService, LoginService l)
+        public ShiftMemberModel(IShiftService shiftService, IMemberService memberService)
         {
             sService = shiftService;
             mService = memberService;
-            login = l;
         }
 
         public async Task OnGetAsync(int shiftid)

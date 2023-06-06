@@ -50,8 +50,8 @@ namespace SemesterProjekt_2.Pages.BlogPosts
         {
             try
             {
-                _blogservice.DeleteBlogPostAsync(Post.memberID);
-                return RedirectToAction("GetAllBlog");
+                _blogservice.DeleteBlogPostAsync(Post.BlogID);
+                return RedirectToPage("GetAllBlog");
             }
             catch(Exception ex)
             {

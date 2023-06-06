@@ -26,10 +26,10 @@ table {
     text-align: center;
 }
 
-    table img {
-        max-height: 70px;
-        max-width: auto;
-    }
+table img {
+    max-height: 70px;
+    max-width: auto;
+}
 
     table td {
         vertical-align: middle;

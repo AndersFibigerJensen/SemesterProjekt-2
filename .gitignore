@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/SemesterProjekt 2/Services/Secret.cs
+/SemesterProjekt 2/Services/Secret1.cs

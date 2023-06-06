@@ -21,13 +21,11 @@ namespace SemesterProjekt_2.Pages.Shifts
 
         public IMemberService mService;
         private IShiftService sService;
-        public LoginService login;
 
-        public GetAllShiftsModel(IShiftService shiftService, IMemberService memberService, LoginService l)
+        public GetAllShiftsModel(IShiftService shiftService, IMemberService memberService)
         {
             mService = memberService;
             sService = shiftService;
-            login = l;
         }
 
         public async Task OnGetAsync()
