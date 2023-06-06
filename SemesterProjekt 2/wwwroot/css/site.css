@@ -17,6 +17,10 @@ body {
   margin-bottom: 60px;
 }
 
+form {
+    width: max-content;
+}
+
 .search {
     margin-top: 16px;
 }
@@ -31,9 +35,9 @@ table img {
     max-width: auto;
 }
 
-    table td {
-        vertical-align: middle;
-    }
+table td {
+   vertical-align: middle;
+}
 
 .form-group {
     margin-bottom: 16px;

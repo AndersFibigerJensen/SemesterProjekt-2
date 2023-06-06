@@ -7,7 +7,7 @@
 
 @if(Model.User.MemberID!=-1)
 {
-    <a asp-page="AddBlogPost"> Add Post</a>
+    <a asp-page="AddBlogPost">lav en ny blogpost</a>
 }
 
 
@@ -36,7 +36,7 @@
                 @if(Model.User.MemberID==item.memberID)
                 {
                     <td>
-                        <a asp-page="DeleteBlogPost" asp-route-id="@item.BlogID">delete</a> | <a asp-page="UpdateBlogPost" asp-route-id="@item.BlogID"> update</a>
+                        <a asp-page="DeleteBlogPost" asp-route-id="@item.BlogID">slet</a> | <a asp-page="UpdateBlogPost" asp-route-id="@item.BlogID">opdater</a>
                     </td>
                     
                 }

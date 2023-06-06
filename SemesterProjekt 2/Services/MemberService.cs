@@ -127,8 +127,12 @@ namespace SemesterProjekt_2.Services
                             bool isFamily = reader.GetBoolean(5);
                             bool HasDoneHygieneCourse = reader.GetBoolean(6);
                             bool isAdmin = reader.GetBoolean(7);
-                            string image = reader.GetString(8);
-                            Member member = new Member(MemberID, name, password, email, Address, isFamily, HasDoneHygieneCourse, isAdmin, image);
+                            string profilepicture = "";
+                            if (!reader.IsDBNull(8))
+                            {
+                                profilepicture = reader.GetString(8);
+                            }
+                            Member member = new Member(MemberID, name, password, email, Address, isFamily, HasDoneHygieneCourse, isAdmin, profilepicture);
                             members.Add(member);
                         }
                         return members;
@@ -176,8 +180,12 @@ namespace SemesterProjekt_2.Services
                             bool isFamily = reader.GetBoolean(5);
                             bool HasDoneHygieneCourse = reader.GetBoolean(6);
                             bool isAdmin = reader.GetBoolean(7);
-                            string image= reader.GetString(8);
-                            Member member = new Member(MemberID, name, password, email, Address, isFamily, HasDoneHygieneCourse, isAdmin,image);
+                            string profilepicture = "";
+                            if (!reader.IsDBNull(8))
+                            {
+                                profilepicture = reader.GetString(8);
+                            }
+                            Member member = new Member(MemberID, name, password, email, Address, isFamily, HasDoneHygieneCourse, isAdmin,profilepicture);
                             members.Add(member);
                         }
                         return members;
