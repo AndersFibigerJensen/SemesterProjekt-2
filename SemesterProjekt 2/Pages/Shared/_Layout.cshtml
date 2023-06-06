@@ -50,6 +50,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/BlogPosts/GetAllBlog">Blog</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Events/GetAllEvents">Event</a>
+                        </li>
                         @if(email==null & password==null)
                         {
                             <li class="nav-item">
@@ -61,11 +64,9 @@
 
                             Member User = memberservice.LoginMemberAsync(email, password).Result;
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Members/GetAllMembers">Member</a>
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Members/GetAllMembers">Medlemmer</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Events/GetAllEvents">Event</a>
-                            </li>
+
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-page="/Shifts/GetAllShifts">Shifts</a>
                             </li>
