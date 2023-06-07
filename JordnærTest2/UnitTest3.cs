@@ -24,7 +24,7 @@ namespace JordnærTest2
             int countBefore = shifts.Count;
             DateTime DT1 = new DateTime(2023, 05, 13, 8, 0, 0);
             DateTime DT2 = new DateTime(2023, 05, 13, 12, 0, 0);
-            Shift newShift = new Shift(888, DT1, DT2, null, null, Shift.Type.CafeteriaAssistant);
+            Shift newShift = new Shift(888, DT1, DT2, null, null, Shift.Type.CafévagtFøl);
             sService.AddShiftAsync(newShift);
             sService.DeleteShiftAsync(888);
             int countAfter = shifts.Count;
