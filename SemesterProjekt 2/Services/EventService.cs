@@ -10,6 +10,9 @@ namespace SemesterProjekt_2.Services
     public class EventService :Connection, IEventService
     {
         //Query String
+        /// <summary>
+        /// En liste over query strings asocieret med event klassen
+        /// </summary>
         private string queryGetAll = "select * from Event";
         private string queryInsert = "insert into Event values(@Name, @DateFrom, @DateTo, @Price, @IsMemberRequired, @Capacity)";
         private string queryGetFromID = "select * from Event where eventid = @EventID";
@@ -76,7 +79,7 @@ namespace SemesterProjekt_2.Services
         /// <param name="filter"></param>
         /// <exception cref="ex"> exceptionen bliver kastet videre i systemet</exception>
         /// <exception cref="sql"> exceptionen bliver kastet videre i systemet</exception>
-        /// <returns>events, med navne, der passer til søgningen</returns>
+        /// <returns>en eller flere events, med navne, der passer til søgningen</returns>
         
         //Adam
         public async Task<List<Event>> FilterEventsAsync(string filter)
@@ -123,8 +126,10 @@ namespace SemesterProjekt_2.Services
         /// <summary>
         /// Viser alle events i databasen
         /// </summary>
-        /// <returns></returns>
-        
+        /// <exception cref="ex"> exceptionen bliver kastet videre i systemet</exception>
+        /// <exception cref="sql"> exceptionen bliver kastet videre i systemet</exception>
+        /// <returns>Alle events i databasen</returns>
+
         //Adam
         public async Task<List<Event>> GetAllEventsAsync()
         {
@@ -166,6 +171,13 @@ namespace SemesterProjekt_2.Services
             return null;
         }
         //Adam
+        /// <summary>
+        /// Finder et event ud fra dets id
+        /// </summary>
+        /// <param name="id"></param>
+        /// /// <exception cref="ex"> exceptionen bliver kastet videre i systemet</exception>
+        /// <exception cref="sql"> exceptionen bliver kastet videre i systemet</exception>
+        /// <returns>en event</returns>
         public async Task<Event> GetEventByIdAsync(int id)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -204,6 +216,15 @@ namespace SemesterProjekt_2.Services
             return null;
         }
         //Adam & Anders
+        /// <summary>
+        /// Tilmelder et member til en event, ved at skabe et eventmember, der binder de to sammen,
+        /// og dermed fungerer som en tilmelding.
+        /// </summary>
+        /// <param name="eventid"></param>
+        /// <param name="memberid"></param>
+        /// /// <exception cref="ex"> exceptionen bliver kastet videre i systemet</exception>
+        /// <exception cref="sql"> exceptionen bliver kastet videre i systemet</exception>
+        /// <returns></returns>
         public async Task JoinEvent(int eventid, int memberid)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -227,6 +248,13 @@ namespace SemesterProjekt_2.Services
             }
         }
         //Adam
+        /// <summary>
+        /// Sletter en event fra databasen 
+        /// </summary>
+        /// <param name="id"></param>
+        /// /// <exception cref="ex"> exceptionen bliver kastet videre i systemet</exception>
+        /// <exception cref="sql"> exceptionen bliver kastet videre i systemet</exception>
+        /// <returns></returns>
         public async Task<Event> RemoveEventAsync(int id)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -255,6 +283,13 @@ namespace SemesterProjekt_2.Services
             return null;
         }
         //Adam & Anders
+        /// <summary>
+        /// viser en liste over alle tilmeldte medlemmer, til en given event.
+        /// </summary>
+        /// <param name="eventid"></param>
+        /// /// <exception cref="ex"> exceptionen bliver kastet videre i systemet</exception>
+        /// <exception cref="sql"> exceptionen bliver kastet videre i systemet</exception>
+        /// <returns>Alle EventMember i databasen, der har det givne eventid</returns>
         public async Task<List<int>> ReturnMembers(int eventid)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -287,6 +322,14 @@ namespace SemesterProjekt_2.Services
             }
         }
         //Adam
+        /// <summary>
+        /// Opdaterer en events properties, og ændrer hermed deres værdier i databasen.
+        /// </summary>
+        /// <param name="eEvent"></param>
+        /// <param name="id"></param>
+        /// /// <exception cref="ex"> exceptionen bliver kastet videre i systemet</exception>
+        /// <exception cref="sql"> exceptionen bliver kastet videre i systemet</exception>
+        /// <returns></returns>
         public async Task<bool> UpdateEventAsync(Event eEvent, int id)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -320,6 +363,13 @@ namespace SemesterProjekt_2.Services
             return false;
         }
         //Adam & Anders
+        /// <summary>
+        /// Tæller antallet af EventMembers eller tilmeldinger, til en given event.
+        /// </summary>
+        /// <param name="eventid"></param>
+        /// /// <exception cref="ex"> exceptionen bliver kastet videre i systemet</exception>
+        /// <exception cref="sql"> exceptionen bliver kastet videre i systemet</exception>
+        /// <returns></returns>
         public async Task<int> CountMembers(int eventid)
         {
             using(SqlConnection connection= new SqlConnection(connectionString)) 
@@ -350,6 +400,14 @@ namespace SemesterProjekt_2.Services
             }
         }
         //Anders
+        /// <summary>
+        /// Sletter et EventMember fra databasen
+        /// </summary>
+        /// <param name="eventid"></param>
+        /// <param name="Memberid"></param>
+        /// /// <exception cref="ex"> exceptionen bliver kastet videre i systemet</exception>
+        /// <exception cref="sql"> exceptionen bliver kastet videre i systemet</exception>
+        /// <returns></returns>
         public async Task<bool> DeleteEventMember(int eventid, int Memberid)
         {
             using(SqlConnection connection= new SqlConnection(connectionString)) 

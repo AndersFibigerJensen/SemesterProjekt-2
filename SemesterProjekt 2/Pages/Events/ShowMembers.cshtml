@@ -9,7 +9,7 @@
     <input type="submit" value="Filter" />
 </form>*@
 <p>
-    <a asp-page="GetAllEvents">Back to events</a>
+    <a asp-page="GetAllEvents">Tilbage til begivenhedsiden</a>
 </p>
 <table class="table">
     <thead>
@@ -48,7 +48,7 @@
             @if (Model.Member.IsAdmin == true)
             {
             <td>
-                <a asp-page="/Events/LeaveEvent" asp-route-itemid="@item" asp-route-eventID="@Model.Event.eventID">Remove</a>
+                <a asp-page="/Events/LeaveEvent" asp-route-itemid="@item" asp-route-eventID="@Model.Event.eventID">Fjern</a>
             </td>
             }
 

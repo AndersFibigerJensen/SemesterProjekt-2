@@ -5,40 +5,40 @@
 @{
     ViewData["Title"] = "GetAllEvents";
 }
-<h1>Velkommen til Eventsiden</h1>
+<h1>Velkommen til Begivenhedsiden</h1>
 
 @if (Model.user.IsAdmin == true)
 {
     <p>
-        <a asp-page="AddEvent">Add new event</a>
+        <a asp-page="AddEvent">Tilføj ny begivenhed</a>
     </p>
 }
 
 <form method="get">
-    Search <input type="text" asp-for="FilterCriteria" />
-    <input type="submit" value="Filter" />
+    <input type="text" asp-for="FilterCriteria" />
+    <input type="submit" value="Søg" />
 </form>
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                Name
+                Navn
             </th>
             <th>
-                Event Start
+                Starttidspunkt
             </th>
             <th>
-                Event End
+                Sluttidspunkt
             </th>
             <th>
-                Price
+                Pris
             </th>
             <th>
-                IsMemberRequired
+                Er medlemskab påkrævet
             </th>
             <th>
-                Capacity
+                Kapacitet
             </th>
         </tr>
     </thead>
@@ -73,11 +73,11 @@
                         <td>
                             @if (item.isMemberRequired == true)
                             {
-                                <p>for medlemmer</p>
+                                <p>For medlemmer</p>
                             }
                             else
                             {
-                                <p>for alle</p>
+                                <p>For alle</p>
                             }
                             @*@(item.isMemberRequired == true)?<p>for medlemmer</p><p>for alle</p>*@
                         </td>
@@ -87,8 +87,8 @@
                         @if (Model.user.IsAdmin == true)
                         {
                             <td>
-                                <a asp-page="/Events/UpdateEvent" asp-route-eventID="@item.eventID">Edit</a>
-                                <a asp-page="/Events/DeleteEvent" asp-route-eventID="@item.eventID">Delete</a>
+                                <a asp-page="/Events/UpdateEvent" asp-route-eventID="@item.eventID">Rediger</a>
+                                <a asp-page="/Events/DeleteEvent" asp-route-eventID="@item.eventID">Slet</a>
                             </td>
                         }
                         @if (item.isMemberRequired == true && Model.user.MemberID != -1)
@@ -96,18 +96,18 @@
                             @if (eservice.ReturnMembers(item.eventID).Result.Contains(Model.user.MemberID) | item.capacity <= eservice.CountMembers(item.eventID).Result)
                             {
                                     <td>
-                                        <a asp-page="/Events/LeaveEvent" asp-route-eventid="@item.eventID">Leave</a>
+                                        <a asp-page="/Events/LeaveEvent" asp-route-eventid="@item.eventID">Forlad</a>
                                     </td>
                             }
                             else if (!eservice.ReturnMembers(item.eventID).Result.Contains(Model.user.MemberID))
                             {
                                    <td>
-                                      <a asp-page="/Events/JoinEvent" asp-route-eventID="@item.eventID">Join</a>
+                                      <a asp-page="/Events/JoinEvent" asp-route-eventID="@item.eventID">Deltag</a>
                                    </td>
                                     
                             }
                             <td>
-                                <a asp-page="/Events/ShowMembers" asp-route-eventID="@item.eventID">Show participants</a>
+                                <a asp-page="/Events/ShowMembers" asp-route-eventID="@item.eventID">Vis deltagere</a>
                             </td>
                         }
 

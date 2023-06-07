@@ -52,9 +52,18 @@ namespace SemesterProjekt_2.Interfaces
         /// <param name="eventid"></param>
         /// <returns>Alle medlemmer, der har tilmeldt sig den angivne event</returns>
         public Task<List<int>> ReturnMembers(int eventid);
-
+        /// <summary>
+        /// Tæller hvor mange medlemmer, der har meldt sig til en given event
+        /// </summary>
+        /// <param name="eventid"></param>
+        /// <returns></returns>
         public Task<int> CountMembers(int eventid);
-
+        /// <summary>
+        /// Sletter en tilmelding fra databasen, så et member ikke længere er tilmeldt en event.
+        /// </summary>
+        /// <param name="eventid"></param>
+        /// <param name="Memberid"></param>
+        /// <returns></returns>
         public Task<bool> DeleteEventMember(int eventid,int Memberid);
     }
 }
