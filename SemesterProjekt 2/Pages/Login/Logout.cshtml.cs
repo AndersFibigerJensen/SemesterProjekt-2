@@ -31,7 +31,7 @@ namespace SemesterProjekt_2.Pages.Login
                 ViewData["Message"] = ex.Message;
                 return Page();
             }
-            return RedirectToPage("/BlogPosts/GetAllBlog");
+            return RedirectToPage("/Index");
         }
 
     }
