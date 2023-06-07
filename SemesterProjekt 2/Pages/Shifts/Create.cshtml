@@ -1,34 +1,34 @@
 ﻿@page
 @model SemesterProjekt_2.Pages.Shifts.CreateModel
 @{
-    ViewData["Title"] = "Create New Shift";
+    ViewData["Title"] = "Skab ny vagt";
 }
 
-<h1>Create New Shift</h1>
+<h1>Skab ny vagt</h1>
 
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div class="form-group">
-                <label asp-for="@Model.Shift.ShiftID" ></label>
+                <label asp-for="@Model.Shift.ShiftID" >Vagtnr</label>
                 <input asp-for="@Model.Shift.ShiftID" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Shift.DateFrom" ></label>
-                <input asp-for="@Model.Shift.DateFrom" class="form-control"/>
-            </div>
-            <div class="form-group">
-                <label asp-for="@Model.Shift.DateTo" ></label>
-                <input asp-for="@Model.Shift.DateTo" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label asp-for="@Model.Shift.ShiftType" class="col-md-2 control-label"></label>
+                <label asp-for="@Model.Shift.ShiftType" class="col-md-2 control-label">Vagttype</label>
                 <div class="col-md-10">
                     <select asp-for="@Model.Shift.ShiftType" asp-items="Html.GetEnumSelectList<Models.Shift.Type>()"></select>
                 </div>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <label asp-for="@Model.Shift.DateFrom" >Startdato</label>
+                <input asp-for="@Model.Shift.DateFrom" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Shift.DateTo" >Slutdato</label>
+                <input asp-for="@Model.Shift.DateTo" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Skab" class="btn btn-primary" />
             </div>
         </form>
     </div>

@@ -1,17 +1,17 @@
 ﻿@page
 @model SemesterProjekt_2.Pages.Shifts.UpdateModel
 @{
-    ViewData["Title"] = "Update Shift";
+    ViewData["Title"] = "Opdater vagt";
 }
 
-<h1>Update Shift</h1>
+<h1>Opdater vagt</h1>
 <p>
-    <h2>You are currently editing the data bound to the following shift:</h2>
+    <h2>Lige nu, opdaterer du den følgende vagt:</h2>
     <h3>
-        ID: @Model.TBU.ShiftID <br />
-        Name: @Model.TBU.DateFrom <br />
-        Address: @Model.TBU.DateTo <br />
-        Shift Type: @Model.TBU.ShiftType <br />
+        Vagtnr: @Model.TBU.ShiftID <br />
+        Vagttype: @Model.TBU.ShiftType <br />
+        Startdato: @Model.TBU.DateFrom <br />
+        Slutdato: @Model.TBU.DateTo <br />
     </h3>
 </p>
 
@@ -19,26 +19,32 @@
     <div class="col-md-4">
         <form method="post">
             <div class="form-group">
-                <label asp-for="@Model.NewShift.ShiftID"></label>
+                <label asp-for="@Model.NewShift.ShiftID">Vagtnr</label>
                 <input asp-for="@Model.NewShift.ShiftID" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="@Model.NewShift.DateFrom"></label>
-                <input asp-for="@Model.NewShift.DateFrom" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label asp-for="@Model.NewShift.DateTo"></label>
-                <input asp-for="@Model.NewShift.DateTo" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label asp-for="@Model.NewShift.ShiftType" class="col-md-2 control-label"></label>
+                <label asp-for="@Model.NewShift.ShiftType" class="col-md-2 control-label">Vagttype</label>
                 <div class="col-md-10">
                     <select asp-for="@Model.NewShift.ShiftType" asp-items="Html.GetEnumSelectList<Models.Shift.Type>()"></select>
                 </div>
             </div>
             <div class="form-group">
-                <input type="submit" value="Update" class="btn btn-primary" />
+                <label asp-for="@Model.NewShift.DateFrom">Startdato</label>
+                <input asp-for="@Model.NewShift.DateFrom" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.NewShift.DateTo">Slutdato</label>
+                <input asp-for="@Model.NewShift.DateTo" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Opdater" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
+
+            <p>
+                <h2>
+                    Hvis du vil opdatere den medlem eller begivenhed som er tilsat til vagten, skal man gøre det fra Vagtsiden.
+                </h2>
+            </p>

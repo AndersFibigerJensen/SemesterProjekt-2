@@ -1,23 +1,23 @@
 ﻿@page
 @model SemesterProjekt_2.Pages.Shifts.DeleteModel
 @{
-    ViewData["Title"] = "Delete Shift";
+    ViewData["Title"] = "Slet vagt";
 }
 
-<h1>Delete Shift</h1>
+<h1>Slet vagt</h1>
 <p>
-    <h2>Are you sure you want to delete the following shift from the database?</h2>
+    <h2>Er du sikker at du vil slætte den følgende vagt?</h2>
     <h3>
-        ID: @Model.TBD.ShiftID <br /> 
-        From: @Model.TBD.DateFrom <br />
-        To: @Model.TBD.DateTo <br />
-        Assigned Member: @Model.TBD.MemberID <br />
-        Corresponding Event: @Model.TBD.EventID <br />
-        Type of Shift: @Model.TBD.ShiftType <br />
+        Vagtnr: @Model.TBD.ShiftID <br />
+        Vagttype: @Model.TBD.ShiftType <br />
+        Startdato: @Model.TBD.DateFrom <br />
+        Slutdato: @Model.TBD.DateTo <br />
+        Tilsat medlem: @Model.TBD.MemberID <br />
+        Begivenhed: @Model.TBD.EventID <br />
     </h3>
     <form method="post">
         <input asp-for="@Model.TBD.ShiftID" type="hidden" />
-        <input type="submit" value="Delete" />
-        <a asp-page="GetAllShifts">Cancel</a>
+        <input type="submit" value="Slet" />
+        <a asp-page="GetAllShifts">Nej tak</a>
     </form>
 </p>
