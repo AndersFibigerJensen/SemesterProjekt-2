@@ -11,6 +11,8 @@ namespace SemesterProjekt_2.Pages.Members
         [BindProperty]
         public Member Member { get; set; }
 
+        public List<Member> Members { get; set; }
+
         [BindProperty]
         public IFormFile Photo { get; set; }
 
@@ -27,10 +29,15 @@ namespace SemesterProjekt_2.Pages.Members
         {
         }
 
-        public IActionResult OnPost() 
+        public async Task<IActionResult> OnPost() 
         {
             try
             {
+                Members= await _memberService.GetAllMembersAsync();
+                if(Members.Find(m => m.Email == Member.Email)!= null)
+                {
+                    throw new Exception("du kan ikke indtaste en email som allerede findes i systemet");
+                }
                 if (Photo != null)
                 {
                     if (Member.Image != null)

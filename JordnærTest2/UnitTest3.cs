@@ -12,7 +12,7 @@ namespace JordnærTest2
     [TestClass]
     public class UnitTest3
     {
-        private string connection = Secret.ConnectionString;
+        private string connection = Secret1.ConnectionString;
         [TestMethod]
         public async Task AddShiftTestAsync()
         {
