@@ -84,10 +84,9 @@ namespace SemesterProjekt_2.Pages.Shifts
             catch (Exception ex)
             {
                 ViewData["Error"] = ex.Message;
+                return RedirectToPage("GetAllShifts");
 
             }
-
-            return RedirectToPage("GetAllShifts");
         }
     }
 }

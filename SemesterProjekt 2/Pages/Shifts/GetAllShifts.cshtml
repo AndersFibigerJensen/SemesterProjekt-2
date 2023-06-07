@@ -5,24 +5,24 @@
 @inject IMemberService mService
 @inject IEventService eService
 @{
-    ViewData["Title"] = "List of Shifts";
+    ViewData["Title"] = "Vagtliste";
 }
 @*Practically all Shift razorpage stuff is made by Luna*@
 @{
     if (Model.CLIMember.MemberID != -1)
     {
-    <h1>List of Shifts</h1>
+    <h1>Vagtliste</h1>
 
     <form method="get">
-                    Search by DateFrom (mm-dd-yyyy)<input type="form-control" asp-for="FilterCriteria" asp-format="{0:MM-dd-yyyy}" />
-                    <input type="submit" value="Search" />
+                    Søge med startdato (mm-dd-yyyy)<input type="form-control" asp-for="FilterCriteria" asp-format="{0:MM-dd-yyyy}" />
+                    <input type="submit" value="Søg" />
     </form>
 
         {
             if (Model.CLIMember.IsAdmin)
             {
                  <p>
-                    <a asp-page="Create">Create New Shift</a>
+                    <a asp-page="Create">Skab ny vagt</a>
                  </p>
             }
         }
@@ -31,22 +31,22 @@
                     <thead>
                         <tr>
                             <th>
-                                Shift No.
+                                Vagt nr.
                             </th>
                             <th>
-                                Shift Type
+                                Vagttype
                             </th>
                             <th>
-                                From (mm-dd-yyyy)
+                                Fra (mm-dd-yyyy)
                             </th>
                             <th>
-                                To (mm-dd-yyyy)
+                                Til (mm-dd-yyyy)
                             </th>
                             <th>
-                                Assigned Member
+                                Tilsat medlem
                             </th>
                             <th>
-                                Corresponding Event
+                                Begivenhed
                             </th>
                         </tr>
                     </thead>
@@ -74,12 +74,12 @@
                                     if (Model.CLIMember.IsAdmin || Model.CLIMember != null)
                                     {
                                         <td>
-                                            <a asp-page="ShiftMember" asp-route-shiftid="@item.ShiftID">None</a>
+                                            <a asp-page="ShiftMember" asp-route-shiftid="@item.ShiftID"> --- </a>
                                         </td>
                                     }
                                     else
                                     {
-                                        <td>None</td>
+                                        <td> --- </td>
                                     }
                                 }
                                 else
@@ -115,12 +115,12 @@
                                     if (Model.CLIMember.IsAdmin)
                                     {
                                         <td>
-                                            <a asp-page="ShiftEvent" asp-route-shiftid="@item.ShiftID">None</a>
+                                            <a asp-page="ShiftEvent" asp-route-shiftid="@item.ShiftID"> --- </a>
                                         </td>
                                     }
                                     else
                                     {
-                                        <td>None</td>
+                                        <td> --- </td>
                                     }
                                 }
                                 else
@@ -157,6 +157,6 @@
     }
     else
     {
-    <h1>You don't have access to this page.</h1>
+    <h1>Access denied.</h1>
     }
 }

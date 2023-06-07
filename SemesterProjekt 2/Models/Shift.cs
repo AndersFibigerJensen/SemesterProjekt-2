@@ -11,11 +11,11 @@
         public int? EventID { get; set; }
         public enum Type
         {
-            Cafeteria = 1,
-            CafeteriaAssistant = 2,
-            Baking = 3,
-            BakingAssistant = 4,
-            Misc = 5,
+            Cafévagt = 1,
+            CafévagtFøl = 2,
+            Bager = 3,
+            BagerFøl = 4,
+            Andet = 5,
         }
         public Type ShiftType { get; set; }
 

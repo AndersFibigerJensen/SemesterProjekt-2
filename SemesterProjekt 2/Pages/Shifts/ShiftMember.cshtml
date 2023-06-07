@@ -7,82 +7,97 @@
 @{
     if(Model.CLIMember.IsAdmin)
     {
-        <h1>You are currently editing ShiftID @Model.ShiftID</h1>
-        <h2>Select a member to be assigned to the Shift. </h2>
-        <h2>Only one member can be assigned to a shift at a time.</h2>
+        <h1>Lige nu, opdater du vagt nr. @Model.ShiftID</h1>
+        <h2>Her kan man koble en enkelt medlem til en vagt.</h2>
 
-        <a asp-page="GetAllShifts">Back</a>
+    <a asp-page="GetAllShifts">Tilbage</a>
 
-        <form method="get">
-            Search <input type="text" asp-for="FilterCriteria" />
-            <input type="submit" value="Filter" />
-        </form>
+    <form method="get">
+                    Søg <input type="text" asp-for="FilterCriteria" />
+                    <input type="submit" value="Filtrere" />
+    </form>
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        Member ID
-                    </th>
-                    <th>
-                        Name
-                    </th>
-                    <th>
-                        Address
-                    </th>
-                    <th>
-                        E-mail
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.Members)
-                {
-                    <tr>
-                        <td>
-                            @item.MemberID
-                        </td>
-                        <td>
-                            @item.Name
-                        </td>
-                        <td>
-                            @item.Address
-                        </td>
-                        <td>
-                            @item.Email
-                        </td>
-                        <td>
-                            <form method="post">
-                                <input type="submit" asp-route-memberid="@item.MemberID" asp-route-shiftid="@Model.ShiftID" value="Assign Member" class="btn btn-primary" />
-                            </form>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+    <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                MedlemID
+                            </th>
+                            <th>
+                                Navn
+                            </th>
+                            <th>
+                                Addresse
+                            </th>
+                            <th>
+                                E-mail
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Members)
+                        {
+                            <tr>
+                                <td>
+                                    @item.MemberID
+                                </td>
+                                <td>
+                                    @item.Name
+                                </td>
+                                <td>
+                                    @item.Address
+                                </td>
+                                <td>
+                                    @item.Email
+                                </td>
+                                @if (@item.HasDoneHygieneCourse)
+                                {
+                                   <td>
+                                     <form method="post">
+                                         <input type="submit" asp-route-memberid="@item.MemberID" asp-route-shiftid="@Model.ShiftID" value="Tilføje medlem" class="btn btn-primary" />
+                                     </form>
+                                   </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                    Har ikke bestået hygiejnekurset
+                                    </td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+    </table>
 
-        <form method="post">
-            <input type="submit" asp-route-memberid="-1" asp-route-shiftid="@Model.ShiftID" value="Clear Shift" class="btn btn-primary" />
-        </form>
+    <form method="post">
+                    <input type="submit" asp-route-memberid="-1" asp-route-shiftid="@Model.ShiftID" value="Fjerne medlem fra vagt" class="btn btn-primary" />
+    </form>
     }
     else if (Model.currentMID == Model.CLIMember.MemberID)
     {
-        <h1>You are already assigned to shift no. @Model.ShiftID</h1>
-        <h2>You cannot unassign yourself from the shift through the website.</h2>
-        <h2>Please contact a supervisor if you wish to be unassigned. (phone number here)</h2>
+    <h1>Du er allerede tilføjet til vagt nr @Model.ShiftID</h1>
+    <h2>Hvis du vil udmelde dig fra den vagt, må du kontakte en admin.</h2>
+    <h2>(contact details here)</h2>
 
-        <a asp-page="GetAllShifts">Back</a>
+    <a asp-page="GetAllShifts">Tilbage</a>
+    }
+    else if (Model.CLIMember.HasDoneHygieneCourse)
+    {
+    <h1>Er du sikker du vil melde dig til vagt nr @Model.ShiftID?</h1>
+    <h2>Advarsel: Man kan ikke udmelde sig uden hjælp af en admin.</h2>
+
+    <form method="post">
+                    <input type="submit" asp-route-memberid="@Model.CLIMember.MemberID" asp-route-shiftid="@Model.ShiftID" value="Ja" class="btn btn-primary" />
+    </form>
+
+    <a asp-page="GetAllShifts">Nej</a>
     }
     else
     {
-        <h1>Would you like to assign yourself to shift number @Model.ShiftID?</h1>
-        <h2>Warning: You cannot unassign yourself from a shift through the website.</h2>
-
-        <form method="post">
-            <input type="submit" asp-route-memberid="@Model.CLIMember.MemberID" asp-route-shiftid="@Model.ShiftID" value="Yes" class="btn btn-primary" />
-        </form>
-
-        <a asp-page="GetAllShifts">No</a>
+        <h1>Du kan ikke tage vagt nr. @Model.ShiftID</h1>
+        <h2>for du har ikke bestået hygiejnekurset.</h2>
+        <h2>Venligst kontakte en admin hvis det her er en fejl.</h2>
+        <h2>(contact details here)</h2>
     }
 }
 
