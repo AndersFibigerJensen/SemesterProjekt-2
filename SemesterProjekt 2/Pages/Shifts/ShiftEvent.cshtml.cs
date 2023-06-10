@@ -60,23 +60,33 @@ namespace SemesterProjekt_2.Pages.Shifts
             if (hoursTo < 0)
                 hoursTo = hoursTo * (-1);
 
-            try
+            if(eventID != -1)
             {
-                if (hoursFrom > 24)
-                    throw new Exception("Event and shift startpoints are above 24 hours apart.");
-                if (hoursTo > 24)
-                    throw new Exception("Event and shift endpoints are above 24 hours apart.");
+                try
+                {
+                    if (hoursFrom > 24)
+                        throw new Exception("Event and shift startpoints are above 24 hours apart.");
+                    if (hoursTo > 24)
+                        throw new Exception("Event and shift endpoints are above 24 hours apart.");
 
+                    await sService.UpdateEventIDAsync(newShift, TBU.ShiftID);
+
+                    return RedirectToPage("GetAllShifts");
+                }
+                catch (Exception ex)
+                {
+                    ViewData["ErrorMessage"] = ex.Message;
+                    Events = await eService.GetAllEventsAsync();
+                    return Page();
+                }
+            }
+            else
+            {
                 await sService.UpdateEventIDAsync(newShift, TBU.ShiftID);
 
                 return RedirectToPage("GetAllShifts");
             }
-            catch(Exception ex)
-            {
-                ViewData["ErrorMessage"] = ex.Message;
-                Events= await eService.GetAllEventsAsync();
-                return Page();
-            }
+            
         }
     }
 }
