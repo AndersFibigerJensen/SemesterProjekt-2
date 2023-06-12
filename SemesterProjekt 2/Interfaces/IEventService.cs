@@ -64,6 +64,7 @@ namespace SemesterProjekt_2.Interfaces
         /// <param name="eventid"></param>
         /// <param name="Memberid"></param>
         /// <returns></returns>
-        public Task<bool> DeleteEventMember(int eventid,int Memberid);
+        public Task<bool> DeleteEventMember(int eventid, int Memberid);
+        
     }
 }

@@ -52,7 +52,7 @@ namespace SemesterProjekt_2.Pages.Members
                 //{
                 //    return Page();
                 //}
-                //_memberService.AddMemberAsync(Member);
+                _memberService.AddMemberAsync(Member);
                 return RedirectToPage("GetAllMembers");
             }
             catch (Exception ex) 

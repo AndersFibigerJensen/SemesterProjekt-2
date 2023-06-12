@@ -73,7 +73,7 @@ namespace SemesterProjekt_2.Pages.Members
                 //{
                 //    return Page();
                 //}
-                if(User.MemberID==Member.MemberID)
+                if(User.MemberID==id)
                 {
                     HttpContext.Session.SetString("email", Member.Email);
                     HttpContext.Session.SetString("password", Member.Password);
